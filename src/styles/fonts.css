@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Avenir-black";
+  src: url("./fonts/Avenir-Black.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Avenir-light";
+  src: url("./fonts/Avenir-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Avenir-medium";
+  src: url("./fonts/Avenir-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Arquitecta";
+  font-weight: bold;
+  src: url("./fonts/ArquitectaBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Arquitecta";
+  font-weight: medium;
+  src: url("./fonts/ArquitectaMedium.otf") format("opentype");
+}
