@@ -3,7 +3,7 @@ import BG from "../../../../public/home/BG.png"
 
 export const HomeSection = styled.section`
   margin: 0 auto;
-  max-width: 1640px;
+  max-width: 100%;
   padding: 32px 0;
   position: relative;
   background-image: url("${BG}");
