@@ -1,37 +1,33 @@
 import styled from "styled-components";
 
-export const HeaderContentWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const MenuIconWrapper = styled.div`
-  z-index: 50;
-  position: absolute;
-  left: 32px;
-  top: 47px;
+  display: flex;
+  align-items: center;
+  margin-left: 32px;
   cursor: pointer;
 `;
 
 export const MainLogoWrapper = styled.div`
+  margin-left: 230px;
   display: flex;
-  margin-left: 714px;
   align-items: center;
 `;
 
 export const HeaderButtonsWrapper = styled.div`
-  position: absolute;
   display: flex;
-  right: 68px;
-  top: 32px;
   align-items: center;
 `;
 
 export const LoginBtn = styled.div`
-  z-index: 50;
+  margin-right: 30px;
   font-family: "Arquitecta";
   font-style: normal;
   font-weight: 700;
@@ -41,11 +37,10 @@ export const LoginBtn = styled.div`
   text-transform: uppercase;
   color: #ffffff;
   cursor: pointer;
-  margin-right: 32px;
 `;
 
 export const GetStartedBtn = styled.button`
-  z-index: 50;
+  margin-right: 30px;
   width: 185px;
   height: 48px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);

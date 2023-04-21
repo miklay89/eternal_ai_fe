@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const TitleWrapper = styled.div`
   margin: 0 auto;
-  margin-top: 141px;
-  margin-left: -30px;
+  margin-top: 140px;
 `;
 
 export const MainTitle = styled.div`
-  z-index: 50;
+  margin: 0 auto;
+  margin-left: 16px;
+  max-width: 100%;
   height: 94px;
   font-family: "Arquitecta";
   font-style: bold;
@@ -21,7 +22,7 @@ export const MainTitle = styled.div`
 `;
 
 export const Subtitle = styled.div`
-  z-index: 50;
+  
   margin: 0 auto;
   margin-top: 8px;
   width: fit-content;
@@ -47,7 +48,6 @@ export const MessagesWrapper = styled.div`
 `;
 
 export const TitleMessage = styled.div`
-  z-index: 50;
   background: linear-gradient(
     281.4deg,
     rgba(248, 45, 152, 0.3) -2.34%,

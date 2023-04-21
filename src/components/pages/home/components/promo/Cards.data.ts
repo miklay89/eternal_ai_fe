@@ -1,0 +1,86 @@
+export const individualsData = [
+  {
+    fullName: "dr. martin luther king jr.",
+    title: "political activist",
+    imgUrl: "./individuals/0.png",
+    substrateUrl: "./individuals/0s.png",
+  },
+  {
+    fullName: "Steve Jobs",
+    title: "Apple Computer Founder",
+    imgUrl: "./individuals/1.png",
+    substrateUrl: "./individuals/1s.png",
+  },
+  {
+    fullName: "elon musk",
+    title: "space nerd",
+    imgUrl: "./individuals/2.png",
+    substrateUrl: "./individuals/2s.png",
+  },
+  {
+    fullName: "albert einstein",
+    title: "genius",
+    imgUrl: "./individuals/3.png",
+    substrateUrl: "./individuals/3s.png",
+  },
+  {
+    fullName: "mother teresa",
+    title: "philanthropist",
+    imgUrl: "./individuals/4.png",
+    substrateUrl: "./individuals/4s.png",
+  },
+  {
+    fullName: "jesus christ",
+    title: "lord & savior",
+    imgUrl: "./individuals/5.png",
+    substrateUrl: "./individuals/5s.png",
+  },
+  {
+    fullName: "leonardo da vinci",
+    title: "artist",
+    imgUrl: "./individuals/6.png",
+    substrateUrl: "./individuals/6s.png",
+  },
+  {
+    fullName: "queen elizabeth",
+    title: "queen of england",
+    imgUrl: "./individuals/7.png",
+    substrateUrl: "./individuals/7s.png",
+  },
+  {
+    fullName: "william shakespeare",
+    title: "author",
+    imgUrl: "./individuals/8.png",
+    substrateUrl: "./individuals/8s.png",
+  },
+  {
+    fullName: "nelson mandela",
+    title: "philanthropist",
+    imgUrl: "./individuals/9.png",
+    substrateUrl: "./individuals/9s.png",
+  },
+  {
+    fullName: "betsy ross",
+    title: "american history",
+    imgUrl: "./individuals/10.png",
+    substrateUrl: "./individuals/10s.png",
+  },
+  {
+    fullName: "gandhi",
+    title: "philanthropist",
+    imgUrl: "./individuals/11.png",
+    substrateUrl: "./individuals/11s.png",
+  },
+  {
+    fullName: "abraham lincoln",
+    title: "american president",
+    imgUrl: "./individuals/12.png",
+    substrateUrl: "./individuals/12s.png",
+  },
+  {
+    fullName: "ron swanson",
+    title: "tv goofy guy",
+    imgUrl: "./individuals/13.png",
+    substrateUrl: "./individuals/13s.png",
+  },
+];

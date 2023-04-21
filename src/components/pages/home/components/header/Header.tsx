@@ -1,18 +1,18 @@
 import {
-  HeaderContentWrapper,
+  HeaderWrapper,
   MenuIconWrapper,
   MainLogoWrapper,
   HeaderButtonsWrapper,
   LoginBtn,
   GetStartedBtn,
 } from "./Header.styles";
-import { ReactComponent as MenuIcon } from "../../../../../assets/Vector.svg";
-import { ReactComponent as Eternal } from "../../../../../assets/ETERNAL.svg";
+import { ReactComponent as MenuIcon } from "../../../../../../public/home/MainMenuIcon.svg";
+import { ReactComponent as Eternal } from "../../../../../../public/home/ETERNAL.svg";
 import Bagel from "./bagel/Bagel";
 
 const Header = () => {
   return (
-    <div>
+    <HeaderWrapper>
       <MenuIconWrapper>
         <MenuIcon />
       </MenuIconWrapper>
@@ -24,7 +24,7 @@ const Header = () => {
         <LoginBtn>login</LoginBtn>
         <GetStartedBtn>get started</GetStartedBtn>
       </HeaderButtonsWrapper>
-    </div>
+    </HeaderWrapper>
   );
 };
 
