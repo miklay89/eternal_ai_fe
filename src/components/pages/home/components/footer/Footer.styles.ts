@@ -59,4 +59,12 @@ export const Social = styled.div`
   width: 32px;
   height: 32px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(
+      281.4deg,
+      rgba(248, 45, 152, 0.8) -2.34%,
+      rgba(88, 51, 239, 0.8) 114.41%
+    );
+  }
 `;
