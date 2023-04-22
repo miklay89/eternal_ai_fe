@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
+  margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  max-width: 1640px;
 `;
 
 export const MenuIconWrapper = styled.div`

@@ -51,64 +51,64 @@ const Bagel = () => {
   return (
     <BagelWrapper width={44.37} height={44}>
       <BagelEllipse
-        width={26.98}
-        height={31.18}
+        width={32.98}
+        height={37.18}
         from={-90}
         borderWidth={3.29814}
         borderColor="#933eff"
         blur={1.49916}
       />
       <BagelEllipse
-        width={26.98}
-        height={36.58}
+        width={32.98}
+        height={42.58}
         from={-90}
         borderWidth={5.69679}
         borderColor="#5833EF"
         blur={2.69848}
       />
       <BagelEllipse
-        width={27.1}
-        height={34.22}
+        width={33.1}
+        height={40.22}
         from={-57.23}
         borderWidth={3.29814}
         borderColor="#FFFEF0"
         blur={1.49916}
       />
       <BagelEllipse
-        width={27.1}
-        height={34.25}
+        width={33.1}
+        height={40.25}
         from={-45}
         borderWidth={3.29814}
         borderColor="#FFFFFF"
         blur={0}
       />
       <BagelEllipse
-        width={27.1}
-        height={33.03}
+        width={33.1}
+        height={39.03}
         from={0}
         borderWidth={3.29814}
         borderColor="#F82D98"
         blur={1.49916}
       />
       <BagelEllipse
-        width={27.1}
-        height={33.03}
+        width={33.1}
+        height={39.03}
         from={0}
         borderWidth={3.29814}
         borderColor="#F82D98"
         blur={0}
       />
       <BagelEllipse
-        width={27.1}
-        height={33.09}
+        width={33.1}
+        height={39.09}
         from={45}
         borderWidth={3.29814}
         borderColor="#AFF220"
         blur={1.49916}
       />
       <BagelEllipse
-        width={28.26}
-        height={32.69}
+        width={34.26}
+        height={38.69}
         from={45}
         borderWidth={3.29814}
         borderColor="#AFF220"

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PromoWrapper = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  margin-top: 767px;
+  margin-top: 152px;
   position: relative;
 `;
 

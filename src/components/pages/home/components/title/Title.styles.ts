@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const TitleWrapper = styled.div`
+  position: relative;
   margin: 0 auto;
   margin-top: 140px;
+  z-index: 1;
 `;
 
 export const MainTitle = styled.div`
