@@ -8,7 +8,7 @@ export const HomeSection = styled.section`
   height: auto;
   background-color: #111115;
   color: #ffffff;
-  background-image: url("/public/home/background/image 1.png");
+  background-image: url("./home/background/image 1.png");
   background-position-x: center;
   background-size: auto;
   background-position-y: 213px;
