@@ -10,7 +10,6 @@ export const CardWrapper = styled.div<{
   height: 297.72px;
   border-radius: 16px;
   cursor: pointer;
-  /* background-image: url("../../../../../../../src/assets/individuals/0.png"); */
   background: ${(props) => `url(${props.background}) no-repeat top center`},
     ${(props) => `url(${props.substrateUrl}) no-repeat top center`};
 `;
@@ -23,7 +22,7 @@ export const PersonInfo = styled.div<{
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  bottom: 0px;
+  bottom: -0.5px;
   width: 261px;
   background: rgba(88, 48, 102, 0.2);
   backdrop-filter: blur(22px);

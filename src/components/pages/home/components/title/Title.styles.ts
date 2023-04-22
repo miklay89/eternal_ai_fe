@@ -4,7 +4,7 @@ export const TitleWrapper = styled.div`
   position: relative;
   margin: 0 auto;
   margin-top: 140px;
-  z-index: 1;
+  z-index: 5;
 `;
 
 export const MainTitle = styled.div`
