@@ -29,10 +29,10 @@ const Menu = (props: Props) => {
           <Link>My account</Link>
           <Divider />
           <Social>
-            <SocialImg src="/public/menu/facebook.svg" />
-            <SocialImg src="/public/menu/instagram.svg" />
-            <SocialImg src="/public/menu/twitter.svg" />
-            <SocialImg src="/public/menu/discord.svg" />
+            <SocialImg src="/menu/facebook.svg" />
+            <SocialImg src="/menu/instagram.svg" />
+            <SocialImg src="/menu/twitter.svg" />
+            <SocialImg src="/menu/discord.svg" />
           </Social>
         </Navbar>
       </MenuContainer>

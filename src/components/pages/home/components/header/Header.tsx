@@ -27,17 +27,17 @@ const Header = (props: Props) => {
         show={props.isOpen}
         onClick={() => props.onMenuClick((prev) => !prev)}
       >
-        <MenuIcon src="/public/header/menu_icon.svg" />
+        <MenuIcon src="/header/menu_icon.svg" />
       </MenuIconWrapper>
       <MenuCloseBtnWrapper
         show={props.isOpen}
         onClick={() => props.onMenuClick((prev) => !prev)}
       >
-        <MenuCloseIcon src="/public/header/close_btn.svg" />
+        <MenuCloseIcon src="/header/close_btn.svg" />
       </MenuCloseBtnWrapper>
       <MainLogoWrapper menuIsOpen={props.isOpen}>
         <Bagel />
-        <MainLogo src="/public/eternal.svg" />
+        <MainLogo src="/eternal.svg" />
       </MainLogoWrapper>
       <HeaderButtonsWrapper>
         <LoginBtn>login</LoginBtn>

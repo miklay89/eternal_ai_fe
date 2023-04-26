@@ -16,19 +16,19 @@ const Footer = () => {
     <FooterWrapper>
       <FooterLogoWrapper>
         <Bagel />
-        <MainLogo src="/public/eternal.svg" />
+        <MainLogo src="/eternal.svg" />
       </FooterLogoWrapper>
       <Copy>© 2023 Eternal. All rights reserved.</Copy>
       <FollowWrapper>
         <FollowText>follow us</FollowText>
         <Social>
-          <SocialImg src="/public/footer/twitter.svg" />
+          <SocialImg src="/footer/twitter.svg" />
         </Social>
         <Social>
-          <SocialImg src="/public/footer/facebook.svg" />
+          <SocialImg src="/footer/facebook.svg" />
         </Social>
         <Social>
-          <SocialImg src="/public/footer/youtube.svg" />
+          <SocialImg src="/footer/youtube.svg" />
         </Social>
       </FollowWrapper>
     </FooterWrapper>
