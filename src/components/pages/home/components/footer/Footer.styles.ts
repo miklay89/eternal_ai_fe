@@ -68,3 +68,5 @@ export const Social = styled.div`
     );
   }
 `;
+
+export const SocialImg = styled.img``;

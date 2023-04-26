@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import {
   HeaderWrapper,
   MenuIconWrapper,
@@ -5,20 +6,38 @@ import {
   HeaderButtonsWrapper,
   LoginBtn,
   GetStartedBtn,
+  MenuIcon,
+  MainLogo,
+  MenuCloseBtnWrapper,
+  MenuCloseIcon,
 } from "./Header.styles";
-import { ReactComponent as MenuIcon } from "../../../../../../public/home/MainMenuIcon.svg";
-import { ReactComponent as Eternal } from "../../../../../../public/home/ETERNAL.svg";
 import Bagel from "./bagel/Bagel";
 
-const Header = () => {
+type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+
+type Props = {
+  isOpen: boolean;
+  onMenuClick: Dispatcher<boolean>;
+};
+
+const Header = (props: Props) => {
   return (
     <HeaderWrapper>
-      <MenuIconWrapper>
-        <MenuIcon />
+      <MenuIconWrapper
+        show={props.isOpen}
+        onClick={() => props.onMenuClick((prev) => !prev)}
+      >
+        <MenuIcon src="/public/header/menu_icon.svg" />
       </MenuIconWrapper>
-      <MainLogoWrapper>
+      <MenuCloseBtnWrapper
+        show={props.isOpen}
+        onClick={() => props.onMenuClick((prev) => !prev)}
+      >
+        <MenuCloseIcon src="/public/header/close_btn.svg" />
+      </MenuCloseBtnWrapper>
+      <MainLogoWrapper menuIsOpen={props.isOpen}>
         <Bagel />
-        <Eternal />
+        <MainLogo src="/public/eternal.svg" />
       </MainLogoWrapper>
       <HeaderButtonsWrapper>
         <LoginBtn>login</LoginBtn>

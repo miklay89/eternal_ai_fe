@@ -2,28 +2,57 @@ import styled from "styled-components";
 
 export const CardWrapper = styled.div<{
   background: string;
-  substrateUrl: string;
 }>`
-  background-color: gray;
   position: relative;
   width: 260.8px;
   height: 297.72px;
-  border-radius: 16px;
   cursor: pointer;
-  background: ${(props) => `url(${props.background}) no-repeat top center`},
-    ${(props) => `url(${props.substrateUrl}) no-repeat top center`};
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block;
+    background-image: ${(props) => `url(${props.background})`};
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    filter: blur(16px);
+  }
+  border-radius: 16px;
+`;
+
+export const CardBg = styled.div<{
+  background: string;
+}>`
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-image: ${(props) => `url(${props.background})`};
+  background-repeat: no-repeat;
+  background-size: 100%;
+  /* filter: blur(16px); */
+`;
+
+export const CardImage = styled.img`
+  position: absolute;
+  z-index: 1;
+  border-radius: 16px;
 `;
 
 export const PersonInfo = styled.div<{
   show: boolean;
 }>`
+  z-index: 1;
   display: ${(props) => (props.show ? "block" : "none")};
   position: absolute;
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  bottom: -0.5px;
-  width: 261px;
+  bottom: 0;
+  width: 100%;
   background: rgba(88, 48, 102, 0.2);
   backdrop-filter: blur(22px);
   border-radius: 16px;

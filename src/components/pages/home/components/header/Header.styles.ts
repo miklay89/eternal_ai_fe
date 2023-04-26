@@ -1,24 +1,49 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
+  height: 56px;
   margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 1640px;
+  z-index: 5;
 `;
 
-export const MenuIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 32px;
+export const MenuIconWrapper = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "none" : "flex")};
+  flex-direction: row;
+  align-items: flex-start;
+  margin-left: 22px;
+  width: 56px;
+  height: 56px;
   cursor: pointer;
 `;
 
-export const MainLogoWrapper = styled.div`
-  margin-left: 230px;
+export const MenuCloseBtnWrapper = styled.div<{
+  show: boolean;
+}>`
+  cursor: pointer;
+  box-sizing: border-box;
+  display: ${(props) => (props.show ? "flex" : "none")};
+  flex-direction: row;
+  align-items: flex-start;
+  width: 56px;
+  height: 56px;
+  background: #000000;
+  border: 1px solid #2f2535;
+  border-radius: 8px;
+  margin-left: 32px;
+`;
+
+export const MainLogoWrapper = styled.div<{
+  menuIsOpen: boolean;
+}>`
+
+  margin-left: ${(props) => (props.menuIsOpen ? "214px" : "224px")};
   display: flex;
   align-items: center;
 `;
@@ -65,3 +90,15 @@ export const GetStartedBtn = styled.button`
     );
   }
 `;
+
+export const MenuIcon = styled.img`
+  display: block;
+  margin: auto auto;
+`;
+
+export const MenuCloseIcon = styled.img`
+  display: block;
+  margin: auto auto;
+`;
+
+export const MainLogo = styled.img``;

@@ -1,4 +1,5 @@
 import Bagel from "../header/bagel/Bagel";
+
 import {
   Copy,
   FollowText,
@@ -6,30 +7,28 @@ import {
   FooterLogoWrapper,
   FooterWrapper,
   Social,
+  SocialImg,
 } from "./Footer.styles";
-import { ReactComponent as Eternal } from "../../../../../../public/home/ETERNAL.svg";
-import { ReactComponent as Youtube } from "../../../../../../public/home/youtube.svg";
-import { ReactComponent as Twitter } from "../../../../../../public/home/twitter.svg";
-import { ReactComponent as FaceBook } from "../../../../../../public/home/facebook.svg";
+import { MainLogo } from "../header/Header.styles";
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <FooterLogoWrapper>
         <Bagel />
-        <Eternal />
+        <MainLogo src="/public/eternal.svg" />
       </FooterLogoWrapper>
       <Copy>© 2023 Eternal. All rights reserved.</Copy>
       <FollowWrapper>
         <FollowText>follow us</FollowText>
         <Social>
-          <Twitter />
+          <SocialImg src="/public/footer/twitter.svg" />
         </Social>
         <Social>
-          <FaceBook />
+          <SocialImg src="/public/footer/facebook.svg" />
         </Social>
         <Social>
-          <Youtube />
+          <SocialImg src="/public/footer/youtube.svg" />
         </Social>
       </FollowWrapper>
     </FooterWrapper>

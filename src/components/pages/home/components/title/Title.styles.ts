@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TitleWrapper = styled.div`
   position: relative;
   margin: 0 auto;
-  margin-top: 140px;
+  margin-top: 136px;
   z-index: 5;
 `;
 
