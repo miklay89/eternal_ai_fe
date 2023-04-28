@@ -33,7 +33,6 @@ export const CardBg = styled.div<{
   background-image: ${(props) => `url(${props.background})`};
   background-repeat: no-repeat;
   background-size: 100%;
-  /* filter: blur(16px); */
 `;
 
 export const CardImage = styled.img`

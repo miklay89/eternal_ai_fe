@@ -8,7 +8,15 @@ export const HeaderWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  z-index: 5;
+  z-index: 10;
+`;
+
+export const HeaderItemWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 270px;
+  height: 56px;
 `;
 
 export const MenuIconWrapper = styled.div<{
@@ -17,7 +25,6 @@ export const MenuIconWrapper = styled.div<{
   display: ${(props) => (props.show ? "none" : "flex")};
   flex-direction: row;
   align-items: flex-start;
-  margin-left: 22px;
   width: 56px;
   height: 56px;
   cursor: pointer;
@@ -36,16 +43,11 @@ export const MenuCloseBtnWrapper = styled.div<{
   background: #000000;
   border: 1px solid #2f2535;
   border-radius: 8px;
-  margin-left: 32px;
 `;
 
-export const MainLogoWrapper = styled.div<{
-  menuIsOpen: boolean;
-}>`
-
-  margin-left: ${(props) => (props.menuIsOpen ? "214px" : "224px")};
+export const MainLogoWrapper = styled.div`
   display: flex;
-  align-items: center;
+  margin: 0 auto;
 `;
 
 export const HeaderButtonsWrapper = styled.div`
@@ -54,7 +56,6 @@ export const HeaderButtonsWrapper = styled.div`
 `;
 
 export const LoginBtn = styled.div`
-  margin-right: 30px;
   font-family: "Arquitecta";
   font-style: normal;
   font-weight: 700;
@@ -64,10 +65,15 @@ export const LoginBtn = styled.div`
   text-transform: uppercase;
   color: #ffffff;
   cursor: pointer;
+  &:hover {
+    color: #f82d98;
+  }
+  &:focus {
+    color: #f82d98;
+  }
 `;
 
 export const GetStartedBtn = styled.button`
-  margin-right: 30px;
   width: 185px;
   height: 48px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
@@ -93,12 +99,39 @@ export const GetStartedBtn = styled.button`
 
 export const MenuIcon = styled.img`
   display: block;
-  margin: auto auto;
+  margin: auto 0;
+  margin-left: 4px;
+  &:hover {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+  &:focus {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
 `;
 
 export const MenuCloseIcon = styled.img`
   display: block;
   margin: auto auto;
+  &:hover {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+  &:focus {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
 `;
 
-export const MainLogo = styled.img``;
+export const MainLogo = styled.img`
+  cursor: pointer;
+  &:hover {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+  &:focus {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+`;

@@ -5,33 +5,24 @@ export const MenuWrapper = styled.div<{
 }>`
   display: ${(props) => (props.isOpen ? "block" : "none")};
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   left: 0;
   top: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(77px);
   z-index: 10;
-  padding-top: 28px;
-`;
-
-export const MenuContainer = styled.div`
-  margin: 0 auto;
-  position: relative;
-  max-width: 1640px;
 `;
 
 export const Navbar = styled.nav`
+  margin-top: 38px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   position: fixed;
   width: 343px;
-  height: 440px;
   left: calc(50% - 343px / 2 + 0.5px);
-  top: 406px;
-
+  top: calc(50% - 440px / 2 + 0.5px);
   border-radius: 32px;
 `;
 
@@ -40,27 +31,23 @@ export const Link = styled.div`
   margin-top: 32px;
   width: auto;
   height: 48px;
-
-  /* Avenir/H3 */
-
   font-family: "Avenir";
   font-style: normal;
   font-weight: 500;
   font-size: 32px;
   line-height: 150%;
-  /* identical to box height, or 48px */
-
   letter-spacing: -0.01em;
-
-  /* White */
-
   color: #ffffff;
-
-  /* Inside auto layout */
-
   flex: none;
   order: 0;
   flex-grow: 0;
+  cursor: pointer;
+  &:hover {
+    color: #f82d98;
+  }
+  &:focus {
+    color: #f82d98;
+  }
 `;
 
 export const Divider = styled.div`
@@ -85,6 +72,16 @@ export const Social = styled.div`
   height: auto;
   flex: none;
   flex-grow: 0;
+  cursor: pointer;
 `;
 
-export const SocialImg = styled.img``;
+export const SocialImg = styled.img`
+  &:hover {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+  &:focus {
+    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
+      brightness(100%) contrast(95%);
+  }
+`;

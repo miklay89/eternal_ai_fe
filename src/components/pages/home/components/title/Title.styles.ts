@@ -83,7 +83,6 @@ export const MessageText = styled.div`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #ffffff;
-
   width: 100%;
   height: 100%;
 `;
