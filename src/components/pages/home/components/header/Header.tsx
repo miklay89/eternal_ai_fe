@@ -55,7 +55,7 @@ const Header = (props: Props) => {
           show={props.isOpenSignUp}
           onClick={() => {
             props.onGetStartedClick((prev) => !prev);
-            props.onMenuClick((prev) => !prev);
+            props.onMenuClick(false);
           }}
         >
           get started
