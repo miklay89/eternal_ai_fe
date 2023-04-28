@@ -53,7 +53,10 @@ const Header = (props: Props) => {
         <LoginBtn show={props.isOpenSignUp}>login</LoginBtn>
         <GetStartedBtn
           show={props.isOpenSignUp}
-          onClick={() => props.onGetStartedClick((prev) => !prev)}
+          onClick={() => {
+            props.onGetStartedClick((prev) => !prev);
+            props.onMenuClick((prev) => !prev);
+          }}
         >
           get started
         </GetStartedBtn>
