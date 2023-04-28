@@ -11,9 +11,11 @@ export const HeaderWrapper = styled.div`
   z-index: 10;
 `;
 
-export const HeaderItemWrapper = styled.div`
+export const HeaderItemWrapper = styled.div<{
+  isOpenSignUp: boolean;
+}>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.isOpenSignUp ? "end" : "space-between")};
   align-items: center;
   width: 270px;
   height: 56px;
@@ -21,8 +23,9 @@ export const HeaderItemWrapper = styled.div`
 
 export const MenuIconWrapper = styled.div<{
   show: boolean;
+  isOpenSignUp: boolean;
 }>`
-  display: ${(props) => (props.show ? "none" : "flex")};
+  display: ${(props) => (props.show ? "none" : props.isOpenSignUp ? "none" : "flex")};
   flex-direction: row;
   align-items: flex-start;
   width: 56px;
@@ -43,6 +46,9 @@ export const MenuCloseBtnWrapper = styled.div<{
   background: #000000;
   border: 1px solid #2f2535;
   border-radius: 8px;
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
 `;
 
 export const MainLogoWrapper = styled.div`
@@ -55,7 +61,10 @@ export const HeaderButtonsWrapper = styled.div`
   align-items: center;
 `;
 
-export const LoginBtn = styled.div`
+export const LoginBtn = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "none" : "block")};
   font-family: "Arquitecta";
   font-style: normal;
   font-weight: 700;
@@ -73,7 +82,10 @@ export const LoginBtn = styled.div`
   }
 `;
 
-export const GetStartedBtn = styled.button`
+export const GetStartedBtn = styled.button<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "none" : "block")};
   width: 185px;
   height: 48px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
@@ -114,14 +126,6 @@ export const MenuIcon = styled.img`
 export const MenuCloseIcon = styled.img`
   display: block;
   margin: auto auto;
-  &:hover {
-    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
-      brightness(100%) contrast(95%);
-  }
-  &:focus {
-    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
-      brightness(100%) contrast(95%);
-  }
 `;
 
 export const MainLogo = styled.img`

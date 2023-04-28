@@ -12,18 +12,20 @@ import {
   enableBodyScroll,
 } from "body-scroll-lock";
 import SignUp from "../modals/sign-up/SignUp";
-// import About from "../modals/about/About";
-// import SignIn from "../modals/sign-in/SignIn";
+import About from "../modals/about/About";
+import SignIn from "../modals/sign-in/SignIn";
 
 const HomePage = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState<boolean>(false);
+  const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
+  const [isOpenAbout, setIsOpenAbout] = useState<boolean>(false);
 
   const ref = useRef(null);
 
   useEffect(() => {
     if (ref.current) {
-      if (isOpenMenu || isOpenSignUp) {
+      if (isOpenMenu || isOpenSignUp || isOpenSignIn || isOpenAbout) {
         disableBodyScroll(ref.current);
       } else {
         enableBodyScroll(ref.current);
@@ -32,18 +34,22 @@ const HomePage = () => {
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, [isOpenMenu, isOpenSignUp]);
+  }, [isOpenMenu, isOpenSignUp, isOpenSignIn, isOpenAbout]);
 
   return (
     <HomeSection ref={ref}>
       <GradientCorner />
       <Menu isOpen={isOpenMenu} />
       <SignUp isOpen={isOpenSignUp} />
+      <SignIn isOpen={isOpenSignIn} />
+      <About isOpen={isOpenAbout} />
       <Container>
         <Header
           isOpen={isOpenMenu}
+          isOpenSignUp={isOpenSignUp}
           onMenuClick={setIsOpenMenu}
           onGetStartedClick={setIsOpenSignUp}
+          onGetStartedClickClose={setIsOpenSignUp}
         />
         <Title />
         <EternalsBG />

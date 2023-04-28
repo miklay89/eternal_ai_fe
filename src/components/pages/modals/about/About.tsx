@@ -1,5 +1,17 @@
-// const About = () => {
-//   return <div>about</div>
-// }
+import { InnerWrapper, ModalWrapper, OuterWrapper } from "./About.styles";
 
-// export default About;
+type Props = {
+  isOpen: boolean;
+};
+
+const About = (props: Props) => {
+  return (
+    <ModalWrapper isOpen={props.isOpen}>
+      <OuterWrapper>
+        <InnerWrapper>about</InnerWrapper>
+      </OuterWrapper>
+    </ModalWrapper>
+  );
+};
+
+export default About;

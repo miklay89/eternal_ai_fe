@@ -1,5 +1,17 @@
-// const SignIn = () => {
-//   return <div>sign-in</div>
-// }
+import { InnerWrapper, ModalWrapper, OuterWrapper } from "./SignIn.styles";
 
-// export default SignIn;
+type Props = {
+  isOpen: boolean;
+};
+
+const SignIn = (props: Props) => {
+  return (
+    <ModalWrapper isOpen={props.isOpen}>
+      <OuterWrapper>
+        <InnerWrapper>sign-in</InnerWrapper>
+      </OuterWrapper>
+    </ModalWrapper>
+  );
+};
+
+export default SignIn;

@@ -18,16 +18,19 @@ type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpen: boolean;
+  isOpenSignUp: boolean;
   onMenuClick: Dispatcher<boolean>;
   onGetStartedClick: Dispatcher<boolean>;
+  onGetStartedClickClose: Dispatcher<boolean>;
 };
 
 const Header = (props: Props) => {
   return (
     <HeaderWrapper>
-      <HeaderItemWrapper>
+      <HeaderItemWrapper isOpenSignUp={false}>
         <MenuIconWrapper
           show={props.isOpen}
+          isOpenSignUp={props.isOpenSignUp}
           onClick={() => props.onMenuClick((prev) => !prev)}
         >
           <MenuIcon src="/header/menu_icon.svg" />
@@ -40,17 +43,26 @@ const Header = (props: Props) => {
           <MenuCloseIcon src="/header/close_btn.svg" />
         </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper>
+      <HeaderItemWrapper isOpenSignUp={false}>
         <MainLogoWrapper>
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </MainLogoWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper>
-        <LoginBtn>login</LoginBtn>
-        <GetStartedBtn onClick={() => props.onGetStartedClick((prev) => !prev)}>
+      <HeaderItemWrapper isOpenSignUp={props.isOpenSignUp}>
+        <LoginBtn show={props.isOpenSignUp}>login</LoginBtn>
+        <GetStartedBtn
+          show={props.isOpenSignUp}
+          onClick={() => props.onGetStartedClick((prev) => !prev)}
+        >
           get started
         </GetStartedBtn>
+        <MenuCloseBtnWrapper
+          show={props.isOpenSignUp}
+          onClick={() => props.onGetStartedClickClose((prev) => !prev)}
+        >
+          <MenuCloseIcon src="/header/close_btn.svg" />
+        </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
     </HeaderWrapper>
   );
