@@ -12,8 +12,8 @@ import {
   enableBodyScroll,
 } from "body-scroll-lock";
 import SignUp from "../modals/sign-up/SignUp";
-import About from "../modals/about/About";
-import SignIn from "../modals/sign-in/SignIn";
+// import About from "../modals/about/About";
+// import SignIn from "../modals/sign-in/SignIn";
 
 const HomePage = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
