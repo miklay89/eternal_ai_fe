@@ -19,6 +19,7 @@ type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 type Props = {
   isOpen: boolean;
   onMenuClick: Dispatcher<boolean>;
+  onGetStartedClick: Dispatcher<boolean>;
 };
 
 const Header = (props: Props) => {
@@ -47,7 +48,9 @@ const Header = (props: Props) => {
       </HeaderItemWrapper>
       <HeaderItemWrapper>
         <LoginBtn>login</LoginBtn>
-        <GetStartedBtn>get started</GetStartedBtn>
+        <GetStartedBtn onClick={() => props.onGetStartedClick((prev) => !prev)}>
+          get started
+        </GetStartedBtn>
       </HeaderItemWrapper>
     </HeaderWrapper>
   );
