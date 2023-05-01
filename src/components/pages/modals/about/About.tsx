@@ -19,7 +19,7 @@ type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<boolean>;
+  onClickClose: Dispatcher<string | null>;
 };
 
 const About = (props: Props) => {
@@ -28,7 +28,7 @@ const About = (props: Props) => {
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(false)}>
+        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>

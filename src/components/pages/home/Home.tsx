@@ -15,18 +15,21 @@ import SignUp from "../modals/sign-up/SignUp";
 import About from "../modals/about/About";
 import SignIn from "../modals/sign-in/SignIn";
 
+export enum Modals {
+  MENU = "menu",
+  SIGN_UP = "sign_up",
+  SIGN_IN = "sign_in",
+  ABOUT = "about",
+}
+
 const HomePage = () => {
-  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
-  const [isOpenSignUp, setIsOpenSignUp] = useState<boolean>(false);
-  const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
-  const [isOpenAbout, setIsOpenAbout] = useState<boolean>(false);
-  // const [currentModal, openModal] = useState<null | string>(null);
+  const [currentModal, openModal] = useState<null | string>(null);
 
   const ref = useRef(null);
 
   useEffect(() => {
     if (ref.current) {
-      if (isOpenMenu || isOpenSignUp || isOpenSignIn || isOpenAbout) {
+      if (currentModal) {
         disableBodyScroll(ref.current);
       } else {
         enableBodyScroll(ref.current);
@@ -35,30 +38,35 @@ const HomePage = () => {
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, [isOpenMenu, isOpenSignUp, isOpenSignIn, isOpenAbout]);
+  }, [currentModal]);
 
   return (
     <HomeSection ref={ref}>
       <GradientCorner />
-      <Menu isOpen={isOpenMenu} onClickAboutLink={setIsOpenAbout} />
+      <Menu
+        isOpen={currentModal === Modals.MENU ? true : false}
+        onClickAboutLink={openModal}
+      />
       <SignUp
-        isOpen={isOpenSignUp}
-        onClickClose={setIsOpenSignUp}
-        onClickSignIn={setIsOpenSignIn}
+        isOpen={currentModal === Modals.SIGN_UP ? true : false}
+        onClickClose={openModal}
+        onClickSignIn={openModal}
       />
       <SignIn
-        isOpen={isOpenSignIn}
-        onClickClose={setIsOpenSignIn}
-        onClickSignUp={setIsOpenSignUp}
+        isOpen={currentModal === Modals.SIGN_IN ? true : false}
+        onClickClose={openModal}
+        onClickSignUp={openModal}
       />
-      <About isOpen={isOpenAbout} onClickClose={setIsOpenAbout} />
+      <About
+        isOpen={currentModal === Modals.ABOUT ? true : false}
+        onClickClose={openModal}
+      />
       <Container>
         <Header
-          isOpenMenu={isOpenMenu}
-          isOpenModal={isOpenSignUp || isOpenSignIn || isOpenAbout}
-          onMenuClick={setIsOpenMenu}
-          onGetStartedClick={setIsOpenSignUp}
-          onLoginClick={setIsOpenSignIn}
+          isOpenMenu={currentModal === Modals.MENU ? true : false}
+          isOpenModal={currentModal !== null && currentModal !== Modals.MENU ? true : false}
+          onOptionClick={openModal}
+          onCloseClick={openModal}
         />
         <Title />
         <EternalsBG />

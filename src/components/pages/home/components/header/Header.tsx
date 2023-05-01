@@ -13,14 +13,15 @@ import {
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
 
+import { Modals } from "../../Home";
+
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpenMenu: boolean;
   isOpenModal: boolean;
-  onMenuClick: Dispatcher<boolean>;
-  onGetStartedClick: Dispatcher<boolean>;
-  onLoginClick: Dispatcher<boolean>;
+  onOptionClick: Dispatcher<string | null>;
+  onCloseClick: Dispatcher<string | null>;
 };
 
 const Header = (props: Props) => {
@@ -30,14 +31,14 @@ const Header = (props: Props) => {
         <MenuIconWrapper
           isOpenMenu={props.isOpenMenu}
           isOpenModal={props.isOpenModal}
-          onClick={() => props.onMenuClick((prev) => !prev)}
+          onClick={() => props.onOptionClick(Modals.MENU)}
         >
           <MenuIcon src="/header/menu_icon.svg" />
         </MenuIconWrapper>
 
         <MenuCloseBtnWrapper
           isOpenMenu={props.isOpenMenu}
-          onClick={() => props.onMenuClick((prev) => !prev)}
+          onClick={() => props.onCloseClick(null)}
         >
           <MenuCloseIcon src="/header/close_btn.svg" />
         </MenuCloseBtnWrapper>
@@ -51,14 +52,14 @@ const Header = (props: Props) => {
       <HeaderItemWrapper isOpenModal={props.isOpenModal}>
         <LoginBtn
           show={props.isOpenModal}
-          onClick={() => props.onLoginClick((prev) => !prev)}
+          onClick={() => props.onOptionClick(Modals.SIGN_IN)}
         >
           login
         </LoginBtn>
         <GetStartedBtn
           show={props.isOpenModal}
           onClick={() => {
-            props.onGetStartedClick((prev) => !prev);
+            props.onOptionClick(Modals.SIGN_UP);
           }}
         >
           get started

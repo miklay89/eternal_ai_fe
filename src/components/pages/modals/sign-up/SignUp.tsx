@@ -20,20 +20,21 @@ import {
   SubTitle,
   Title,
 } from "./SignUp.styles";
+import { Modals } from "../../home/Home";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<boolean>;
-  onClickSignIn: Dispatcher<boolean>;
+  onClickClose: Dispatcher<string | null>;
+  onClickSignIn: Dispatcher<string | null>;
 };
 
 const SignUp = (props: Props) => {
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(false)}>
+        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>
@@ -56,7 +57,7 @@ const SignUp = (props: Props) => {
           <AlreadyHaveWrapper>
             <AlreadyText>Already have an account?</AlreadyText>
             &nbsp;
-            <AlreadyLink onClick={() => props.onClickSignIn(true)}>
+            <AlreadyLink onClick={() => props.onClickSignIn(Modals.SIGN_IN)}>
               Sign in
             </AlreadyLink>
           </AlreadyHaveWrapper>

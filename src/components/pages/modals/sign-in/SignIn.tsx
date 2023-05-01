@@ -16,20 +16,21 @@ import {
   Title,
 } from "./SignIn.styles";
 import { MenuCloseIcon } from "../../home/components/header/Header.styles";
+import { Modals } from "../../home/Home";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<boolean>;
-  onClickSignUp: Dispatcher<boolean>;
+  onClickClose: Dispatcher<string | null>;
+  onClickSignUp: Dispatcher<string | null>;
 };
 
 const SignIn = (props: Props) => {
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(false)}>
+        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>
@@ -46,7 +47,9 @@ const SignIn = (props: Props) => {
           <HaveNotWrapper>
             <NotText>Don’t have an account?</NotText>
             &nbsp;
-            <NotLink onClick={() => props.onClickSignUp(true)}>Sign up</NotLink>
+            <NotLink onClick={() => props.onClickSignUp(Modals.SIGN_UP)}>
+              Sign up
+            </NotLink>
           </HaveNotWrapper>
         </InnerWrapper>
       </OuterWrapper>

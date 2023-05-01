@@ -12,14 +12,14 @@ type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   isOpen: boolean;
-  onClickAboutLink: Dispatcher<boolean>;
+  onClickAboutLink: Dispatcher<string | null>;
 };
 
 const Menu = (props: Props) => {
   return (
     <MenuWrapper isOpen={props.isOpen}>
       <Navbar>
-        <Link onClick={() => props.onClickAboutLink(true)}>About us</Link>
+        <Link onClick={() => props.onClickAboutLink("about")}>About us</Link>
         <Link>Pricing</Link>
         <Link>How it works</Link>
         <Link>My account</Link>
