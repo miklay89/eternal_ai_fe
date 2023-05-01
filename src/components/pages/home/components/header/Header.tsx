@@ -3,7 +3,6 @@ import {
   HeaderWrapper,
   MenuIconWrapper,
   MainLogoWrapper,
-  HeaderButtonsWrapper,
   LoginBtn,
   GetStartedBtn,
   MenuIcon,
@@ -17,55 +16,53 @@ import Bagel from "./bagel/Bagel";
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
-  isOpen: boolean;
-  isOpenSignUp: boolean;
+  isOpenMenu: boolean;
+  isOpenModal: boolean;
   onMenuClick: Dispatcher<boolean>;
   onGetStartedClick: Dispatcher<boolean>;
-  onGetStartedClickClose: Dispatcher<boolean>;
+  onLoginClick: Dispatcher<boolean>;
 };
 
 const Header = (props: Props) => {
   return (
-    <HeaderWrapper>
-      <HeaderItemWrapper isOpenSignUp={false}>
+    <HeaderWrapper isOpenModal={props.isOpenModal}>
+      <HeaderItemWrapper isOpenModal={props.isOpenModal}>
         <MenuIconWrapper
-          show={props.isOpen}
-          isOpenSignUp={props.isOpenSignUp}
+          isOpenMenu={props.isOpenMenu}
+          isOpenModal={props.isOpenModal}
           onClick={() => props.onMenuClick((prev) => !prev)}
         >
           <MenuIcon src="/header/menu_icon.svg" />
         </MenuIconWrapper>
 
         <MenuCloseBtnWrapper
-          show={props.isOpen}
+          isOpenMenu={props.isOpenMenu}
           onClick={() => props.onMenuClick((prev) => !prev)}
         >
           <MenuCloseIcon src="/header/close_btn.svg" />
         </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper isOpenSignUp={false}>
+      <HeaderItemWrapper isOpenModal={false}>
         <MainLogoWrapper>
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </MainLogoWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper isOpenSignUp={props.isOpenSignUp}>
-        <LoginBtn show={props.isOpenSignUp}>login</LoginBtn>
+      <HeaderItemWrapper isOpenModal={props.isOpenModal}>
+        <LoginBtn
+          show={props.isOpenModal}
+          onClick={() => props.onLoginClick((prev) => !prev)}
+        >
+          login
+        </LoginBtn>
         <GetStartedBtn
-          show={props.isOpenSignUp}
+          show={props.isOpenModal}
           onClick={() => {
             props.onGetStartedClick((prev) => !prev);
-            props.onMenuClick(false);
           }}
         >
           get started
         </GetStartedBtn>
-        <MenuCloseBtnWrapper
-          show={props.isOpenSignUp}
-          onClick={() => props.onGetStartedClickClose((prev) => !prev)}
-        >
-          <MenuCloseIcon src="/header/close_btn.svg" />
-        </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
     </HeaderWrapper>
   );

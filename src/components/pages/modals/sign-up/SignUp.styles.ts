@@ -14,6 +14,41 @@ export const ModalWrapper = styled.div<{
   z-index: 10;
 `;
 
+export const ModalNavWrapper = styled.div`
+  position: relative;
+  margin: 0 auto;
+  margin-top: 28px;
+  padding-left: 28px;
+  padding-right: 28px;
+  max-width: 1640px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 15;
+`;
+
+export const ModalCloseBtnWrapper = styled.div`
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  background: #000000;
+  border: 1px solid #2f2535;
+  border-radius: 8px;
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  z-index: 15;
+`;
+
+export const ModalCloseIcon = styled.img`
+  display: block;
+  margin: auto auto;
+`;
+
 export const OuterWrapper = styled.div`
   padding: 1px;
   margin: auto auto;
@@ -108,7 +143,7 @@ export const Input = styled.input`
 `;
 
 export const ButtonsWrapper = styled.div`
-  margin-top: 32px;
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

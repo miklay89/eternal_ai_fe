@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div<{
+  isOpenModal: boolean;
+}>`
   height: 56px;
   margin: 0 auto;
   position: relative;
-  display: flex;
+  display: ${(props) => (props.isOpenModal ? "block" : "flex")};
+  width: ${(props) => (props.isOpenModal ? "270px" : "")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -12,20 +15,21 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const HeaderItemWrapper = styled.div<{
-  isOpenSignUp: boolean;
+  isOpenModal: boolean;
 }>`
-  display: flex;
-  justify-content: ${(props) => (props.isOpenSignUp ? "end" : "space-between")};
+  display: ${(props) => (props.isOpenModal ? "none" : "flex")};
+  justify-content: ${(props) => (props.isOpenModal ? "center" : "space-between")};
+  margin: ${(props) => (props.isOpenModal ? "0 auto" : "0")};
   align-items: center;
   width: 270px;
   height: 56px;
 `;
 
 export const MenuIconWrapper = styled.div<{
-  show: boolean;
-  isOpenSignUp: boolean;
+  isOpenMenu: boolean;
+  isOpenModal: boolean;
 }>`
-  display: ${(props) => (props.show ? "none" : props.isOpenSignUp ? "none" : "flex")};
+  display: ${(props) => (props.isOpenMenu ? "none" : props.isOpenModal ? "none" : "flex")};
   flex-direction: row;
   align-items: flex-start;
   width: 56px;
@@ -34,11 +38,11 @@ export const MenuIconWrapper = styled.div<{
 `;
 
 export const MenuCloseBtnWrapper = styled.div<{
-  show: boolean;
+  isOpenMenu: boolean;
 }>`
   cursor: pointer;
   box-sizing: border-box;
-  display: ${(props) => (props.show ? "flex" : "none")};
+  display: ${(props) => (props.isOpenMenu ? "flex" : "none")};
   flex-direction: row;
   align-items: flex-start;
   width: 56px;

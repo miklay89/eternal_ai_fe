@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Container, GradientCorner, HomeSection } from "./Home.styles";
 import EternalsBG from "./components/eternalsBG/EternalsBG";
 import Footer from "./components/footer/Footer";
@@ -20,6 +20,7 @@ const HomePage = () => {
   const [isOpenSignUp, setIsOpenSignUp] = useState<boolean>(false);
   const [isOpenSignIn, setIsOpenSignIn] = useState<boolean>(false);
   const [isOpenAbout, setIsOpenAbout] = useState<boolean>(false);
+  // const [currentModal, openModal] = useState<null | string>(null);
 
   const ref = useRef(null);
 
@@ -39,17 +40,25 @@ const HomePage = () => {
   return (
     <HomeSection ref={ref}>
       <GradientCorner />
-      <Menu isOpen={isOpenMenu} />
-      <SignUp isOpen={isOpenSignUp} />
-      <SignIn isOpen={isOpenSignIn} />
-      <About isOpen={isOpenAbout} />
+      <Menu isOpen={isOpenMenu} onClickAboutLink={setIsOpenAbout} />
+      <SignUp
+        isOpen={isOpenSignUp}
+        onClickClose={setIsOpenSignUp}
+        onClickSignIn={setIsOpenSignIn}
+      />
+      <SignIn
+        isOpen={isOpenSignIn}
+        onClickClose={setIsOpenSignIn}
+        onClickSignUp={setIsOpenSignUp}
+      />
+      <About isOpen={isOpenAbout} onClickClose={setIsOpenAbout} />
       <Container>
         <Header
-          isOpen={isOpenMenu}
-          isOpenSignUp={isOpenSignUp}
+          isOpenMenu={isOpenMenu}
+          isOpenModal={isOpenSignUp || isOpenSignIn || isOpenAbout}
           onMenuClick={setIsOpenMenu}
           onGetStartedClick={setIsOpenSignUp}
-          onGetStartedClickClose={setIsOpenSignUp}
+          onLoginClick={setIsOpenSignIn}
         />
         <Title />
         <EternalsBG />

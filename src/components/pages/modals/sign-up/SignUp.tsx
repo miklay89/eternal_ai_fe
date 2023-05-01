@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+import { MenuCloseIcon } from "../../home/components/header/Header.styles";
 import {
   AlreadyHaveWrapper,
   AlreadyLink,
@@ -9,6 +11,8 @@ import {
   InnerWrapper,
   Input,
   InputTitle,
+  ModalCloseBtnWrapper,
+  ModalNavWrapper,
   ModalWrapper,
   OuterWrapper,
   SignUpBtn,
@@ -17,13 +21,22 @@ import {
   Title,
 } from "./SignUp.styles";
 
+type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+
 type Props = {
   isOpen: boolean;
+  onClickClose: Dispatcher<boolean>;
+  onClickSignIn: Dispatcher<boolean>;
 };
 
 const SignUp = (props: Props) => {
   return (
     <ModalWrapper isOpen={props.isOpen}>
+      <ModalNavWrapper>
+        <ModalCloseBtnWrapper onClick={() => props.onClickClose(false)}>
+          <MenuCloseIcon src="/header/close_btn.svg" />
+        </ModalCloseBtnWrapper>
+      </ModalNavWrapper>
       <OuterWrapper>
         <InnerWrapper>
           <Title>Get started</Title>
@@ -43,7 +56,9 @@ const SignUp = (props: Props) => {
           <AlreadyHaveWrapper>
             <AlreadyText>Already have an account?</AlreadyText>
             &nbsp;
-            <AlreadyLink>Sign in</AlreadyLink>
+            <AlreadyLink onClick={() => props.onClickSignIn(true)}>
+              Sign in
+            </AlreadyLink>
           </AlreadyHaveWrapper>
         </InnerWrapper>
       </OuterWrapper>
