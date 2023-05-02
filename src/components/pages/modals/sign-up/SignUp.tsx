@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { MenuCloseIcon } from "../../home/components/header/Header.styles";
+import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   AlreadyHaveWrapper,
   AlreadyLink,

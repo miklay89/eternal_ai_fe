@@ -15,7 +15,7 @@ import {
   SignInBtn,
   Title,
 } from "./SignIn.styles";
-import { MenuCloseIcon } from "../../home/components/header/Header.styles";
+import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import { Modals } from "../../home/Home";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;

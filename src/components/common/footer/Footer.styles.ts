@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-export const FooterWrapper = styled.div`
+export const FooterWrapper = styled.div<{
+  marginTop: number;
+}>`
   margin: 0 auto;
   max-width: 1576px;
   height: 140px;
-  margin-top: 150.84px;
+  margin-top: ${(props) => props.marginTop + "px"};
   background: #1d1d24;
   border-radius: 32px;
   padding-left: 48px;

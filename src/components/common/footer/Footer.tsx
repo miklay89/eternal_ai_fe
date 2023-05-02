@@ -11,9 +11,13 @@ import {
 } from "./Footer.styles";
 import { MainLogo } from "../header/Header.styles";
 
-const Footer = () => {
+type Props = {
+  marginTop: number;
+}
+
+const Footer = (props: Props) => {
   return (
-    <FooterWrapper>
+    <FooterWrapper marginTop={props.marginTop}>
       <FooterLogoWrapper>
         <Bagel />
         <MainLogo src="/eternal.svg" />

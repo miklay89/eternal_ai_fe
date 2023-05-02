@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Container, GradientCorner, HomeSection } from "./Home.styles";
 import EternalsBG from "./components/eternalsBG/EternalsBG";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import Footer from "../../common/footer/Footer";
+import Header from "../../common/header/Header";
 import Menu from "../modals/menu/Menu";
 import Promo from "./components/promo/Promo";
 import Title from "./components/title/Title";
@@ -71,7 +71,7 @@ const HomePage = () => {
         <Title />
         <EternalsBG />
         <Promo />
-        <Footer />
+        <Footer marginTop={150.84} />
       </Container>
     </HomeSection>
   );

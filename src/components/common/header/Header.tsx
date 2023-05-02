@@ -13,7 +13,7 @@ import {
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
 
-import { Modals } from "../../Home";
+import { Modals } from "../../pages/home/Home";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
