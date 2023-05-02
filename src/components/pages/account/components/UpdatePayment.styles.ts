@@ -149,7 +149,9 @@ export const CardInfoWrapper = styled.div<{
   gap: 16px;
 `;
 
-export const InputsWrapper = styled.div`
+export const InputsWrapper = styled.div<{
+  isFocused: boolean;
+}>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -160,9 +162,14 @@ export const InputsWrapper = styled.div`
   padding-bottom: 17.5px;
   width: 100%;
   height: 100%;
-  border: 1px solid #2f2535;
+  border: ${(props) =>
+    props.isFocused ? "1px solid rgba(248, 45, 152, 1)" : "1px solid #2f2535"};
   border-radius: 16px;
   max-width: 529px;
+  &:hover {
+    border-color: ${(props) =>
+      props.isFocused ? "rgba(248, 45, 152, 1)" : "rgba(255, 255, 255, 0.5)"};
+  }
 `;
 
 export const CardIcon = styled.img`

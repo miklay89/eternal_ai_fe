@@ -22,6 +22,7 @@ import {
 
 const UpdatePayment = () => {
   const [update, setIsUpdate] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
     <OuterWrapper>
@@ -42,7 +43,11 @@ const UpdatePayment = () => {
         </UpdateBtnOuterWrapper>
         <CancelSubBtn show={update}>cancel subscription</CancelSubBtn>
         <CardInfoWrapper show={update}>
-          <InputsWrapper>
+          <InputsWrapper
+            isFocused={isFocused}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          >
             <CardIcon src="/credit_card_icon.png" />
             <CardNumberInput placeholder="Card Number" />
             <CardMonthInput placeholder="MM / YY" />
