@@ -46,6 +46,7 @@ const HomePage = () => {
       <Menu
         isOpen={currentModal === Modals.MENU ? true : false}
         onClickAboutLink={openModal}
+        closeMenu={openModal}
       />
       <SignUp
         isOpen={currentModal === Modals.SIGN_UP ? true : false}
@@ -69,9 +70,9 @@ const HomePage = () => {
           onCloseClick={openModal}
         />
         <Title />
-        <EternalsBG />
+        <EternalsBG top={1270} />
         <Promo />
-        <Footer marginTop={150.84} />
+        <Footer marginTop={150.84} closeAllModals={openModal}/>
       </Container>
     </HomeSection>
   );

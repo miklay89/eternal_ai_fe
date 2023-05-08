@@ -42,7 +42,7 @@ export const OuterWrapper = styled.div`
   );
   position: relative;
   width: 760px;
-  z-index: 10;
+  z-index: 5;
 `;
 
 export const InnerWrapper = styled.div`

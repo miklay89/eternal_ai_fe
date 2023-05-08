@@ -14,6 +14,9 @@ import {
 import Bagel from "./bagel/Bagel";
 
 import { Modals } from "../../pages/home/Home";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Paths } from "../../../routes/root";
+import scrollToTop from "../../hooks/scrollToTop";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -25,6 +28,20 @@ type Props = {
 };
 
 const Header = (props: Props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClickLogo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === Paths.HOME) {
+      props.onCloseClick(null);
+      scrollToTop();
+    } else {
+      navigate(Paths.HOME);
+      scrollToTop();
+    }
+  };
+
   return (
     <HeaderWrapper isOpenModal={props.isOpenModal}>
       <HeaderItemWrapper isOpenModal={props.isOpenModal}>
@@ -44,7 +61,7 @@ const Header = (props: Props) => {
         </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
       <HeaderItemWrapper isOpenModal={false}>
-        <MainLogoWrapper>
+        <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </MainLogoWrapper>

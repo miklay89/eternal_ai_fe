@@ -10,15 +10,34 @@ import {
   SocialImg,
 } from "./Footer.styles";
 import { MainLogo } from "../header/Header.styles";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Paths } from "../../../routes/root";
+import { Dispatch, SetStateAction } from "react";
+import scrollToTop from "../../hooks/scrollToTop";
+
+type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
   marginTop: number;
-}
+  closeAllModals: Dispatcher<string | null>;
+};
 
 const Footer = (props: Props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleClickFooterLogo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === Paths.HOME) {
+      props.closeAllModals(null);
+      scrollToTop();
+    } else {
+      navigate(Paths.HOME);
+      scrollToTop();
+    }
+  };
   return (
     <FooterWrapper marginTop={props.marginTop}>
-      <FooterLogoWrapper>
+      <FooterLogoWrapper onClick={(e) => handleClickFooterLogo(e)}>
         <Bagel />
         <MainLogo src="/eternal.svg" />
       </FooterLogoWrapper>

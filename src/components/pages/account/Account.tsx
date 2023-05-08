@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../../common/footer/Footer";
 import Header from "../../common/header/Header";
 import {
   AccountSection,
   Container,
-  ContentWrapper,
   Ellipse,
   InnerWrapper,
   Input,
@@ -14,18 +13,63 @@ import {
   Title,
 } from "./Account.styles";
 import UpdatePayment from "./components/UpdatePayment";
+import {
+  clearAllBodyScrollLocks,
+  disableBodyScroll,
+  enableBodyScroll,
+} from "body-scroll-lock";
+import Menu from "../modals/menu/Menu";
+import SignUp from "../modals/sign-up/SignUp";
+import SignIn from "../modals/sign-in/SignIn";
+import About from "../modals/about/About";
+import { Modals } from "../home/Home";
 
 const Account = () => {
-  const [isOpenMenu, setIsOpenMenu] = useState<null | string>(null);
+  const [currentModal, openModal] = useState<null | string>(null);
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      if (currentModal) {
+        disableBodyScroll(ref.current);
+      } else {
+        enableBodyScroll(ref.current);
+      }
+    }
+    return () => {
+      clearAllBodyScrollLocks();
+    };
+  }, [currentModal]);
   return (
-    <AccountSection>
+    <AccountSection ref={ref}>
+      <Menu
+        isOpen={currentModal === Modals.MENU ? true : false}
+        onClickAboutLink={openModal}
+        closeMenu={openModal}
+      />
+      <SignUp
+        isOpen={currentModal === Modals.SIGN_UP ? true : false}
+        onClickClose={openModal}
+        onClickSignIn={openModal}
+      />
+      <SignIn
+        isOpen={currentModal === Modals.SIGN_IN ? true : false}
+        onClickClose={openModal}
+        onClickSignUp={openModal}
+      />
+      <About
+        isOpen={currentModal === Modals.ABOUT ? true : false}
+        onClickClose={openModal}
+      />
       <Container>
-        {/* TODO ADD header + Add windows states from MOBX */}
         <Header
-          isOpenMenu={false}
-          isOpenModal={false}
-          onOptionClick={setIsOpenMenu}
-          onCloseClick={setIsOpenMenu}
+          isOpenMenu={currentModal === Modals.MENU ? true : false}
+          isOpenModal={
+            currentModal !== null && currentModal !== Modals.MENU ? true : false
+          }
+          onOptionClick={openModal}
+          onCloseClick={openModal}
         />
         <Ellipse
           width={1624}
@@ -56,7 +100,7 @@ const Account = () => {
           </InnerWrapper>
         </OuterWrapper>
         <UpdatePayment />
-        <Footer marginTop={80} />
+        <Footer marginTop={80} closeAllModals={openModal}/>
       </Container>
     </AccountSection>
   );

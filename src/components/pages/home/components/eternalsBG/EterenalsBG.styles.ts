@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  position: relative;
-  height: 393px;
-  margin-top: 230px;
+export const Wrapper = styled.div<{
+  top: number;
+}>`
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: ${(props) => props.top + "px"};
 `;
 
 export const ImgPart = styled.img<{

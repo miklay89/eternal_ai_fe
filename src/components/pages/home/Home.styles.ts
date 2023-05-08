@@ -10,6 +10,7 @@ export const HomeSection = styled.section`
 `;
 
 export const Container = styled.div`
+  position: relative;
   margin: 0 auto;
   padding: 28px;
   max-width: 1640px;

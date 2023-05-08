@@ -1,8 +1,12 @@
 import { ImgPart, Shadow, Wrapper } from "./EterenalsBG.styles";
 
-const EternalsBG = () => {
+type Props = {
+  top: number;
+}
+
+const EternalsBG = (props: Props) => {
   return (
-    <Wrapper>
+    <Wrapper top={props.top}>
       <ImgPart src="/home/conversation.png" left={76} bottom={200} />
       <ImgPart src="/home/blur.png" left={-25} bottom={10} />
       <ImgPart src="/home/e_musk.png" left={0} bottom={8} />
