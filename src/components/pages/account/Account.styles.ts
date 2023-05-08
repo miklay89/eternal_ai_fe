@@ -7,6 +7,7 @@ export const AccountSection = styled.section`
   height: auto;
   background-color: #111115;
   color: #ffffff;
+  overflow: hidden;
 `;
 
 export const Container = styled.div`
@@ -14,7 +15,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 28px;
   max-width: 1640px;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 export const Ellipse = styled.img<{
