@@ -14,6 +14,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 28px;
   max-width: 1640px;
+  overflow: hidden;
 `;
 
 export const Ellipse = styled.img<{
