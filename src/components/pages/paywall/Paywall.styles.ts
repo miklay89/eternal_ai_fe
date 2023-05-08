@@ -7,6 +7,7 @@ export const Section = styled.section`
   height: auto;
   background-color: #111115;
   color: #ffffff;
+  overflow: hidden;
 `;
 
 export const Container = styled.div`
