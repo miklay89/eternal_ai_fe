@@ -28,7 +28,7 @@ export enum Payments {
 const Paywall = () => {
   const navigate = useNavigate();
   const [currentModal, openModal] = useState<null | string>(null);
-  const [payment, showPayment] = useState<string>(Payments.SUCCESS);
+  const [payment, showPayment] = useState<string>(Payments.INFO);
 
   const handleCloseBtnClick = (e: React.MouseEvent) => {
     e.preventDefault();
