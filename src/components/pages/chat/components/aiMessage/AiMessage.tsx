@@ -1,5 +1,7 @@
+import { Wrapper } from "./AiMessage.styles";
+
 const AiMessage = () => {
-  return <div>AiMessage</div>;
+  return <Wrapper>AiMessage</Wrapper>;
 };
 
 export default AiMessage;

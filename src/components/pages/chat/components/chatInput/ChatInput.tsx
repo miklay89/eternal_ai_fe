@@ -1,5 +1,7 @@
+import { Wrapper } from "./ChatInput.styles";
+
 const ChatInput = () => {
-  return <div>ChatInput</div>;
+  return <Wrapper>ChatInput</Wrapper>;
 };
 
 export default ChatInput;

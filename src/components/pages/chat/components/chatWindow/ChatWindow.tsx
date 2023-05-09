@@ -1,5 +1,7 @@
+import { Wrapper } from "./ChatWindow.styles";
+
 const ChatWindow = () => {
-  return <div>ChatWindow</div>;
+  return <Wrapper>ChatWindow</Wrapper>;
 };
 
 export default ChatWindow;

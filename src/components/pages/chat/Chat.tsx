@@ -69,10 +69,9 @@ const Chat = () => {
         {/* <div>Рожа + подпись + подсветка с абсолютным позиционированием</div> */}
         <Portrait />
         {/* <div>Окно чата - меседжы от юзера и меседжы от бота</div> */}
-        <div>
-          <AiMessage />
-          <UserMessage />
-        </div>
+        <ChatWindow />
+        <AiMessage />
+        <UserMessage />
         {/* <div>Инпут для написания сообщений</div> */}
         <ChatInput />
       </Container>

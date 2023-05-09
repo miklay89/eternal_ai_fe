@@ -1,5 +1,7 @@
+import { Wrapper } from "./UserMessage.styles";
+
 const UserMessage = () => {
-  return <div>UserMessage</div>;
+  return <Wrapper>UserMessage</Wrapper>;
 };
 
 export default UserMessage;
