@@ -1,5 +1,7 @@
+import { Wrapper } from "./Portraite.styles";
+
 const Portrait = () => {
-  return <div>Portrait</div>;
+  return <Wrapper>Portrait</Wrapper>;
 };
 
 export default Portrait;
