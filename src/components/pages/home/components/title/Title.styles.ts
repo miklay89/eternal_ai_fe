@@ -28,7 +28,7 @@ export const Subtitle = styled.div`
   margin: 0 auto;
   margin-top: 8px;
   width: fit-content;
-  font-family: "Avenir-medium";
+  font-family: "Avenir";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
