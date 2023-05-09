@@ -7,6 +7,7 @@ export const Wrapper = styled.div<{
   margin-left: auto;
   margin-right: auto;
   top: ${(props) => props.top + "px"};
+  width: 100%;
 `;
 
 export const ImgPart = styled.img<{
