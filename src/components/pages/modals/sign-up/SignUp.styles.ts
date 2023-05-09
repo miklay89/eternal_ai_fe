@@ -149,35 +149,8 @@ export const ButtonsWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const SignUpGoogle = styled.div`
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 24px;
-  gap: 16px;
-  width: 304.5px;
-  height: 62px;
-  border: 1px solid #ffffff;
-  border-radius: 120px;
-`;
-
-export const GoogleIcon = styled.img``;
-
-export const GoogleBtnText = styled.div`
-  font-family: "Arquitecta";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 110%;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #ffffff;
-`;
-
 export const SignUpBtn = styled.button`
-  width: 304.5px;
+  width: 100%;
   height: 62px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   border-radius: 120px;

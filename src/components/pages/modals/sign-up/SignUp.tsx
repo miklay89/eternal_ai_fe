@@ -6,8 +6,6 @@ import {
   AlreadyText,
   ButtonsWrapper,
   Divider,
-  GoogleBtnText,
-  GoogleIcon,
   InnerWrapper,
   Input,
   InputTitle,
@@ -16,7 +14,6 @@ import {
   ModalWrapper,
   OuterWrapper,
   SignUpBtn,
-  SignUpGoogle,
   SubTitle,
   Title,
 } from "./SignUp.styles";
@@ -47,10 +44,6 @@ const SignUp = (props: Props) => {
           <InputTitle>Password</InputTitle>
           <Input placeholder="*********"></Input>
           <ButtonsWrapper>
-            <SignUpGoogle>
-              <GoogleIcon src="/google-icon.svg" />
-              <GoogleBtnText>sign up with google</GoogleBtnText>
-            </SignUpGoogle>
             <SignUpBtn>sign up</SignUpBtn>
           </ButtonsWrapper>
           <Divider />
