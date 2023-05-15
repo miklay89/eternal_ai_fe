@@ -4,10 +4,9 @@ export const Section = styled.section`
   margin: 0 auto;
   max-width: 100%;
   position: relative;
-  height: 100vh;
+  height: 100%;
   background-color: #111115;
   color: #ffffff;
-  overflow: hidden;
 `;
 
 export const Container = styled.div`
@@ -15,6 +14,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 28px;
   max-width: 1640px;
+  overflow: hidden;
 `;
 
 export const PortraitWrapper = styled.div`
