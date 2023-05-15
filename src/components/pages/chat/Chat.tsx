@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Container, Section } from "./Chat.styles";
+import {
+  ChatInputWrapper,
+  ChatWindow,
+  Container,
+  PortraitWrapper,
+  Section,
+} from "./Chat.styles";
 import {
   clearAllBodyScrollLocks,
   disableBodyScroll,
@@ -13,14 +19,21 @@ import About from "../modals/about/About";
 import Header from "../../common/header/Header";
 import Portrait from "./components/portraite/Portrait";
 import ChatInput from "./components/chatInput/ChatInput";
-import ChatWindow from "./components/chatWindow/ChatWindow";
 import AiMessage from "./components/aiMessage/AiMessage";
 import UserMessage from "./components/userMessage/UserMessage";
+import { individualsData } from "../home/components/promo/Cards.data";
+
+export type Message = {
+  ai: boolean;
+  text: string;
+};
 
 const Chat = () => {
-  const [currentModal, openModal] = useState<null | string>(null);
-
   const ref = useRef(null);
+  const chatMessageRef = useRef<null | HTMLDivElement>(null);
+
+  const [currentModal, openModal] = useState<null | string>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     if (ref.current) {
@@ -34,6 +47,29 @@ const Chat = () => {
       clearAllBodyScrollLocks();
     };
   }, [currentModal]);
+
+  const scrollToBottom = () => {
+    chatMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const messagesForRender = messages.map((msg, idx) => {
+    if (msg.ai) {
+      return (
+        <AiMessage
+          key={idx}
+          text={msg.text}
+          ref={chatMessageRef}
+          backgroundUrl={individualsData[0].substrateUrl}
+          portraitUrl={individualsData[0].imgUrl}
+        />
+      );
+    }
+    return <UserMessage key={idx} text={msg.text} ref={chatMessageRef} />;
+  });
 
   return (
     <Section ref={ref}>
@@ -66,14 +102,19 @@ const Chat = () => {
           onOptionClick={openModal}
           onCloseClick={openModal}
         />
-        {/* <div>Рожа + подпись + подсветка с абсолютным позиционированием</div> */}
-        <Portrait />
-        {/* <div>Окно чата - меседжы от юзера и меседжы от бота</div> */}
-        <ChatWindow />
-        <AiMessage />
-        <UserMessage />
-        {/* <div>Инпут для написания сообщений</div> */}
-        <ChatInput />
+        <PortraitWrapper>
+          <Portrait
+            fullName={individualsData[0].fullName}
+            imgUrl={individualsData[0].imgUrl}
+            uuid={individualsData[0].uuid}
+            title={individualsData[0].title}
+            id={individualsData[0].id}
+          />
+        </PortraitWrapper>
+        <ChatWindow>{messagesForRender}</ChatWindow>
+        <ChatInputWrapper>
+          <ChatInput onSubmit={setMessages} />
+        </ChatInputWrapper>
       </Container>
     </Section>
   );
