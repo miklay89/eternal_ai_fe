@@ -1,4 +1,7 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/index";
+import { setAuth } from "../../../store/authReducer";
 import {
   HeaderWrapper,
   MenuIconWrapper,
@@ -7,29 +10,28 @@ import {
   GetStartedBtn,
   MenuIcon,
   MainLogo,
-  MenuCloseBtnWrapper,
-  MenuCloseIcon,
   HeaderItemWrapper,
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
-
 import { Modals } from "../../pages/home/Home";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
 import scrollToTop from "../../hooks/scrollToTop";
+import LocalStorage from "../../../services/localStorage";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 type Props = {
-  isOpenMenu: boolean;
-  isOpenModal: boolean;
+  show: boolean;
   onOptionClick: Dispatcher<string | null>;
   onCloseClick: Dispatcher<string | null>;
 };
 
 const Header = (props: Props) => {
+  const AuthState = useSelector((state: RootState) => state.isAuth);
   const location = useLocation();
   const navigate = useNavigate();
+  const [signOutBtn, showSingOutBtn] = useState<boolean>(false);
 
   const handleClickLogo = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -42,39 +44,46 @@ const Header = (props: Props) => {
     }
   };
 
+  const handleClickBtn = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!signOutBtn) {
+      props.onOptionClick(Modals.SIGN_IN);
+    } else {
+      setAuth(false);
+      showSingOutBtn(false);
+      LocalStorage.deleteToken();
+    }
+  };
+
+  useEffect(() => {
+    if (AuthState.isAuth) {
+      showSingOutBtn(true);
+      return;
+    }
+    if (!AuthState.isAuth) {
+      showSingOutBtn(false);
+      return;
+    }
+  }, [AuthState.isAuth]);
+
   return (
-    <HeaderWrapper isOpenModal={props.isOpenModal}>
-      <HeaderItemWrapper isOpenModal={props.isOpenModal}>
-        <MenuIconWrapper
-          isOpenMenu={props.isOpenMenu}
-          isOpenModal={props.isOpenModal}
-          onClick={() => props.onOptionClick(Modals.MENU)}
-        >
+    <HeaderWrapper show={props.show}>
+      <HeaderItemWrapper>
+        <MenuIconWrapper onClick={() => props.onOptionClick(Modals.MENU)}>
           <MenuIcon src="/header/menu_icon.svg" />
         </MenuIconWrapper>
-
-        <MenuCloseBtnWrapper
-          isOpenMenu={props.isOpenMenu}
-          onClick={() => props.onCloseClick(null)}
-        >
-          <MenuCloseIcon src="/header/close_btn.svg" />
-        </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper isOpenModal={false}>
+      <HeaderItemWrapper>
         <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </MainLogoWrapper>
       </HeaderItemWrapper>
-      <HeaderItemWrapper isOpenModal={props.isOpenModal}>
-        <LoginBtn
-          show={props.isOpenModal}
-          onClick={() => props.onOptionClick(Modals.SIGN_IN)}
-        >
-          login
+      <HeaderItemWrapper>
+        <LoginBtn onClick={(e) => handleClickBtn(e)}>
+          {signOutBtn ? "sign out" : "login"}
         </LoginBtn>
         <GetStartedBtn
-          show={props.isOpenModal}
           onClick={() => {
             props.onOptionClick(Modals.SIGN_UP);
           }}

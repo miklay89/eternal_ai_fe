@@ -64,10 +64,7 @@ const Account = () => {
       />
       <Container>
         <Header
-          isOpenMenu={currentModal === Modals.MENU ? true : false}
-          isOpenModal={
-            currentModal !== null && currentModal !== Modals.MENU ? true : false
-          }
+          show={currentModal == null ? true : false}
           onOptionClick={openModal}
           onCloseClick={openModal}
         />
@@ -100,7 +97,7 @@ const Account = () => {
           </InnerWrapper>
         </OuterWrapper>
         <UpdatePayment />
-        <Footer marginTop={80} closeAllModals={openModal}/>
+        <Footer marginTop={80} closeAllModals={openModal} />
       </Container>
     </AccountSection>
   );

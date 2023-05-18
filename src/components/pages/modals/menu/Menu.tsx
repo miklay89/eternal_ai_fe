@@ -1,8 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   Divider,
+  GetStartedBtn,
+  HeaderItemWrapper,
+  HeaderWrapper,
   Link,
+  LoginBtn,
+  MainLogo,
+  MainLogoWrapper,
+  MenuCloseIcon,
   MenuWrapper,
+  ModalCloseBtnWrapper,
   Navbar,
   Social,
   SocialImg,
@@ -10,6 +18,11 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
 import { Modals } from "../../home/Home";
+import Bagel from "../../../common/header/bagel/Bagel";
+import scrollToTop from "../../../hooks/scrollToTop";
+import { validateEmail, validatePassword } from "../../../hooks/validators";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -22,6 +35,19 @@ type Props = {
 const Menu = (props: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const AuthState = useSelector((state: RootState) => state.isAuth);
+  const [signOutBtn, showSingOutBtn] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (AuthState.isAuth) {
+      showSingOutBtn(true);
+      return;
+    }
+    if (!AuthState.isAuth) {
+      showSingOutBtn(false);
+      return;
+    }
+  }, [AuthState.isAuth]);
 
   const handleAccountClick = () => {
     if (location.pathname === Paths.ACCOUNT) {
@@ -30,8 +56,44 @@ const Menu = (props: Props) => {
     navigate("/account");
   };
 
+  const handleClickLogo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === Paths.HOME) {
+      props.closeMenu(null);
+      scrollToTop();
+    } else {
+      navigate(Paths.HOME);
+      scrollToTop();
+    }
+  };
+
   return (
     <MenuWrapper isOpen={props.isOpen}>
+      <HeaderWrapper>
+        <HeaderItemWrapper>
+          <ModalCloseBtnWrapper onClick={() => props.closeMenu(null)}>
+            <MenuCloseIcon src="/header/close_btn.svg" />
+          </ModalCloseBtnWrapper>
+        </HeaderItemWrapper>
+        <HeaderItemWrapper>
+          <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
+            <Bagel />
+            <MainLogo src="/eternal.svg" />
+          </MainLogoWrapper>
+        </HeaderItemWrapper>
+        <HeaderItemWrapper>
+          <LoginBtn onClick={() => props.closeMenu(Modals.SIGN_IN)}>
+            {signOutBtn ? "sign out" : "login"}
+          </LoginBtn>
+          <GetStartedBtn
+            onClick={() => {
+              props.closeMenu(Modals.SIGN_UP);
+            }}
+          >
+            get started
+          </GetStartedBtn>
+        </HeaderItemWrapper>
+      </HeaderWrapper>
       <Navbar>
         <Link onClick={() => props.onClickAboutLink(Modals.ABOUT)}>
           About us

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container, GradientCorner, HomeSection } from "./Home.styles";
 import EternalsBG from "./components/eternalsBG/EternalsBG";
 import Footer from "../../common/footer/Footer";
@@ -64,15 +64,14 @@ const HomePage = () => {
       />
       <Container>
         <Header
-          isOpenMenu={currentModal === Modals.MENU ? true : false}
-          isOpenModal={currentModal !== null && currentModal !== Modals.MENU ? true : false}
+          show={currentModal == null ? true : false}
           onOptionClick={openModal}
           onCloseClick={openModal}
         />
         <Title />
         <EternalsBG top={1270} />
         <Promo />
-        <Footer marginTop={150.84} closeAllModals={openModal}/>
+        <Footer marginTop={150.84} closeAllModals={openModal} />
       </Container>
     </HomeSection>
   );

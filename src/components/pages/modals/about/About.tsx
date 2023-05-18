@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { MenuCloseIcon } from "../../../common/header/Header.styles";
+import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   Check,
   CheckBox,
@@ -8,12 +8,17 @@ import {
   ContinueBtn,
   Description,
   InnerWrapper,
+  LogoWrapper,
   ModalCloseBtnWrapper,
   ModalNavWrapper,
   ModalWrapper,
   OuterWrapper,
   Title,
 } from "./About.styles";
+import Bagel from "../../../common/header/bagel/Bagel";
+import scrollToTop from "../../../hooks/scrollToTop";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Paths } from "../../../../routes/root";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -24,10 +29,27 @@ type Props = {
 
 const About = (props: Props) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClickLogo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === Paths.HOME) {
+      props.onClickClose(null);
+      scrollToTop();
+    } else {
+      navigate(Paths.HOME);
+      scrollToTop();
+    }
+  };
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
+        <LogoWrapper onClick={(e) => handleClickLogo(e)}>
+          <Bagel />
+          <MainLogo src="/eternal.svg" />
+        </LogoWrapper>
         <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>

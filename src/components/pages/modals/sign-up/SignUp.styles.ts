@@ -22,8 +22,14 @@ export const ModalNavWrapper = styled.div`
   padding-right: 28px;
   max-width: 1640px;
   display: flex;
-  justify-content: flex-end;
-  z-index: 15;
+`;
+
+export const LogoWrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(28px);
 `;
 
 export const ModalCloseBtnWrapper = styled.div`

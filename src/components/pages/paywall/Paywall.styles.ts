@@ -33,6 +33,16 @@ export const GradientCorner = styled.div`
   );
 `;
 
+export const LogoWrapper = styled.div`
+  position: relative;
+  margin: 0 auto;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+`;
+
 export const CloseBtnWrapper = styled.div`
   cursor: pointer;
   position: absolute;
@@ -50,7 +60,7 @@ export const CloseBtnWrapper = styled.div`
   &:hover {
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
-  z-index: 10;
+  z-index: 15;
 `;
 
 export const CloseIcon = styled.img`
@@ -63,7 +73,7 @@ export const TitleWrapper = styled.div<{
 }>`
   display: ${(props) => (props.show ? "block" : "none")};
   margin: 0 auto;
-  margin-top: 174px;
+  margin-top: 182px;
   position: relative;
   z-index: 10;
 `;

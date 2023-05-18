@@ -1,62 +1,37 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div<{
-  isOpenModal: boolean;
+  show: boolean;
 }>`
-  height: 56px;
+  height: auto;
   margin: 0 auto;
   position: relative;
-  display: ${(props) => (props.isOpenModal ? "block" : "flex")};
-  width: ${(props) => (props.isOpenModal ? "270px" : "")};
+  display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 5;
 `;
 
-export const HeaderItemWrapper = styled.div<{
-  isOpenModal: boolean;
-}>`
-  display: ${(props) => (props.isOpenModal ? "none" : "flex")};
-  justify-content: ${(props) => (props.isOpenModal ? "center" : "space-between")};
-  margin: ${(props) => (props.isOpenModal ? "0 auto" : "0")};
+export const HeaderItemWrapper = styled.div`
+  display: flex;
   align-items: center;
-  width: 270px;
+  width: 320px;
   height: 56px;
 `;
 
-export const MenuIconWrapper = styled.div<{
-  isOpenMenu: boolean;
-  isOpenModal: boolean;
-}>`
-  display: ${(props) => (props.isOpenMenu ? "none" : props.isOpenModal ? "none" : "flex")};
+export const MenuIconWrapper = styled.div`
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
   width: 56px;
   height: 56px;
   cursor: pointer;
-`;
-
-export const MenuCloseBtnWrapper = styled.div<{
-  isOpenMenu: boolean;
-}>`
-  cursor: pointer;
-  box-sizing: border-box;
-  display: ${(props) => (props.isOpenMenu ? "flex" : "none")};
-  flex-direction: row;
-  align-items: flex-start;
-  width: 56px;
-  height: 56px;
-  background: #000000;
-  border: 1px solid #2f2535;
-  border-radius: 8px;
-  &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-  }
 `;
 
 export const MainLogoWrapper = styled.div`
   display: flex;
+  align-items: center;
   margin: 0 auto;
 `;
 
@@ -65,10 +40,10 @@ export const HeaderButtonsWrapper = styled.div`
   align-items: center;
 `;
 
-export const LoginBtn = styled.div<{
-  show: boolean;
-}>`
-  display: ${(props) => (props.show ? "none" : "block")};
+export const LoginBtn = styled.div`
+  display: block;
+  margin-left: auto;
+  margin-right: 32px;
   font-family: "Arquitecta";
   font-style: normal;
   font-weight: 700;
@@ -86,10 +61,8 @@ export const LoginBtn = styled.div<{
   }
 `;
 
-export const GetStartedBtn = styled.button<{
-  show: boolean;
-}>`
-  display: ${(props) => (props.show ? "none" : "block")};
+export const GetStartedBtn = styled.button`
+  display: block;
   width: 185px;
   height: 48px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);

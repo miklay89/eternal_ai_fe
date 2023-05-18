@@ -95,10 +95,7 @@ const Chat = () => {
 
       <Container>
         <Header
-          isOpenMenu={currentModal === Modals.MENU ? true : false}
-          isOpenModal={
-            currentModal !== null && currentModal !== Modals.MENU ? true : false
-          }
+          show={currentModal == null ? true : false}
           onOptionClick={openModal}
           onCloseClick={openModal}
         />

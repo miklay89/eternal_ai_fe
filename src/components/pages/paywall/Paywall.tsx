@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Header from "../../common/header/Header";
 import EternalsBG from "../home/components/eternalsBG/EternalsBG";
 import {
   CloseBtnWrapper,
   CloseIcon,
   Container,
   GradientCorner,
+  LogoWrapper,
   PaymentWrapper,
   Section,
   SubTitle,
@@ -18,6 +18,8 @@ import scrollToTop from "../../hooks/scrollToTop";
 import PayInfo from "./components/payInfo/PayInfo";
 import Payment from "./components/payment/Payment";
 import Success from "./components/success/Success";
+import Bagel from "../../common/header/bagel/Bagel";
+import { MainLogo } from "../../common/header/Header.styles";
 
 export enum Payments {
   INFO = "info",
@@ -36,16 +38,20 @@ const Paywall = () => {
     scrollToTop();
   };
 
+  const handleClickLogo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(Paths.HOME);
+    scrollToTop();
+  };
+
   return (
     <Section>
       <GradientCorner />
       <Container>
-        <Header
-          isOpenMenu={false}
-          isOpenModal={true}
-          onOptionClick={openModal}
-          onCloseClick={openModal}
-        />
+        <LogoWrapper onClick={(e) => handleClickLogo(e)}>
+          <Bagel />
+          <MainLogo src="/eternal.svg" />
+        </LogoWrapper>
         <CloseBtnWrapper onClick={(e) => handleCloseBtnClick(e)}>
           <CloseIcon src="/header/close_btn.svg" />
         </CloseBtnWrapper>
