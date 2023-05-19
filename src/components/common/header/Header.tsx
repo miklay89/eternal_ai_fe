@@ -11,6 +11,10 @@ import {
   MenuIcon,
   MainLogo,
   HeaderItemWrapper,
+  ShareBtnOuter,
+  ShareBtnInner,
+  ShareIcon,
+  ShareText,
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
 import { Modals } from "../../pages/home/Home";
@@ -84,12 +88,19 @@ const Header = (props: Props) => {
           {signOutBtn ? "sign out" : "login"}
         </LoginBtn>
         <GetStartedBtn
+          show={signOutBtn ? false : true}
           onClick={() => {
             props.onOptionClick(Modals.SIGN_UP);
           }}
         >
           get started
         </GetStartedBtn>
+        <ShareBtnOuter show={signOutBtn ? true : false}>
+          <ShareBtnInner>
+            <ShareIcon src="/share_icon.svg" />
+            <ShareText>SHARE</ShareText>
+          </ShareBtnInner>
+        </ShareBtnOuter>
       </HeaderItemWrapper>
     </HeaderWrapper>
   );

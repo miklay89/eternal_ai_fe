@@ -12,6 +12,10 @@ import {
   MenuWrapper,
   ModalCloseBtnWrapper,
   Navbar,
+  ShareBtnInner,
+  ShareBtnOuter,
+  ShareIcon,
+  ShareText,
   Social,
   SocialImg,
 } from "./Menu.styles";
@@ -20,9 +24,10 @@ import { Paths } from "../../../../routes/root";
 import { Modals } from "../../home/Home";
 import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
-import { validateEmail, validatePassword } from "../../../hooks/validators";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
+import LocalStorage from "../../../../services/localStorage";
+import { setAuth } from "../../../../store/authReducer";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -49,7 +54,8 @@ const Menu = (props: Props) => {
     }
   }, [AuthState.isAuth]);
 
-  const handleAccountClick = () => {
+  const handleAccountClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (location.pathname === Paths.ACCOUNT) {
       props.closeMenu(null);
     }
@@ -64,6 +70,26 @@ const Menu = (props: Props) => {
     } else {
       navigate(Paths.HOME);
       scrollToTop();
+    }
+  };
+
+  const handleClickPricing = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (AuthState.isAuth) {
+      navigate(Paths.PAYWALL);
+    } else {
+      props.closeMenu(Modals.SIGN_IN);
+    }
+  };
+
+  const handleClickBtn = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!signOutBtn) {
+      props.closeMenu(Modals.SIGN_IN);
+    } else {
+      setAuth(false);
+      showSingOutBtn(false);
+      LocalStorage.deleteToken();
     }
   };
 
@@ -82,25 +108,31 @@ const Menu = (props: Props) => {
           </MainLogoWrapper>
         </HeaderItemWrapper>
         <HeaderItemWrapper>
-          <LoginBtn onClick={() => props.closeMenu(Modals.SIGN_IN)}>
+          <LoginBtn onClick={(e) => handleClickBtn(e)}>
             {signOutBtn ? "sign out" : "login"}
           </LoginBtn>
           <GetStartedBtn
-            onClick={() => {
-              props.closeMenu(Modals.SIGN_UP);
-            }}
-          >
-            get started
-          </GetStartedBtn>
+          show={signOutBtn ? false : true}
+          onClick={() => {
+            props.closeMenu(Modals.SIGN_UP);
+          }}
+        >
+          get started
+        </GetStartedBtn>
+        <ShareBtnOuter show={signOutBtn ? true : false}>
+          <ShareBtnInner>
+            <ShareIcon src="/share_icon.svg" />
+            <ShareText>SHARE</ShareText>
+          </ShareBtnInner>
+        </ShareBtnOuter>
         </HeaderItemWrapper>
       </HeaderWrapper>
       <Navbar>
         <Link onClick={() => props.onClickAboutLink(Modals.ABOUT)}>
           About us
         </Link>
-        <Link>Pricing</Link>
-        <Link>How it works</Link>
-        <Link onClick={handleAccountClick}>My account</Link>
+        <Link onClick={(e) => handleClickPricing(e)}>Pricing</Link>
+        <Link onClick={(e) => handleAccountClick(e)}>My account</Link>
         <Divider />
         <Social>
           <SocialImg src="/menu/facebook.svg" />

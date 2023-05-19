@@ -43,6 +43,15 @@ const About = (props: Props) => {
     }
   };
 
+  const handleClickContinue = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isChecked) {
+      alert("checkbox required");
+      return;
+    }
+    props.onClickClose(null);
+  };
+
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
@@ -74,7 +83,9 @@ const About = (props: Props) => {
             </CheckBox>
             <CheckBoxText>I have read the above statement</CheckBoxText>
           </CheckBoxWrapper>
-          <ContinueBtn>continue</ContinueBtn>
+          <ContinueBtn onClick={(e) => handleClickContinue(e)}>
+            continue
+          </ContinueBtn>
         </InnerWrapper>
       </OuterWrapper>
     </ModalWrapper>

@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import {
   MainTitle,
   MessageText,
@@ -6,8 +7,35 @@ import {
   TitleMessage,
   TitleWrapper,
 } from "./Title.styles";
+import { useNavigate } from "react-router-dom";
+import { messages } from "./title.data";
+import { setMessage } from "../../../../../store/messageReducer";
+import { Paths } from "../../../../../routes/root";
+import { RootState } from "../../../../../store";
 
 const Title = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const AuthState = useSelector((state: RootState) => state.isAuth);
+
+  const handleClickMessage = (e: React.MouseEvent, message: string) => {
+    e.preventDefault();
+    if (!AuthState.isAuth) {
+      alert("sign in first");
+    } else {
+      dispatch(setMessage(message));
+      navigate(Paths.CHAT);
+    }
+  };
+
+  const messagesForRender = messages.map((m, i) => {
+    return (
+      <TitleMessage key={i} onClick={(e) => handleClickMessage(e, m)}>
+        <MessageText>{m}</MessageText>
+      </TitleMessage>
+    );
+  });
+
   return (
     <TitleWrapper>
       <MainTitle>
@@ -15,17 +43,7 @@ const Title = () => {
         <br /> important questions
       </MainTitle>
       <Subtitle>Choose a question to quickly get a realistic response</Subtitle>
-      <MessagesWrapper>
-        <TitleMessage>
-          <MessageText>What did you want to be when you grew up?</MessageText>
-        </TitleMessage>
-        <TitleMessage>
-          <MessageText>What is the meaning of life?</MessageText>
-        </TitleMessage>
-        <TitleMessage>
-          <MessageText>What is your greatest accomplishment?</MessageText>
-        </TitleMessage>
-      </MessagesWrapper>
+      <MessagesWrapper>{messagesForRender}</MessagesWrapper>
     </TitleWrapper>
   );
 };

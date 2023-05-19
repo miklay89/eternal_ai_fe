@@ -22,6 +22,10 @@ import ChatInput from "./components/chatInput/ChatInput";
 import AiMessage from "./components/aiMessage/AiMessage";
 import UserMessage from "./components/userMessage/UserMessage";
 import { individualsData } from "../home/components/promo/Cards.data";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { setMessage } from "../../../store/messageReducer";
+import { socket } from "../../../services/socket";
 
 export type Message = {
   ai: boolean;
@@ -29,11 +33,54 @@ export type Message = {
 };
 
 const Chat = () => {
+  const dispatch = useDispatch();
   const ref = useRef(null);
   const chatMessageRef = useRef<null | HTMLDivElement>(null);
-
+  const messageState = useSelector((state: RootState) => state.message);
   const [currentModal, openModal] = useState<null | string>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+
+  let initMsgState = true;
+  useEffect(() => {
+    if (initMsgState) {
+      if (messageState.message.length) {
+        const initMsg = {
+          ai: false,
+          text: messageState.message,
+        };
+        setMessages((prev) => [...prev, initMsg]);
+        dispatch(setMessage(""));
+        initMsgState = false;
+      }
+    }
+  }, []);
+
+  // SOCKET
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
+  useEffect(() => {
+    console.log("try connect");
+    socket.connect();
+    function onConnect() {
+      setIsConnected(true);
+      console.log("connected");
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+    // socket.on("connect_event", onError);
+    // socket.on('foo', onFooEvent);
+
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+      // socket.off('foo', onFooEvent);
+    };
+  }, []);
 
   useEffect(() => {
     if (ref.current) {

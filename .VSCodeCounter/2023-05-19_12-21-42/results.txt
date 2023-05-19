@@ -1,0 +1,143 @@
+Date : 2023-05-19 12:21:42
+Directory : /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src
+Total : 70 files,  4732 codes, 145 comments, 529 blanks, all 5406 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript     |         39 |      2,839 |         13 |        288 |      3,140 |
+| TypeScript JSX |         27 |      1,708 |          3 |        160 |      1,871 |
+| CSS            |          4 |        185 |        129 |         81 |        395 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                            |         70 |      4,732 |        145 |        529 |      5,406 |
+| . (Files)                                                                                                                    |          4 |         30 |          1 |          7 |         38 |
+| api                                                                                                                          |          6 |        189 |         10 |         23 |        222 |
+| api/auth                                                                                                                     |          2 |         80 |          0 |          8 |         88 |
+| api/chat                                                                                                                     |          2 |         18 |          0 |          5 |         23 |
+| api/profile                                                                                                                  |          2 |         91 |         10 |         10 |        111 |
+| components                                                                                                                   |         51 |      4,210 |          4 |        398 |      4,612 |
+| components/common                                                                                                            |          5 |        436 |          0 |         41 |        477 |
+| components/common/footer                                                                                                     |          2 |        123 |          0 |         14 |        137 |
+| components/common/header                                                                                                     |          3 |        313 |          0 |         27 |        340 |
+| components/common/header (Files)                                                                                             |          2 |        198 |          0 |         20 |        218 |
+| components/common/header/bagel                                                                                               |          1 |        115 |          0 |          7 |        122 |
+| components/hooks                                                                                                             |          3 |         23 |          0 |          7 |         30 |
+| components/pages                                                                                                             |         43 |      3,751 |          4 |        350 |      4,105 |
+| components/pages/account                                                                                                     |          4 |        527 |          0 |         39 |        566 |
+| components/pages/account (Files)                                                                                             |          2 |        233 |          0 |         16 |        249 |
+| components/pages/account/components                                                                                          |          2 |        294 |          0 |         23 |        317 |
+| components/pages/chat                                                                                                        |         10 |        554 |          2 |         62 |        618 |
+| components/pages/chat (Files)                                                                                                |          2 |        149 |          0 |         17 |        166 |
+| components/pages/chat/components                                                                                             |          8 |        405 |          2 |         45 |        452 |
+| components/pages/chat/components/aiMessage                                                                                   |          2 |         75 |          1 |         11 |         87 |
+| components/pages/chat/components/chatInput                                                                                   |          2 |        106 |          0 |         13 |        119 |
+| components/pages/chat/components/portraite                                                                                   |          2 |        194 |          0 |         15 |        209 |
+| components/pages/chat/components/userMessage                                                                                 |          2 |         30 |          1 |          6 |         37 |
+| components/pages/home                                                                                                        |         11 |        564 |          1 |         52 |        617 |
+| components/pages/home (Files)                                                                                                |          2 |        104 |          0 |         11 |        115 |
+| components/pages/home/components                                                                                             |          9 |        460 |          1 |         41 |        502 |
+| components/pages/home/components/eternalsBG                                                                                  |          2 |         51 |          0 |          8 |         59 |
+| components/pages/home/components/promo                                                                                       |          5 |        297 |          1 |         22 |        320 |
+| components/pages/home/components/promo (Files)                                                                               |          3 |        189 |          0 |         10 |        199 |
+| components/pages/home/components/promo/components                                                                            |          2 |        108 |          1 |         12 |        121 |
+| components/pages/home/components/title                                                                                       |          2 |        112 |          0 |         11 |        123 |
+| components/pages/loading                                                                                                     |          2 |        151 |          0 |         13 |        164 |
+| components/pages/modals                                                                                                      |          8 |      1,169 |          1 |        107 |      1,277 |
+| components/pages/modals/about                                                                                                |          2 |        233 |          0 |         23 |        256 |
+| components/pages/modals/menu                                                                                                 |          2 |        311 |          0 |         28 |        339 |
+| components/pages/modals/sign-in                                                                                              |          2 |        312 |          1 |         27 |        340 |
+| components/pages/modals/sign-up                                                                                              |          2 |        313 |          0 |         29 |        342 |
+| components/pages/paywall                                                                                                     |          8 |        786 |          0 |         77 |        863 |
+| components/pages/paywall (Files)                                                                                             |          2 |        184 |          0 |         18 |        202 |
+| components/pages/paywall/components                                                                                          |          6 |        602 |          0 |         59 |        661 |
+| components/pages/paywall/components/payInfo                                                                                  |          2 |        263 |          0 |         24 |        287 |
+| components/pages/paywall/components/payment                                                                                  |          2 |        219 |          0 |         21 |        240 |
+| components/pages/paywall/components/success                                                                                  |          2 |        120 |          0 |         14 |        134 |
+| routes                                                                                                                       |          1 |         48 |          1 |          5 |         54 |
+| services                                                                                                                     |          2 |         43 |          0 |          9 |         52 |
+| store                                                                                                                        |          2 |         27 |          0 |          6 |         33 |
+| styles                                                                                                                       |          4 |        185 |        129 |         81 |        395 |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                     | language       | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/App.tsx                                                            | TypeScript JSX |         15 |          0 |          3 |         18 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/auth/auth.ts                                                   | TypeScript     |         74 |          0 |          6 |         80 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/auth/types.ts                                                  | TypeScript     |          6 |          0 |          2 |          8 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/chat/chat.ts                                                   | TypeScript     |          4 |          0 |          4 |          8 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/chat/types.ts                                                  | TypeScript     |         14 |          0 |          1 |         15 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/profile/profile.ts                                             | TypeScript     |         67 |         10 |          7 |         84 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/api/profile/types.ts                                               | TypeScript     |         24 |          0 |          3 |         27 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/common/footer/Footer.styles.ts                          | TypeScript     |         67 |          0 |          8 |         75 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/common/footer/Footer.tsx                                | TypeScript JSX |         56 |          0 |          6 |         62 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/common/header/Header.styles.ts                          | TypeScript     |        108 |          0 |         11 |        119 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/common/header/Header.tsx                                | TypeScript JSX |         90 |          0 |          9 |         99 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/common/header/bagel/Bagel.tsx                           | TypeScript JSX |        115 |          0 |          7 |        122 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/hooks/navigateToHome.ts                                 | TypeScript     |          9 |          0 |          3 |         12 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/hooks/scrollToTop.ts                                    | TypeScript     |          7 |          0 |          2 |          9 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/hooks/validators.ts                                     | TypeScript     |          7 |          0 |          2 |          9 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/account/Account.styles.ts                         | TypeScript     |        131 |          0 |         11 |        142 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/account/Account.tsx                               | TypeScript JSX |        102 |          0 |          5 |        107 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/account/components/UpdatePayment.styles.ts        | TypeScript     |        234 |          0 |         19 |        253 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/account/components/UpdatePayment.tsx              | TypeScript JSX |         60 |          0 |          4 |         64 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/Chat.styles.ts                               | TypeScript     |         39 |          0 |          6 |         45 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/Chat.tsx                                     | TypeScript JSX |        110 |          0 |         11 |        121 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/aiMessage/AiMessage.styles.ts     | TypeScript     |         48 |          1 |          6 |         55 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/aiMessage/AiMessage.tsx           | TypeScript JSX |         27 |          0 |          5 |         32 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/chatInput/ChatInput.styles.ts     | TypeScript     |         58 |          0 |          5 |         63 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/chatInput/ChatInput.tsx           | TypeScript JSX |         48 |          0 |          8 |         56 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/portraite/Portrait.tsx            | TypeScript JSX |         96 |          0 |          4 |        100 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/portraite/Portraite.styles.ts     | TypeScript     |         98 |          0 |         11 |        109 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/userMessage/UserMessage.styles.ts | TypeScript     |         20 |          1 |          2 |         23 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/chat/components/userMessage/UserMessage.tsx       | TypeScript JSX |         10 |          0 |          4 |         14 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/Home.styles.ts                               | TypeScript     |         30 |          0 |          4 |         34 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/Home.tsx                                     | TypeScript JSX |         74 |          0 |          7 |         81 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/eternalsBG/EterenalsBG.styles.ts  | TypeScript     |         30 |          0 |          4 |         34 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/eternalsBG/EternalsBG.tsx         | TypeScript JSX |         21 |          0 |          4 |         25 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/promo/Cards.data.ts               | TypeScript     |        114 |          0 |          1 |        115 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/promo/Promo.styles.ts             | TypeScript     |         44 |          0 |          6 |         50 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/promo/Promo.tsx                   | TypeScript JSX |         31 |          0 |          3 |         34 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/promo/components/Card.styles.ts   | TypeScript     |         77 |          0 |          7 |         84 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/promo/components/Card.tsx         | TypeScript JSX |         31 |          1 |          5 |         37 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/title/Title.styles.ts             | TypeScript     |         81 |          0 |          8 |         89 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/home/components/title/Title.tsx                   | TypeScript JSX |         31 |          0 |          3 |         34 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/loading/Loading.styles.ts                         | TypeScript     |         68 |          0 |          8 |         76 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/loading/Loading.tsx                               | TypeScript JSX |         83 |          0 |          5 |         88 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/about/About.styles.ts                      | TypeScript     |        155 |          0 |         16 |        171 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/about/About.tsx                            | TypeScript JSX |         78 |          0 |          7 |         85 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/menu/Menu.styles.ts                        | TypeScript     |        203 |          0 |         19 |        222 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/menu/Menu.tsx                              | TypeScript JSX |        108 |          0 |          9 |        117 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/sign-in/SignIn.styles.ts                   | TypeScript     |        193 |          0 |         17 |        210 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/sign-in/SignIn.tsx                         | TypeScript JSX |        119 |          1 |         10 |        130 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/sign-up/SignUp.styles.ts                   | TypeScript     |        200 |          0 |         18 |        218 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/modals/sign-up/SignUp.tsx                         | TypeScript JSX |        113 |          0 |         11 |        124 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/Paywall.styles.ts                         | TypeScript     |        106 |          0 |         11 |        117 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/Paywall.tsx                               | TypeScript JSX |         78 |          0 |          7 |         85 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/payInfo/PayInfo.styles.ts      | TypeScript     |        194 |          0 |         19 |        213 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/payInfo/PayInfo.tsx            | TypeScript JSX |         69 |          0 |          5 |         74 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/payment/Payment.styles.ts      | TypeScript     |        166 |          0 |         15 |        181 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/payment/Payment.tsx            | TypeScript JSX |         53 |          0 |          6 |         59 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/success/Success.styles.ts      | TypeScript     |         87 |          0 |          9 |         96 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/components/pages/paywall/components/success/Success.tsx            | TypeScript JSX |         33 |          0 |          5 |         38 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/custom.d.ts                                                        | TypeScript     |          6 |          0 |          1 |          7 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/main.tsx                                                           | TypeScript JSX |          9 |          0 |          2 |         11 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/routes/root.tsx                                                    | TypeScript JSX |         48 |          1 |          5 |         54 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/services/axios.ts                                                  | TypeScript     |         32 |          0 |          6 |         38 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/services/localStorage.ts                                           | TypeScript     |         11 |          0 |          3 |         14 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/store/authReducer.ts                                               | TypeScript     |         18 |          0 |          4 |         22 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/store/index.ts                                                     | TypeScript     |          9 |          0 |          2 |         11 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/styles/fonts.css                                                   | CSS            |         25 |          0 |          5 |         30 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/styles/global.css                                                  | CSS            |         11 |          0 |          2 |         13 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/styles/index.css                                                   | CSS            |          3 |          0 |          0 |          3 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/styles/normalize.css                                               | CSS            |        146 |        129 |         74 |        349 |
+| /Users/mykhailokurov/Documents/code/lambda/eternal_fe/src/vite-env.d.ts                                                      | TypeScript     |          0 |          1 |          1 |          2 |
+| Total                                                                                                                        |                |      4,732 |        145 |        529 |      5,406 |
++------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
