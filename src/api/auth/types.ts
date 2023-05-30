@@ -5,3 +5,8 @@ export type SignIn = {
 export type Refresh = {
   accessToken: string;
 };
+
+export type PasswordUpdateData = {
+  email: string;
+  password: string;
+}

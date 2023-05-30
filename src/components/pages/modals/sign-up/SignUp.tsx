@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   AlreadyHaveWrapper,
@@ -18,25 +18,24 @@ import {
   SubTitle,
   Title,
 } from "./SignUp.styles";
-import { Modals } from "../../home/Home";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
 import Auth from "../../../../api/auth/auth";
 import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
 import { Paths } from "../../../../routes/root";
 import { useLocation, useNavigate } from "react-router-dom";
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../../store/reducers/modals";
+import { Modals } from "../types";
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<string | null>;
-  onClickSignIn: Dispatcher<string | null>;
 };
 
 const SignUp = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -61,13 +60,13 @@ const SignUp = (props: Props) => {
     setEmail("");
     setPassword("");
     alert("user created, please confirm email");
-    props.onClickClose(Modals.SIGN_IN);
+    dispatch(openModal(Modals.SIGN_IN));
   };
 
   const handleClickLogo = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === Paths.HOME) {
-      props.onClickClose(null);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     } else {
       navigate(Paths.HOME);
@@ -82,7 +81,7 @@ const SignUp = (props: Props) => {
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </LogoWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
+        <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>
@@ -110,7 +109,7 @@ const SignUp = (props: Props) => {
           <AlreadyHaveWrapper>
             <AlreadyText>Already have an account?</AlreadyText>
             &nbsp;
-            <AlreadyLink onClick={() => props.onClickSignIn(Modals.SIGN_IN)}>
+            <AlreadyLink onClick={() => dispatch(openModal(Modals.SIGN_IN))}>
               Sign in
             </AlreadyLink>
           </AlreadyHaveWrapper>

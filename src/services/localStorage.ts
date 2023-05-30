@@ -4,7 +4,8 @@ export default class LocalStorage {
   }
 
   static getToken() {
-    return localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    return token;
   }
 
   static deleteToken() {

@@ -1,5 +1,4 @@
 import Bagel from "../header/bagel/Bagel";
-
 import {
   Copy,
   FollowText,
@@ -12,23 +11,23 @@ import {
 import { MainLogo } from "../header/Header.styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
-import { Dispatch, SetStateAction } from "react";
 import scrollToTop from "../../hooks/scrollToTop";
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../store/reducers/modals";
+import { Modals } from "../../pages/modals/types";
 
 type Props = {
   marginTop: number;
-  closeAllModals: Dispatcher<string | null>;
 };
 
 const Footer = (props: Props) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const handleClickFooterLogo = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === Paths.HOME) {
-      props.closeAllModals(null);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     } else {
       navigate(Paths.HOME);

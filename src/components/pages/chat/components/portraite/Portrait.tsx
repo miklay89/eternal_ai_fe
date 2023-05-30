@@ -86,7 +86,7 @@ const Portrait = (props: Props) => {
           blur={0}
         />
       </BagelWrapper>
-      <PortraitImg src="/home/l_king.png" />
+      <PortraitImg src={props.imgUrl} />
       <Shadow />
       <InfoWrapper>
         <Name>{props.fullName}</Name>

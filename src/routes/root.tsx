@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../components/pages/loading/Loading";
+import PrivateRoute from "./PrivateRouteComponent";
 
 const Home = lazy(() => import("../components/pages/home/Home"));
-const Account = lazy(() => import("../components/pages/account/Account"));
 const Paywall = lazy(() => import("../components/pages/paywall/Paywall"));
+const Account = lazy(() => import("../components/pages/account/Account"));
 const Chat = lazy(() => import("../components/pages/chat/Chat"));
 
 export enum Paths {
   HOME = "/",
   ACCOUNT = "/account",
   PAYWALL = "/paywall",
-  CHAT = "/chat"
+  CHAT = "/chat",
 }
 
-// TODO add protected routes Account + Paywall
 const router = createBrowserRouter([
   {
     path: Paths.HOME,
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     path: Paths.ACCOUNT,
     element: (
       <Suspense fallback={<Loading />}>
-        <Account />
+        <PrivateRoute fc={Account} />
       </Suspense>
     ),
   },
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     path: Paths.CHAT,
     element: (
       <Suspense fallback={<Loading />}>
-        <Chat />
+        <PrivateRoute fc={Chat} />
       </Suspense>
     ),
   },

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BagelEllipse,
   BagelWrapper,
@@ -5,9 +6,54 @@ import {
   LoadingContainer,
   LoadingWrapper,
 } from "./Loading.styles";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { setAuth } from "../../../store/reducers/auth";
+import Auth from "../../../api/auth/auth";
+import socket from "../../../services/socket";
+import { setConnection } from "../../../store/reducers/socket";
+import { setSoul } from "../../../store/reducers/soul";
+import LocalStorage from "../../../services/localStorage";
+import Profile from "../../../api/profile/profile";
+import { setProfile } from "../../../store/reducers/profile";
 
 const Loading = () => {
+  const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const socketIsConnected = useSelector(
+    (state: RootState) => state.socket.connection
+  );
+  const soul = useSelector((state: RootState) => state.soul.soul);
+  const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
+  const profileState = useSelector((state: RootState) => state.profile.user);
+
+  useEffect(() => {
+    const token = LocalStorage.getToken();
+    if (!token) return;
+    if (authState) return;
+    const checkAuth = async () => {
+      await Auth.checkAuthMe()
+        .then(() => dispatch(setAuth(true)))
+        .catch(() => {
+          LocalStorage.deleteToken();
+          dispatch(setAuth(false));
+        });
+    };
+
+    checkAuth();
+
+    if (socketIsConnected) return;
+    socket.connect();
+    socket.on("connect", () => dispatch(setConnection(true)));
+
+    if (soulIsSet) return;
+    const soulInfo = { soul: soul, isSet: true };
+    socket.emit("setSoul", { soulId: soul.uuid });
+    dispatch(setSoul(soulInfo));
+
+    if (profileState.email.length > 0) return;
+    Profile.getData().then((user) => dispatch(setProfile(user)));
+  }, []);
 
   return (
     <LoadingWrapper>

@@ -14,64 +14,46 @@ import {
 import SignUp from "../modals/sign-up/SignUp";
 import About from "../modals/about/About";
 import SignIn from "../modals/sign-in/SignIn";
-
-export enum Modals {
-  MENU = "menu",
-  SIGN_UP = "sign_up",
-  SIGN_IN = "sign_in",
-  ABOUT = "about",
-}
+import { Modals } from "../modals/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 const HomePage = () => {
-  const [currentModal, openModal] = useState<null | string>(null);
-
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const ref = useRef(null);
 
   useEffect(() => {
     if (ref.current) {
-      if (currentModal) {
-        disableBodyScroll(ref.current);
-      } else {
+      if (modalState === Modals.NONE) {
         enableBodyScroll(ref.current);
+      } else {
+        disableBodyScroll(ref.current);
       }
     }
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, [currentModal]);
+  }, [modalState]);
 
   return (
     <HomeSection ref={ref}>
       <GradientCorner />
-      <Menu
-        isOpen={currentModal === Modals.MENU ? true : false}
-        onClickAboutLink={openModal}
-        closeMenu={openModal}
-      />
-      <SignUp
-        isOpen={currentModal === Modals.SIGN_UP ? true : false}
-        onClickClose={openModal}
-        onClickSignIn={openModal}
-      />
-      <SignIn
-        isOpen={currentModal === Modals.SIGN_IN ? true : false}
-        onClickClose={openModal}
-        onClickSignUp={openModal}
-      />
-      <About
-        isOpen={currentModal === Modals.ABOUT ? true : false}
-        onClickClose={openModal}
-      />
+      <Menu isOpen={modalState === Modals.MENU ? true : false} />
+      <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
+      <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
+      <About isOpen={modalState === Modals.ABOUT ? true : false} />
       <Container>
         <Header
-          show={currentModal == null ? true : false}
-          onOptionClick={openModal}
-          onCloseClick={openModal}
+          show={
+            modalState === Modals.NONE || modalState === Modals.MENU
+              ? true
+              : false
+          }
         />
         <Title />
         <EternalsBG top={1270} />
         <Promo />
-        <Footer marginTop={150.84} closeAllModals={openModal} />
+        <Footer marginTop={150.84} />
       </Container>
     </HomeSection>
   );

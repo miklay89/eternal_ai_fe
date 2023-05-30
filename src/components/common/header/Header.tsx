@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/index";
-import { setAuth } from "../../../store/authReducer";
+import { setAuth } from "../../../store/reducers/auth";
 import {
   HeaderWrapper,
   MenuIconWrapper,
@@ -15,67 +14,74 @@ import {
   ShareBtnInner,
   ShareIcon,
   ShareText,
+  MenuCloseBtnWrapper,
+  MenuCloseIcon,
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
-import { Modals } from "../../pages/home/Home";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
 import scrollToTop from "../../hooks/scrollToTop";
 import LocalStorage from "../../../services/localStorage";
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+import { Modals } from "../../pages/modals/types";
+import { openModal } from "../../../store/reducers/modals";
+import socket from "../../../services/socket";
+import { setConnection } from "../../../store/reducers/socket";
+import { setInitialState } from "../../../store/reducers/profile";
 
 type Props = {
   show: boolean;
-  onOptionClick: Dispatcher<string | null>;
-  onCloseClick: Dispatcher<string | null>;
 };
 
 const Header = (props: Props) => {
-  const AuthState = useSelector((state: RootState) => state.isAuth);
   const location = useLocation();
   const navigate = useNavigate();
-  const [signOutBtn, showSingOutBtn] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const modalState = useSelector((state: RootState) => state.modal.open);
 
   const handleClickLogo = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === Paths.HOME) {
-      props.onCloseClick(null);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     } else {
       navigate(Paths.HOME);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     }
   };
 
   const handleClickBtn = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!signOutBtn) {
-      props.onOptionClick(Modals.SIGN_IN);
+    if (!authState) {
+      dispatch(openModal(Modals.SIGN_IN));
     } else {
-      setAuth(false);
-      showSingOutBtn(false);
+      dispatch(setAuth(false));
+      socket.disconnect();
+      dispatch(setConnection(false));
       LocalStorage.deleteToken();
+      dispatch(setInitialState());
     }
   };
 
-  useEffect(() => {
-    if (AuthState.isAuth) {
-      showSingOutBtn(true);
-      return;
-    }
-    if (!AuthState.isAuth) {
-      showSingOutBtn(false);
-      return;
-    }
-  }, [AuthState.isAuth]);
-
   return (
-    <HeaderWrapper show={props.show}>
+    <HeaderWrapper
+      show={props.show}
+      isOpenMenu={modalState === Modals.MENU ? true : false}
+    >
       <HeaderItemWrapper>
-        <MenuIconWrapper onClick={() => props.onOptionClick(Modals.MENU)}>
+        <MenuIconWrapper
+          show={modalState === Modals.MENU ? false : true}
+          onClick={() => dispatch(openModal(Modals.MENU))}
+        >
           <MenuIcon src="/header/menu_icon.svg" />
         </MenuIconWrapper>
+        <MenuCloseBtnWrapper
+          show={modalState === Modals.MENU ? true : false}
+          onClick={() => dispatch(openModal(Modals.NONE))}
+        >
+          <MenuCloseIcon src="/header/close_btn.svg" />
+        </MenuCloseBtnWrapper>
       </HeaderItemWrapper>
       <HeaderItemWrapper>
         <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
@@ -85,17 +91,15 @@ const Header = (props: Props) => {
       </HeaderItemWrapper>
       <HeaderItemWrapper>
         <LoginBtn onClick={(e) => handleClickBtn(e)}>
-          {signOutBtn ? "sign out" : "login"}
+          {authState ? "sign out" : "login"}
         </LoginBtn>
         <GetStartedBtn
-          show={signOutBtn ? false : true}
-          onClick={() => {
-            props.onOptionClick(Modals.SIGN_UP);
-          }}
+          show={authState ? false : true}
+          onClick={() => dispatch(openModal(Modals.SIGN_UP))}
         >
           get started
         </GetStartedBtn>
-        <ShareBtnOuter show={signOutBtn ? true : false}>
+        <ShareBtnOuter show={authState ? true : false}>
           <ShareBtnInner>
             <ShareIcon src="/share_icon.svg" />
             <ShareText>SHARE</ShareText>

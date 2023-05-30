@@ -1,5 +1,6 @@
+import axios, { isAxiosError } from "axios";
 import axiosInstance from "../../services/axios";
-import { Card } from "./types";
+import { Card, FullProfile, UpdateProfile } from "./types";
 
 enum ProfileRoutes {
   PROFILE_INFO = "/user/profile",
@@ -8,75 +9,67 @@ enum ProfileRoutes {
 
 export default class Profile {
   static async getData() {
-    try {
-      await axiosInstance.get(ProfileRoutes.PROFILE_INFO, {
-        headers: {
-          Authorization: "token",
-        },
-      });
-      // TODO fill profile
-      return true;
-    } catch {
-      // TODO show message - error
-    }
+    const res = await axiosInstance.get<FullProfile>(
+      ProfileRoutes.PROFILE_INFO
+    );
+    return res.data;
   }
 
-  static async updateData() {
+  static async updateData(name?: string, phone?: string) {
     try {
-      await axiosInstance.patch(ProfileRoutes.PROFILE_INFO, {
-        headers: {
-          Authorization: "token",
-        },
-      });
-      // TODO show message - ok
+      const payload = {
+        name: name,
+        phone: phone,
+      };
+      const res = await axiosInstance.patch<UpdateProfile>(
+        ProfileRoutes.PROFILE_INFO,
+        payload
+      );
       return true;
-    } catch {
-      // TODO show message - error
+    } catch (e) {
+      if (isAxiosError<{ message: string }>(e)) {
+        console.log(e.response!.data.message);
+        return e.response!.data.message;
+      }
       return false;
     }
   }
 
   static async createSubscription(card: Card) {
     try {
-      await axiosInstance.post(ProfileRoutes.PROFILE_SUBSCRIPTION, {
-        headers: {
-          Authorization: "token",
-        },
-      });
-      // TODO show message - ok
+      await axiosInstance.post(ProfileRoutes.PROFILE_SUBSCRIPTION, card);
       return true;
-    } catch {
-      // TODO show message - error
+    } catch (e) {
+      if (isAxiosError<{ message: string }>(e)) {
+        console.log(e.response!.data.message);
+        return e.response!.data.message;
+      }
       return false;
     }
   }
 
-  static async updateSubscription(card: Card) {
+  static async updateCardInfo(card: Card) {
     try {
-      await axiosInstance.patch(ProfileRoutes.PROFILE_SUBSCRIPTION, {
-        headers: {
-          Authorization: "token",
-        },
-      });
-      // TODO show message - ok
+      await axiosInstance.patch(ProfileRoutes.PROFILE_SUBSCRIPTION, card);
       return true;
-    } catch {
-      // TODO show message - error
+    } catch (e) {
+      if (isAxiosError<{ message: string }>(e)) {
+        console.log(e.response!.data.message);
+        return e.response!.data.message;
+      }
       return false;
     }
   }
 
-  static async deleteSubscription(card: Card) {
+  static async deleteSubscription() {
     try {
-      await axiosInstance.delete(ProfileRoutes.PROFILE_SUBSCRIPTION, {
-        headers: {
-          Authorization: "token",
-        },
-      });
-      // TODO show message - ok
+      await axiosInstance.delete(ProfileRoutes.PROFILE_SUBSCRIPTION);
       return true;
-    } catch {
-      // TODO show message - error
+    } catch (e) {
+      if (isAxiosError<{ message: string }>(e)) {
+        console.log(e.response!.data.message);
+        return e.response!.data.message;
+      }
       return false;
     }
   }

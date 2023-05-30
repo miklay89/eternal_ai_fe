@@ -32,6 +32,7 @@ export const ChatInputWrapper = styled.div`
 `;
 
 export const ChatWindow = styled.div`
+  position: relative;
   margin-left: auto;
   margin-right: 2px;
   margin-top: 130px;
@@ -41,4 +42,5 @@ export const ChatWindow = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  z-index: 5;
 `;

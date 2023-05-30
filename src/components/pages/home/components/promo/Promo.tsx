@@ -16,6 +16,8 @@ const Promo = () => {
         title={individual.title}
         imgUrl={individual.imgUrl}
         substrateUrl={individual.substrateUrl}
+        uuid={individual.uuid}
+        id={individual.id}
       ></Card>
     );
   });

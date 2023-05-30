@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   Check,
@@ -19,23 +19,24 @@ import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../../store/reducers/modals";
+import { Modals } from "../types";
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<string | null>;
 };
 
 const About = (props: Props) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const handleClickLogo = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === Paths.HOME) {
-      props.onClickClose(null);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     } else {
       navigate(Paths.HOME);
@@ -49,7 +50,7 @@ const About = (props: Props) => {
       alert("checkbox required");
       return;
     }
-    props.onClickClose(null);
+    dispatch(openModal(Modals.NONE));
   };
 
   return (
@@ -59,7 +60,7 @@ const About = (props: Props) => {
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </LogoWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
+        <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>

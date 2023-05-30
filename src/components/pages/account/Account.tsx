@@ -22,51 +22,110 @@ import Menu from "../modals/menu/Menu";
 import SignUp from "../modals/sign-up/SignUp";
 import SignIn from "../modals/sign-in/SignIn";
 import About from "../modals/about/About";
-import { Modals } from "../home/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { Modals } from "../modals/types";
+import Profile from "../../../api/profile/profile";
+import { setProfile } from "../../../store/reducers/profile";
+import Auth from "../../../api/auth/auth";
 
 const Account = () => {
-  const [currentModal, openModal] = useState<null | string>(null);
-
   const ref = useRef(null);
+  const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const modalState = useSelector((state: RootState) => state.modal.open);
+  const profileState = useSelector((state: RootState) => state.profile.user);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [subEndDate, setSubEndDate] = useState<string>("");
+
+  const handleSave = async () => {
+    if (!authState) {
+      alert("sign-in first");
+      return;
+    }
+
+    const res = await Profile.updateData(name, phone);
+    if (typeof res === "boolean" && res) {
+      Profile.getData().then((user) => dispatch(setProfile(user)));
+    }
+    if (typeof res === "string") {
+      alert(res);
+    }
+    if (password.length > 0) {
+      if (password.length > 5 && password.length < 25) {
+        const data = { email: profileState.email, password };
+        Auth.updatePassword(data)
+          .then((res) => {
+            if (typeof res === "boolean" && res) {
+              alert("check email for confirmation new password");
+            }
+          })
+          .catch((res: string) => alert(res));
+      } else {
+        alert("password should be 5-25 length for updating");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!authState) return;
+    Profile.getData().then((user) => dispatch(setProfile(user)));
+  }, []);
+
+  useEffect(() => {
+    setName(profileState.name ? profileState.name : "");
+    setEmail(profileState.email);
+    setPhone(profileState.phone ? profileState.phone : "");
+  }, [profileState]);
 
   useEffect(() => {
     if (ref.current) {
-      if (currentModal) {
-        disableBodyScroll(ref.current);
-      } else {
+      if (modalState === Modals.NONE) {
         enableBodyScroll(ref.current);
+      } else {
+        disableBodyScroll(ref.current);
       }
     }
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, [currentModal]);
+  }, [modalState]);
+
+  useEffect(() => {
+    if (profileState.subscriptionDue) {
+      const date = new Date(profileState.subscriptionDue);
+      const month = date.toLocaleString("en-US", { month: "long" });
+      const day = date.getDate();
+      const year = date.getFullYear();
+      setSubEndDate(
+        `Next payment will be processed on ${month} ${day}, ${year}.`
+      );
+      return;
+    }
+    if (!profileState.subscriptionDue) {
+      setSubEndDate(
+        `You are not subscribed yet, you left ${profileState.freeQuestionsLeft} free questions.`
+      );
+      return;
+    }
+  }, []);
+
   return (
     <AccountSection ref={ref}>
-      <Menu
-        isOpen={currentModal === Modals.MENU ? true : false}
-        onClickAboutLink={openModal}
-        closeMenu={openModal}
-      />
-      <SignUp
-        isOpen={currentModal === Modals.SIGN_UP ? true : false}
-        onClickClose={openModal}
-        onClickSignIn={openModal}
-      />
-      <SignIn
-        isOpen={currentModal === Modals.SIGN_IN ? true : false}
-        onClickClose={openModal}
-        onClickSignUp={openModal}
-      />
-      <About
-        isOpen={currentModal === Modals.ABOUT ? true : false}
-        onClickClose={openModal}
-      />
+      <Menu isOpen={modalState === Modals.MENU ? true : false} />
+      <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
+      <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
+      <About isOpen={modalState === Modals.ABOUT ? true : false} />
       <Container>
         <Header
-          show={currentModal == null ? true : false}
-          onOptionClick={openModal}
-          onCloseClick={openModal}
+          show={
+            modalState === Modals.NONE || modalState === Modals.MENU
+              ? true
+              : false
+          }
         />
         <Ellipse
           width={1624}
@@ -86,18 +145,35 @@ const Account = () => {
           <InnerWrapper>
             <Title>Account Details</Title>
             <InputTitle>Name</InputTitle>
-            <Input placeholder="Justin Mac" />
+            <Input
+              placeholder="Justin Mac"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <InputTitle>Email</InputTitle>
-            <Input placeholder="justin@gmail.com" />
+            <Input
+              placeholder="justin@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <InputTitle>Phone number</InputTitle>
-            <Input placeholder="8329822222" />
+            <Input
+              placeholder="8329822222"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
             <InputTitle>Password</InputTitle>
-            <Input placeholder="•••••••••••••••••••" />
-            <SaveBtn>Save</SaveBtn>
+            <Input
+              placeholder="•••••••••••••••••••"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <SaveBtn onClick={handleSave}>Save</SaveBtn>
           </InnerWrapper>
         </OuterWrapper>
-        <UpdatePayment />
-        <Footer marginTop={80} closeAllModals={openModal} />
+        <UpdatePayment nextPayment={subEndDate} />
+        <Footer marginTop={80} />
       </Container>
     </AccountSection>
   );

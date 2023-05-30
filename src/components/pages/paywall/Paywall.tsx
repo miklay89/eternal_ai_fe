@@ -20,16 +20,11 @@ import Payment from "./components/payment/Payment";
 import Success from "./components/success/Success";
 import Bagel from "../../common/header/bagel/Bagel";
 import { MainLogo } from "../../common/header/Header.styles";
+import { Payments } from "./types";
 
-export enum Payments {
-  INFO = "info",
-  PAYMENT = "payment",
-  SUCCESS = "success",
-}
-
+//TODO add cardInputs + subscribe if signed in
 const Paywall = () => {
   const navigate = useNavigate();
-  const [currentModal, openModal] = useState<null | string>(null);
   const [payment, showPayment] = useState<string>(Payments.INFO);
 
   const handleCloseBtnClick = (e: React.MouseEvent) => {

@@ -10,7 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   if (config.headers)
-    config.headers.Authorization = `Bearer ${LocalStorage.getToken()}`;
+    config.headers.Authorization = `${LocalStorage.getToken()}`;
   return config;
 });
 
@@ -24,8 +24,9 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
       const success = await Auth.refresh();
       if (success) {
-        instance.defaults.headers.common["Authorization"] =
-          "Bearer " + LocalStorage.getToken();
+        instance.defaults.headers.common[
+          "Authorization"
+        ] = `${LocalStorage.getToken()}`;
         return instance(originalRequest);
       }
       return Promise.reject(error);

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div<{
   show: boolean;
+  isOpenMenu: boolean;
 }>`
   height: auto;
   margin: 0 auto;
@@ -10,7 +11,7 @@ export const HeaderWrapper = styled.div<{
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  z-index: 5;
+  z-index: ${(props) => (props.isOpenMenu ? 20 : 5)};
 `;
 
 export const HeaderItemWrapper = styled.div`
@@ -20,8 +21,10 @@ export const HeaderItemWrapper = styled.div`
   height: 56px;
 `;
 
-export const MenuIconWrapper = styled.div`
-  display: flex;
+export const MenuIconWrapper = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: row;
   align-items: flex-start;
   width: 56px;
@@ -99,6 +102,25 @@ export const MenuIcon = styled.img`
   &:focus {
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
+  }
+`;
+
+export const MenuCloseBtnWrapper = styled.div<{
+  show: boolean;
+}>`
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  display: ${(props) => (props.show ? "flex" : "none")};
+  flex-direction: row;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  background: #000000;
+  border: 1px solid #2f2535;
+  border-radius: 8px;
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 `;
 

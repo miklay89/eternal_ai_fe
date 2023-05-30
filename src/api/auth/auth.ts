@@ -1,7 +1,6 @@
-import { setAuth } from "../../store/authReducer";
 import axiosInstance from "../../services/axios";
 import LocalStorage from "../../services/localStorage";
-import { Refresh, SignIn } from "./types";
+import { PasswordUpdateData, Refresh, SignIn } from "./types";
 import axios, { isAxiosError } from "axios";
 import { API_BASE_URL } from "../../services/axios";
 
@@ -10,6 +9,7 @@ enum AuthRoutes {
   SIGN_IN = "/auth/login",
   REFRESH = "/auth/login",
   ME = "/auth/status",
+  RESET_PASSWORD = "/auth/resetpass",
 }
 
 export default class Auth {
@@ -59,21 +59,28 @@ export default class Auth {
         }
       );
       LocalStorage.setToken(`Bearer ${res.data.accessToken}`);
-      return true;
+      return res.data.accessToken;
     } catch (e) {
       if (e instanceof Error) {
         console.log(e.message);
       }
-      return null;
+      return false;
     }
   }
 
   static async checkAuthMe() {
+    await axiosInstance.get(AuthRoutes.ME);
+  }
+
+  static async updatePassword(data: PasswordUpdateData) {
     try {
-      await axiosInstance.get(AuthRoutes.ME);
-      setAuth(true);
-    } catch {
-      setAuth(false);
+      await axios.post(API_BASE_URL + AuthRoutes.RESET_PASSWORD, data);
+      return true;
+    } catch (e) {
+      if (isAxiosError<{ message: string }>(e)) {
+        console.log(e.response!.data.message);
+        return e.response!.data.message;
+      }
     }
   }
 }

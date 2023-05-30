@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../store/index";
-import { setAuth } from "../../../../store/authReducer";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../../../store/reducers/auth";
 import {
   Divider,
   HaveNotWrapper,
@@ -20,25 +19,21 @@ import {
   LogoWrapper,
 } from "./SignIn.styles";
 import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
-import { Modals } from "../../home/Home";
 import Auth from "../../../../api/auth/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
 import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
+import { openModal } from "../../../../store/reducers/modals";
+import { Modals } from "../types";
 
 type Props = {
   isOpen: boolean;
-  onClickClose: Dispatcher<string | null>;
-  onClickSignUp: Dispatcher<string | null>;
 };
 
 const SignIn = (props: Props) => {
   const dispatch = useDispatch();
-  const isAuthState = useSelector((state: RootState) => state.isAuth);
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState<string>("");
@@ -65,17 +60,23 @@ const SignIn = (props: Props) => {
     setEmail("");
     setPassword("");
     dispatch(setAuth(true));
-    if (location.pathname === Paths.HOME || location.pathname === Paths.CHAT) {
-      props.onClickClose(null);
+
+    if (
+      location.pathname === Paths.HOME ||
+      location.pathname === Paths.CHAT ||
+      location.pathname === Paths.ACCOUNT
+    ) {
+      window.location.reload();
     } else {
       navigate(Paths.HOME);
+      window.location.reload();
     }
   };
 
   const handleClickLogo = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === Paths.HOME) {
-      props.onClickClose(null);
+      dispatch(openModal(Modals.NONE));
       scrollToTop();
     } else {
       navigate(Paths.HOME);
@@ -90,7 +91,7 @@ const SignIn = (props: Props) => {
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </LogoWrapper>
-        <ModalCloseBtnWrapper onClick={() => props.onClickClose(null)}>
+        <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
           <MenuCloseIcon src="/header/close_btn.svg" />
         </ModalCloseBtnWrapper>
       </ModalNavWrapper>
@@ -116,7 +117,7 @@ const SignIn = (props: Props) => {
           <HaveNotWrapper>
             <NotText>Don’t have an account?</NotText>
             &nbsp;
-            <NotLink onClick={() => props.onClickSignUp(Modals.SIGN_UP)}>
+            <NotLink onClick={() => dispatch(openModal(Modals.SIGN_UP))}>
               Sign up
             </NotLink>
           </HaveNotWrapper>

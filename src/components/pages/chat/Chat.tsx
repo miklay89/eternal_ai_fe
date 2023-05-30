@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   ChatInputWrapper,
   ChatWindow,
@@ -12,7 +12,6 @@ import {
   enableBodyScroll,
 } from "body-scroll-lock";
 import Menu from "../modals/menu/Menu";
-import { Modals } from "../home/Home";
 import SignUp from "../modals/sign-up/SignUp";
 import SignIn from "../modals/sign-in/SignIn";
 import About from "../modals/about/About";
@@ -21,13 +20,21 @@ import Portrait from "./components/portraite/Portrait";
 import ChatInput from "./components/chatInput/ChatInput";
 import AiMessage from "./components/aiMessage/AiMessage";
 import UserMessage from "./components/userMessage/UserMessage";
-import { individualsData } from "../home/components/promo/Cards.data";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { setMessage } from "../../../store/messageReducer";
-import { socket } from "../../../services/socket";
+import {
+  addMessage,
+  removeLoadingMessage,
+  removePrevUserMessage,
+} from "../../../store/reducers/messages";
+import socket from "../../../services/socket";
+import { ErrorRes, ResMessage } from "./types";
+import LoadingMessage from "./components/loadingMessage/LoadingMessage";
+import { setConnection } from "../../../store/reducers/socket";
+import { Modals } from "../modals/types";
 
 export type Message = {
+  id?: string;
   ai: boolean;
   text: string;
 };
@@ -35,65 +42,60 @@ export type Message = {
 const Chat = () => {
   const dispatch = useDispatch();
   const ref = useRef(null);
+  const modalState = useSelector((state: RootState) => state.modal.open);
+  const messages = useSelector((state: RootState) => state.message);
+  const soul = useSelector((state: RootState) => state.soul.soul);
   const chatMessageRef = useRef<null | HTMLDivElement>(null);
-  const messageState = useSelector((state: RootState) => state.message);
-  const [currentModal, openModal] = useState<null | string>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  let initMsgState = true;
-  useEffect(() => {
-    if (initMsgState) {
-      if (messageState.message.length) {
-        const initMsg = {
-          ai: false,
-          text: messageState.message,
-        };
-        setMessages((prev) => [...prev, initMsg]);
-        dispatch(setMessage(""));
-        initMsgState = false;
-      }
-    }
-  }, []);
-
-  // SOCKET
-  const [isConnected, setIsConnected] = useState(socket.connected);
 
   useEffect(() => {
-    console.log("try connect");
-    socket.connect();
-    function onConnect() {
-      setIsConnected(true);
-      console.log("connected");
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    // socket.on("connect_event", onError);
-    // socket.on('foo', onFooEvent);
+    socket.on("error", (res: ErrorRes) => {
+      alert(res.message);
+      dispatch(removeLoadingMessage());
+      dispatch(removePrevUserMessage());
+    });
+    socket.on("disconnect", () => dispatch(setConnection(false)));
 
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      // socket.off('foo', onFooEvent);
+      socket.off("error");
+      socket.off("disconnect");
     };
   }, []);
 
+  socket.on("messages", (res: ResMessage) => saveMessage(res));
+
+  const saveMessage = (res: ResMessage) => {
+    dispatch(removePrevUserMessage());
+    dispatch(removeLoadingMessage());
+
+    const [usrRes] = res.messages.filter((m) => m.role === "user");
+    const userMsg = {
+      id: usrRes.id,
+      isAi: false,
+      text: usrRes.content,
+    };
+    dispatch(addMessage(userMsg));
+
+    const [aiRes] = res.messages.filter((m) => m.role === "assistant");
+    const aiMsg = {
+      id: aiRes.id,
+      isAi: true,
+      text: aiRes.content,
+    };
+    dispatch(addMessage(aiMsg));
+  };
+
   useEffect(() => {
     if (ref.current) {
-      if (currentModal) {
-        disableBodyScroll(ref.current);
-      } else {
+      if (modalState === Modals.NONE) {
         enableBodyScroll(ref.current);
+      } else {
+        disableBodyScroll(ref.current);
       }
     }
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, [currentModal]);
+  }, [modalState]);
 
   const scrollToBottom = () => {
     chatMessageRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -104,14 +106,24 @@ const Chat = () => {
   }, [messages]);
 
   const messagesForRender = messages.map((msg, idx) => {
-    if (msg.ai) {
+    if (msg.isAi && msg.id !== "loading") {
       return (
         <AiMessage
           key={idx}
           text={msg.text}
           ref={chatMessageRef}
-          backgroundUrl={individualsData[0].substrateUrl}
-          portraitUrl={individualsData[0].imgUrl}
+          backgroundUrl={soul.substrateUrl}
+          portraitUrl={soul.imgUrl}
+        />
+      );
+    }
+    if (msg.isAi && msg.id === "loading") {
+      return (
+        <LoadingMessage
+          key={idx}
+          ref={chatMessageRef}
+          backgroundUrl={soul.substrateUrl}
+          portraitUrl={soul.imgUrl}
         />
       );
     }
@@ -120,44 +132,31 @@ const Chat = () => {
 
   return (
     <Section ref={ref}>
-      <Menu
-        isOpen={currentModal === Modals.MENU ? true : false}
-        onClickAboutLink={openModal}
-        closeMenu={openModal}
-      />
-      <SignUp
-        isOpen={currentModal === Modals.SIGN_UP ? true : false}
-        onClickClose={openModal}
-        onClickSignIn={openModal}
-      />
-      <SignIn
-        isOpen={currentModal === Modals.SIGN_IN ? true : false}
-        onClickClose={openModal}
-        onClickSignUp={openModal}
-      />
-      <About
-        isOpen={currentModal === Modals.ABOUT ? true : false}
-        onClickClose={openModal}
-      />
+      <Menu isOpen={modalState === Modals.MENU ? true : false} />
+      <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
+      <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
+      <About isOpen={modalState === Modals.ABOUT ? true : false} />
 
       <Container>
         <Header
-          show={currentModal == null ? true : false}
-          onOptionClick={openModal}
-          onCloseClick={openModal}
+          show={
+            modalState === Modals.NONE || modalState === Modals.MENU
+              ? true
+              : false
+          }
         />
         <PortraitWrapper>
           <Portrait
-            fullName={individualsData[0].fullName}
-            imgUrl={individualsData[0].imgUrl}
-            uuid={individualsData[0].uuid}
-            title={individualsData[0].title}
-            id={individualsData[0].id}
+            fullName={soul.fullName}
+            imgUrl={soul.imgUrl}
+            uuid={soul.uuid}
+            title={soul.title}
+            id={soul.id}
           />
         </PortraitWrapper>
         <ChatWindow>{messagesForRender}</ChatWindow>
         <ChatInputWrapper>
-          <ChatInput onSubmit={setMessages} />
+          <ChatInput />
         </ChatInputWrapper>
       </Container>
     </Section>

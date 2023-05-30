@@ -19,7 +19,7 @@ import {
   Title,
   Wrapper,
 } from "./PayInfo.styles";
-import { Payments } from "../../Paywall";
+import { Payments } from "../../types";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 

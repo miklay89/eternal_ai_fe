@@ -1,11 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./authReducer";
-import messageReducer from "./messageReducer";
+import authReducer from "./reducers/auth";
+import messagesReducer from "./reducers/messages";
+import soulReducer from "./reducers/soul";
+import socketReducer from "./reducers/socket";
+import modalReducer from "./reducers/modals";
+import profileReducer from "./reducers/profile";
 
 export const store = configureStore({
   reducer: {
     isAuth: authReducer,
-    message: messageReducer,
+    message: messagesReducer,
+    soul: soulReducer,
+    socket: socketReducer,
+    modal: modalReducer,
+    profile: profileReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

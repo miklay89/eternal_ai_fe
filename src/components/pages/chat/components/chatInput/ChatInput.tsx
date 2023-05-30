@@ -1,34 +1,52 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useState } from "react";
 import {
   InnerWrapper,
   Input,
   OuterWrapper,
   SubmitBtn,
 } from "./ChatInput.styles";
-import { Message } from "../../Chat";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store";
+import { addMessage } from "../../../../../store/reducers/messages";
+import socket from "../../../../../services/socket";
+import { setConnection } from "../../../../../store/reducers/socket";
 
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
-
-type Props = {
-  onSubmit: Dispatcher<Message[]>;
-};
-
-const ChatInput = (props: Props) => {
+const ChatInput = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState<string>("");
   const AuthState = useSelector((state: RootState) => state.isAuth);
-
+  const soul = useSelector((state: RootState) => state.soul.soul);
+  const socketIsConnected = useSelector(
+    (state: RootState) => state.socket.connection
+  );
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!AuthState.isAuth) {
       alert("sign in first");
       return;
     }
+    if (!socketIsConnected) {
+      socket.connect();
+      socket.on("connect", () => dispatch(setConnection(true)));
+    }
+
     if (!value.length) return;
-    const msg = { ai: false, text: value };
-    props.onSubmit((prev) => [...prev, msg]);
+    const msg = {
+      isAi: false,
+      text: value,
+      id: "template",
+    };
+    dispatch(addMessage(msg));
+    socket.emit("sendMessage", { content: msg.text });
+
     setValue("");
+
+    const loadingMsg = {
+      isAi: true,
+      text: "",
+      id: "loading",
+    };
+    dispatch(addMessage(loadingMsg));
   };
 
   const handleSubmitKeyboard = (e: React.KeyboardEvent) => {
@@ -37,10 +55,31 @@ const ChatInput = (props: Props) => {
         alert("sign in first");
         return;
       }
+
+      if (!socketIsConnected) {
+        socket.connect();
+        socket.on("connect", () => dispatch(setConnection(true)));
+      }
+
       if (!value.length) return;
-      const msg = { ai: false, text: value };
-      props.onSubmit((prev) => [...prev, msg]);
+
+      const msg = {
+        isAi: false,
+        text: value,
+        id: "template",
+      };
+      dispatch(addMessage(msg));
+
+      socket.emit("sendMessage", { content: msg.text });
+
       setValue("");
+
+      const loadingMsg = {
+        isAi: true,
+        text: "",
+        id: "loading",
+      };
+      dispatch(addMessage(loadingMsg));
     } else {
       return;
     }

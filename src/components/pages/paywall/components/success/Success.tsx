@@ -9,6 +9,8 @@ import {
   Title,
   Wrapper,
 } from "./Success.styles";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../../../../../routes/root";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -18,6 +20,11 @@ type Props = {
 };
 
 const Success = (props: Props) => {
+  const navigate = useNavigate();
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(Paths.CHAT);
+  };
   return (
     <Wrapper show={props.show}>
       <OuterWrapper>
@@ -27,7 +34,9 @@ const Success = (props: Props) => {
           </Circle>
           <Title>You have successfully subscribed!</Title>
           <Subtitle>A receipt was sent to your email</Subtitle>
-          <StartChattingBtn>start chatting</StartChattingBtn>
+          <StartChattingBtn onClick={(e) => handleClick(e)}>
+            start chatting
+          </StartChattingBtn>
         </InnerWrapper>
       </OuterWrapper>
     </Wrapper>

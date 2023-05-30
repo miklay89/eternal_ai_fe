@@ -1,4 +1,4 @@
-export type Profile = {
+export type FullProfile = {
   user: {
     email: string;
     name: string | null;
