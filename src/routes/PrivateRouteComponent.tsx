@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../store";
 import { FC, useEffect } from "react";
 import { openModal } from "../store/reducers/modals";
@@ -36,6 +36,8 @@ const PrivateRouteComponent = (props: Props) => {
   if (authState) {
     return <props.fc />;
   }
+
+  return <Outlet />;
 };
 
 export default PrivateRouteComponent;
