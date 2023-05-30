@@ -72,7 +72,6 @@ const Account = () => {
   };
 
   useEffect(() => {
-    if (!authState) return;
     Profile.getData().then((user) => dispatch(setProfile(user)));
   }, []);
 
