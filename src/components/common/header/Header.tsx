@@ -61,6 +61,7 @@ const Header = (props: Props) => {
       dispatch(setConnection(false));
       LocalStorage.deleteToken();
       dispatch(setInitialState());
+      navigate(Paths.HOME);
     }
   };
 

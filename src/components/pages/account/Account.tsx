@@ -115,6 +115,7 @@ const Account = () => {
 
   return (
     <AccountSection ref={ref}>
+      <Loading />
       <Menu isOpen={modalState === Modals.MENU ? true : false} />
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
       <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
