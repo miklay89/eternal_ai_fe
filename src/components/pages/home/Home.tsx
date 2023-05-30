@@ -17,6 +17,7 @@ import SignIn from "../modals/sign-in/SignIn";
 import { Modals } from "../modals/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import Loading from "../loading/Loading";
 
 const HomePage = () => {
   const modalState = useSelector((state: RootState) => state.modal.open);
@@ -37,6 +38,7 @@ const HomePage = () => {
 
   return (
     <HomeSection ref={ref}>
+      <Loading />
       <GradientCorner />
       <Menu isOpen={modalState === Modals.MENU ? true : false} />
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />

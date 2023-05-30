@@ -16,9 +16,13 @@ import { setSoul } from "../../../store/reducers/soul";
 import LocalStorage from "../../../services/localStorage";
 import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
+import { setLoading } from "../../../store/reducers/loading";
 
 const Loading = () => {
   const dispatch = useDispatch();
+  const loadingState = useSelector(
+    (state: RootState) => state.loading.isLoading
+  );
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
   const socketIsConnected = useSelector(
     (state: RootState) => state.socket.connection
@@ -29,34 +33,60 @@ const Loading = () => {
 
   useEffect(() => {
     const token = LocalStorage.getToken();
-    if (!token) return;
-    if (authState) return;
-    const checkAuth = async () => {
-      await Auth.checkAuthMe()
-        .then(() => dispatch(setAuth(true)))
-        .catch(() => {
-          LocalStorage.deleteToken();
-          dispatch(setAuth(false));
-        });
-    };
+    if (!token) {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2000);
+      dispatch(setLoading(false));
+      return;
+    }
+    if (authState) {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2000);
+      return;
+    }
 
-    checkAuth();
+    Auth.checkAuthMe()
+      .then(() => dispatch(setAuth(true)))
+      .catch(() => {
+        LocalStorage.deleteToken();
+        dispatch(setAuth(false));
+      });
 
-    if (socketIsConnected) return;
+    if (socketIsConnected) {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2000);
+      return;
+    }
     socket.connect();
     socket.on("connect", () => dispatch(setConnection(true)));
 
-    if (soulIsSet) return;
+    if (soulIsSet) {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2000);
+      return;
+    }
     const soulInfo = { soul: soul, isSet: true };
     socket.emit("setSoul", { soulId: soul.uuid });
     dispatch(setSoul(soulInfo));
 
-    if (profileState.email.length > 0) return;
+    if (profileState.email.length > 0) {
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2000);
+      return;
+    }
     Profile.getData().then((user) => dispatch(setProfile(user)));
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 2000);
   }, []);
 
   return (
-    <LoadingWrapper>
+    <LoadingWrapper show={loadingState}>
       <LoadingContainer>
         <BagelWrapper width={300} height={300}>
           <BagelEllipse

@@ -28,6 +28,7 @@ import { Modals } from "../modals/types";
 import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
 import Auth from "../../../api/auth/auth";
+import Loading from "../loading/Loading";
 
 const Account = () => {
   const ref = useRef(null);

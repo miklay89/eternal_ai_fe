@@ -32,6 +32,7 @@ import { ErrorRes, ResMessage } from "./types";
 import LoadingMessage from "./components/loadingMessage/LoadingMessage";
 import { setConnection } from "../../../store/reducers/socket";
 import { Modals } from "../modals/types";
+import Loading from "../loading/Loading";
 
 export type Message = {
   id?: string;

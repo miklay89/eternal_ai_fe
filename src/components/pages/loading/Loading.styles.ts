@@ -48,8 +48,10 @@ export const BagelEllipse = styled.div<EllipseProps>`
   animation: ${rotateAnimation} 10s linear infinite;
 `;
 
-export const LoadingWrapper = styled.div`
-  display: block;
+export const LoadingWrapper = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "block" : "none")};
   position: absolute;
   width: 100vw;
   height: 100vh;

@@ -5,6 +5,7 @@ import soulReducer from "./reducers/soul";
 import socketReducer from "./reducers/socket";
 import modalReducer from "./reducers/modals";
 import profileReducer from "./reducers/profile";
+import loadingReducer from "./reducers/loading";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     socket: socketReducer,
     modal: modalReducer,
     profile: profileReducer,
+    loading: loadingReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
