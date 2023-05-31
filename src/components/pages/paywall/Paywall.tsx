@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EternalsBG from "../home/components/eternalsBG/EternalsBG";
+import EternalsBG from "../../common/eternalsBG/EternalsBG";
 import {
   CloseBtnWrapper,
   CloseIcon,

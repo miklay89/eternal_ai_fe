@@ -9,13 +9,15 @@ import {
   GetStartedBtn,
   MenuIcon,
   MainLogo,
-  HeaderItemWrapper,
   ShareBtnOuter,
   ShareBtnInner,
   ShareIcon,
   ShareText,
   MenuCloseBtnWrapper,
   MenuCloseIcon,
+  Center,
+  Left,
+  Right,
 } from "./Header.styles";
 import Bagel from "./bagel/Bagel";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -70,7 +72,7 @@ const Header = (props: Props) => {
       show={props.show}
       isOpenMenu={modalState === Modals.MENU ? true : false}
     >
-      <HeaderItemWrapper>
+      <Left>
         <MenuIconWrapper
           show={modalState === Modals.MENU ? false : true}
           onClick={() => dispatch(openModal(Modals.MENU))}
@@ -83,14 +85,14 @@ const Header = (props: Props) => {
         >
           <MenuCloseIcon src="/header/close_btn.svg" />
         </MenuCloseBtnWrapper>
-      </HeaderItemWrapper>
-      <HeaderItemWrapper>
+      </Left>
+      <Center>
         <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
           <Bagel />
           <MainLogo src="/eternal.svg" />
         </MainLogoWrapper>
-      </HeaderItemWrapper>
-      <HeaderItemWrapper>
+      </Center>
+      <Right>
         <LoginBtn onClick={(e) => handleClickBtn(e)}>
           {authState ? "sign out" : "login"}
         </LoginBtn>
@@ -106,7 +108,7 @@ const Header = (props: Props) => {
             <ShareText>SHARE</ShareText>
           </ShareBtnInner>
         </ShareBtnOuter>
-      </HeaderItemWrapper>
+      </Right>
     </HeaderWrapper>
   );
 };

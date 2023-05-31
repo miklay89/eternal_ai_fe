@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, GradientCorner, HomeSection } from "./Home.styles";
-import EternalsBG from "./components/eternalsBG/EternalsBG";
+import EternalsBG from "../../common/eternalsBG/EternalsBG";
 import Footer from "../../common/footer/Footer";
 import Header from "../../common/header/Header";
 import Menu from "../modals/menu/Menu";

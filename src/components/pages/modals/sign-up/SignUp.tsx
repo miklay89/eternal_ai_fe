@@ -97,7 +97,7 @@ const SignUp = (props: Props) => {
           ></Input>
           <InputTitle>Password</InputTitle>
           <Input
-            placeholder="*********"
+            placeholder="•••••••••••••••••••"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

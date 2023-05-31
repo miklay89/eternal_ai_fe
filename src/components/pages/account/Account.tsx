@@ -33,7 +33,6 @@ import Loading from "../loading/Loading";
 const Account = () => {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
   const modalState = useSelector((state: RootState) => state.modal.open);
   const profileState = useSelector((state: RootState) => state.profile.user);
   const [name, setName] = useState<string>("");
@@ -43,19 +42,21 @@ const Account = () => {
   const [subEndDate, setSubEndDate] = useState<string>("");
 
   const handleSave = async () => {
-    if (!authState) {
-      alert("sign-in first");
-      return;
+    if (name.length > 0 && name !== profileState.name) {
+      const res = await Profile.updateData(name, undefined);
+      if (typeof res === "string") {
+        alert(res);
+      }
     }
 
-    const res = await Profile.updateData(name, phone);
-    if (typeof res === "boolean" && res) {
-      Profile.getData().then((user) => dispatch(setProfile(user)));
+    if (phone.length > 0 && phone !== profileState.phone) {
+      const res = await Profile.updateData(undefined, phone);
+      if (typeof res === "string") {
+        alert(res);
+      }
     }
-    if (typeof res === "string") {
-      alert(res);
-    }
-    if (password.length > 0) {
+
+    if (password.length !== 0) {
       if (password.length > 5 && password.length < 25) {
         const data = { email: profileState.email, password };
         Auth.updatePassword(data)
@@ -69,6 +70,8 @@ const Account = () => {
         alert("password should be 5-25 length for updating");
       }
     }
+
+    Profile.getData().then((user) => dispatch(setProfile(user)));
   };
 
   useEffect(() => {
@@ -79,6 +82,31 @@ const Account = () => {
     setName(profileState.name ? profileState.name : "");
     setEmail(profileState.email);
     setPhone(profileState.phone ? profileState.phone : "");
+    if (profileState.isSubscribed) {
+      if (profileState.subscriptionDue) {
+        const date = new Date(profileState.subscriptionDue);
+        const month = date.toLocaleString("en-US", { month: "long" });
+        const day = date.getDate();
+        const year = date.getFullYear();
+        setSubEndDate(
+          `Next payment will be processed on ${month} ${day}, ${year}.`
+        );
+      }
+    } else {
+      if (profileState.subscriptionDue) {
+        const date = new Date(profileState.subscriptionDue);
+        const month = date.toLocaleString("en-US", { month: "long" });
+        const day = date.getDate();
+        const year = date.getFullYear();
+        setSubEndDate(
+          `You are not subscribed, but subscription due to ${month} ${day}, ${year}.`
+        );
+      } else {
+        setSubEndDate(
+          `You are not subscribed yet, you left ${profileState.freeQuestionsLeft} free questions.`
+        );
+      }
+    }
   }, [profileState]);
 
   useEffect(() => {
@@ -93,25 +121,6 @@ const Account = () => {
       clearAllBodyScrollLocks();
     };
   }, [modalState]);
-
-  useEffect(() => {
-    if (profileState.subscriptionDue) {
-      const date = new Date(profileState.subscriptionDue);
-      const month = date.toLocaleString("en-US", { month: "long" });
-      const day = date.getDate();
-      const year = date.getFullYear();
-      setSubEndDate(
-        `Next payment will be processed on ${month} ${day}, ${year}.`
-      );
-      return;
-    }
-    if (!profileState.subscriptionDue) {
-      setSubEndDate(
-        `You are not subscribed yet, you left ${profileState.freeQuestionsLeft} free questions.`
-      );
-      return;
-    }
-  }, []);
 
   return (
     <AccountSection ref={ref}>
@@ -159,7 +168,7 @@ const Account = () => {
             />
             <InputTitle>Phone number</InputTitle>
             <Input
-              placeholder="8329822222"
+              placeholder="+1329822222"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />

@@ -18,8 +18,8 @@ export default class Profile {
   static async updateData(name?: string, phone?: string) {
     try {
       const payload = {
-        name: name,
-        phone: phone,
+        name: name ? name : undefined,
+        phone: phone ? phone : undefined,
       };
       const res = await axiosInstance.patch<UpdateProfile>(
         ProfileRoutes.PROFILE_INFO,

@@ -14,7 +14,21 @@ export const HeaderWrapper = styled.div<{
   z-index: ${(props) => (props.isOpenMenu ? 20 : 5)};
 `;
 
-export const HeaderItemWrapper = styled.div`
+export const Left = styled.div`
+  display: flex;
+  align-items: center;
+  width: 320px;
+  height: 56px;
+`;
+
+export const Center = styled.div`
+  display: flex;
+  align-items: center;
+  width: 320px;
+  height: 56px;
+`;
+
+export const Right = styled.div`
   display: flex;
   align-items: center;
   width: 320px;
