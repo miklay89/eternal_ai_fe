@@ -43,4 +43,16 @@ export const ChatWindow = styled.div`
   flex-direction: column;
   gap: 24px;
   z-index: 5;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: gray;
+    opacity: 0.4;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  }
 `;
