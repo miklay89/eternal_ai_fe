@@ -66,7 +66,7 @@ const Payment = (props: Props) => {
 
     const updCardInfo = await Profile.updateCardInfo({ card: card });
     if (typeof updCardInfo === "string") return alert(updCardInfo);
-    const subscribeClient = await Profile.createSubscription({ card: card });
+    const subscribeClient = await Profile.createSubscription();
     if (typeof subscribeClient === "string") return alert(subscribeClient);
     props.onChangeView(Payments.SUCCESS);
   };

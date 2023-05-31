@@ -162,6 +162,7 @@ const Account = () => {
             />
             <InputTitle>Email</InputTitle>
             <Input
+              disabled
               placeholder="justin@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

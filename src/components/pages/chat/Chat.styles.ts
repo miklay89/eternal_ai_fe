@@ -26,17 +26,17 @@ export const PortraitWrapper = styled.div`
 export const ChatInputWrapper = styled.div`
   margin-left: auto;
   margin-right: 2px;
-  margin-top: 404px;
+  margin-top: 1295px;
   width: 727px;
   height: 78px;
 `;
 
 export const ChatWindow = styled.div`
-  position: relative;
-  margin-left: auto;
-  margin-right: 2px;
-  margin-top: 130px;
-  max-width: 719px;
+  position: absolute;
+  padding-right: 26px;
+  left: 887px;
+  top: 137px;
+  width: 745px;
   height: 676px;
   overflow-y: scroll;
   display: flex;

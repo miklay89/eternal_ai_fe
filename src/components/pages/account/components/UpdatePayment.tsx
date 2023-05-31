@@ -10,6 +10,7 @@ import {
   ProOuterWrapper,
   ProText,
   SaveBtn,
+  SubscribeBtn,
   UpdateBtnInnerWrapper,
   UpdateBtnOuterWrapper,
   UpdateBtnText,
@@ -22,22 +23,26 @@ import {
   validateMonth,
 } from "../../../common/paymentInput/cardInputsValidators";
 import Profile from "../../../../api/profile/profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setProfile } from "../../../../store/reducers/profile";
 import { RootState } from "../../../../store";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../../../../routes/root";
 
 type Props = {
   nextPayment: string;
 };
 
 const UpdatePayment = (props: Props) => {
-  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const profileState = useSelector((state: RootState) => state.profile.user);
   const [update, setIsUpdate] = useState<boolean>(false);
   const [number, setNumber] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
 
   const handleSubmit = async (e: React.MouseEvent) => {
-    if (!authState) return alert("sign-in first");
     e.preventDefault();
     const validCardNumber = validateCardNumber(number);
     if (typeof validCardNumber === "boolean") {
@@ -68,15 +73,24 @@ const UpdatePayment = (props: Props) => {
 
     const updCardInfo = await Profile.updateCardInfo({ card: card });
     if (typeof updCardInfo === "string") return alert(updCardInfo);
-    const subscribeClient = await Profile.createSubscription({ card: card });
-    if (typeof subscribeClient === "string") return alert(subscribeClient);
-    setIsUpdate(true);
+    setIsUpdate(false);
   };
 
   const handleCancelSub = async (e: React.MouseEvent) => {
     e.preventDefault();
     const res = await Profile.deleteSubscription();
     if (typeof res === "string") return alert(res);
+
+    Profile.getData().then((user) => dispatch(setProfile(user)));
+  };
+
+  const handleSub = (e: React.MouseEvent) => {
+    e.preventDefault();
+    Profile.createSubscription().then((res) => {
+      if (typeof res === "string") alert(res);
+    });
+
+    Profile.getData().then((user) => dispatch(setProfile(user)));
   };
 
   return (
@@ -94,7 +108,10 @@ const UpdatePayment = (props: Props) => {
             <UpdateBtnText>update payment</UpdateBtnText>
           </UpdateBtnInnerWrapper>
         </UpdateBtnOuterWrapper>
-        <CancelSubBtn show={update} onClick={(e) => handleCancelSub(e)}>
+        <CancelSubBtn
+          show={profileState.isSubscribed ? true : false}
+          onClick={(e) => handleCancelSub(e)}
+        >
           cancel subscription
         </CancelSubBtn>
         <CardInfoWrapper show={update}>
@@ -108,6 +125,12 @@ const UpdatePayment = (props: Props) => {
           />
           <SaveBtn onClick={(e) => handleSubmit(e)}>Save</SaveBtn>
         </CardInfoWrapper>
+        <SubscribeBtn
+          show={profileState.isSubscribed ? false : true}
+          onClick={(e) => handleSub(e)}
+        >
+          Subscribe
+        </SubscribeBtn>
       </InnerWrapper>
     </OuterWrapper>
   );

@@ -121,7 +121,7 @@ export const UpdateBtnText = styled.div`
 export const CancelSubBtn = styled.div<{
   show: boolean;
 }>`
-  display: ${(props) => (props.show ? "none" : "block")};
+  display: ${(props) => (props.show ? "block" : "none")};
   margin: 0 auto;
   margin-top: 32px;
   font-family: "Arquitecta";
@@ -173,3 +173,30 @@ export const SaveBtn = styled.button`
   }
 `;
 
+export const SubscribeBtn = styled.button<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "block" : "none")};
+  margin-top: 32px;
+  width: 100%;
+  height: 62px;
+  background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  border-radius: 120px;
+  border: none;
+  font-family: "Arquitecta";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 110%;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(
+      281.4deg,
+      rgba(248, 45, 152, 0.8) -2.34%,
+      rgba(88, 51, 239, 0.8) 114.41%
+    );
+  }
+`;

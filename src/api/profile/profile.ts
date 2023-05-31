@@ -35,10 +35,9 @@ export default class Profile {
     }
   }
 
-  static async createSubscription(card: Card) {
+  static async createSubscription() {
     try {
-      await axiosInstance.post(ProfileRoutes.PROFILE_SUBSCRIPTION, card);
-      return true;
+      await axiosInstance.post(ProfileRoutes.PROFILE_SUBSCRIPTION);
     } catch (e) {
       if (isAxiosError<{ message: string }>(e)) {
         console.log(e.response!.data.message);

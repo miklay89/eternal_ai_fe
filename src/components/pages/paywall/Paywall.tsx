@@ -22,7 +22,6 @@ import Bagel from "../../common/header/bagel/Bagel";
 import { MainLogo } from "../../common/header/Header.styles";
 import { Payments } from "./types";
 
-//TODO add cardInputs + subscribe if signed in
 const Paywall = () => {
   const navigate = useNavigate();
   const [payment, showPayment] = useState<string>(Payments.INFO);
