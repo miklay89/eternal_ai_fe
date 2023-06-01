@@ -17,6 +17,8 @@ import LocalStorage from "../../../services/localStorage";
 import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
 import { setLoading } from "../../../store/reducers/loading";
+import Chat from "../../../api/chat/chat";
+import { individualsData } from "../home/components/promo/Cards.data";
 
 const Loading = () => {
   const dispatch = useDispatch();
@@ -40,46 +42,42 @@ const Loading = () => {
       dispatch(setLoading(false));
       return;
     }
-    if (authState) {
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 2000);
-      return;
+
+    if (!authState) {
+      Auth.checkAuthMe()
+        .then(() => dispatch(setAuth(true)))
+        .catch(() => {
+          LocalStorage.deleteToken();
+          dispatch(setAuth(false));
+        });
     }
 
-    Auth.checkAuthMe()
-      .then(() => dispatch(setAuth(true)))
-      .catch(() => {
-        LocalStorage.deleteToken();
-        dispatch(setAuth(false));
+    if (!socketIsConnected) {
+      socket.connect();
+      socket.on("connect", () => dispatch(setConnection(true)));
+    }
+
+    if (!soulIsSet) {
+      Chat.getChatInfo().then((chat) => {
+        if (chat) {
+          const [newSoul] = individualsData.filter(
+            (i) => i.uuid === chat.currentSoulId
+          );
+          const soulInfo = { soul: newSoul ? newSoul : soul, isSet: true };
+          socket.emit("setSoul", { soulId: newSoul.uuid });
+          dispatch(setSoul(soulInfo));
+        } else {
+          const soulInfo = { soul: soul, isSet: true };
+          socket.emit("setSoul", { soulId: soul.uuid });
+          dispatch(setSoul(soulInfo));
+        }
       });
-
-    if (socketIsConnected) {
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 2000);
-      return;
     }
-    socket.connect();
-    socket.on("connect", () => dispatch(setConnection(true)));
 
-    if (soulIsSet) {
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 2000);
-      return;
+    if (profileState.email.length == 0) {
+      Profile.getData().then((user) => dispatch(setProfile(user)));
     }
-    const soulInfo = { soul: soul, isSet: true };
-    socket.emit("setSoul", { soulId: soul.uuid });
-    dispatch(setSoul(soulInfo));
 
-    if (profileState.email.length > 0) {
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 2000);
-      return;
-    }
-    Profile.getData().then((user) => dispatch(setProfile(user)));
     setTimeout(() => {
       dispatch(setLoading(false));
     }, 2000);

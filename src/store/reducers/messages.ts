@@ -22,6 +22,9 @@ export const messagesSlice = createSlice({
     removeLoadingMessage: (state) => {
       return [...state.filter((a) => a.id !== "loading")];
     },
+    removeScrollMessage: (state) => {
+      return [...state.filter((a) => a.id !== "scroll")];
+    },
     eraseChat: (state) => {
       return (state = []);
     },
@@ -31,5 +34,6 @@ export const messagesSlice = createSlice({
 export const { addMessage } = messagesSlice.actions;
 export const { removePrevUserMessage } = messagesSlice.actions;
 export const { removeLoadingMessage } = messagesSlice.actions;
+export const { removeScrollMessage } = messagesSlice.actions;
 export const { eraseChat } = messagesSlice.actions;
 export default messagesSlice.reducer;

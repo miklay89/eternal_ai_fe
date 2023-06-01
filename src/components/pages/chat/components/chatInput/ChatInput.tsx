@@ -7,7 +7,10 @@ import {
 } from "./ChatInput.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store";
-import { addMessage } from "../../../../../store/reducers/messages";
+import {
+  addMessage,
+  removeScrollMessage,
+} from "../../../../../store/reducers/messages";
 import socket from "../../../../../services/socket";
 import { setConnection } from "../../../../../store/reducers/socket";
 import { setSoul } from "../../../../../store/reducers/soul";
@@ -15,7 +18,6 @@ import { setSoul } from "../../../../../store/reducers/soul";
 const ChatInput = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>("");
-  const AuthState = useSelector((state: RootState) => state.isAuth);
   const soul = useSelector((state: RootState) => state.soul.soul);
   const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
   const socketIsConnected = useSelector(
@@ -35,6 +37,9 @@ const ChatInput = () => {
     }
 
     if (!value.length) return;
+
+    dispatch(removeScrollMessage());
+
     const msg = {
       isAi: false,
       text: value,
@@ -51,6 +56,13 @@ const ChatInput = () => {
       id: "loading",
     };
     dispatch(addMessage(loadingMsg));
+
+    const scrollMsg = {
+      id: "scroll",
+      isAi: true,
+      text: "",
+    };
+    dispatch(addMessage(scrollMsg));
   };
 
   const handleSubmitKeyboard = (e: React.KeyboardEvent) => {
@@ -67,6 +79,8 @@ const ChatInput = () => {
       }
 
       if (!value.length) return;
+
+      dispatch(removeScrollMessage());
 
       const msg = {
         isAi: false,
@@ -85,6 +99,13 @@ const ChatInput = () => {
         id: "loading",
       };
       dispatch(addMessage(loadingMsg));
+
+      const scrollMsg = {
+        id: "scroll",
+        isAi: true,
+        text: "",
+      };
+      dispatch(addMessage(scrollMsg));
     } else {
       return;
     }

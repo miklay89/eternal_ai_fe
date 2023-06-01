@@ -14,6 +14,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 28px;
   max-width: 1640px;
+  height: 100vh;
   overflow: hidden;
 `;
 
@@ -24,9 +25,9 @@ export const PortraitWrapper = styled.div`
 `;
 
 export const ChatInputWrapper = styled.div`
-  margin-left: auto;
-  margin-right: 2px;
-  margin-top: 1295px;
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
   width: 727px;
   height: 78px;
 `;
@@ -43,7 +44,7 @@ export const ChatWindow = styled.div`
   flex-direction: column;
   gap: 24px;
   z-index: 5;
-  
+
   &::-webkit-scrollbar {
     width: 6px;
   }

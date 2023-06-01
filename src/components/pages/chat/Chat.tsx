@@ -26,6 +26,7 @@ import {
   addMessage,
   removeLoadingMessage,
   removePrevUserMessage,
+  removeScrollMessage,
 } from "../../../store/reducers/messages";
 import socket from "../../../services/socket";
 import { ErrorRes, ResMessage } from "./types";
@@ -33,12 +34,9 @@ import LoadingMessage from "./components/loadingMessage/LoadingMessage";
 import { setConnection } from "../../../store/reducers/socket";
 import { Modals } from "../modals/types";
 import Loading from "../loading/Loading";
+import ScrollMessage from "./components/scrollMessage/ScrollMessage";
 
-export type Message = {
-  id?: string;
-  ai: boolean;
-  text: string;
-};
+// TODO add history
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -65,6 +63,7 @@ const Chat = () => {
   socket.on("messages", (res: ResMessage) => saveMessage(res));
 
   const saveMessage = (res: ResMessage) => {
+    dispatch(removeScrollMessage());
     dispatch(removePrevUserMessage());
     dispatch(removeLoadingMessage());
 
@@ -83,6 +82,13 @@ const Chat = () => {
       text: aiRes.content,
     };
     dispatch(addMessage(aiMsg));
+
+    const scrollMsg = {
+      id: "scroll",
+      isAi: true,
+      text: "",
+    };
+    dispatch(addMessage(scrollMsg));
   };
 
   useEffect(() => {
@@ -107,28 +113,31 @@ const Chat = () => {
   }, [messages]);
 
   const messagesForRender = messages.map((msg, idx) => {
-    if (msg.isAi && msg.id !== "loading") {
+    if (msg.isAi && msg.id !== "loading" && msg.id !== "scroll") {
       return (
         <AiMessage
           key={idx}
           text={msg.text}
-          ref={chatMessageRef}
           backgroundUrl={soul.substrateUrl}
           portraitUrl={soul.imgUrl}
         />
       );
     }
+
     if (msg.isAi && msg.id === "loading") {
       return (
         <LoadingMessage
           key={idx}
-          ref={chatMessageRef}
           backgroundUrl={soul.substrateUrl}
           portraitUrl={soul.imgUrl}
         />
       );
     }
-    return <UserMessage key={idx} text={msg.text} ref={chatMessageRef} />;
+
+    if (msg.isAi && msg.id === "scroll") {
+      return <ScrollMessage key={idx} ref={chatMessageRef} />;
+    }
+    return <UserMessage key={idx} text={msg.text} />;
   });
 
   return (

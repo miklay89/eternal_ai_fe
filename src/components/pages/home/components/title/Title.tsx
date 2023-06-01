@@ -9,7 +9,10 @@ import {
 } from "./Title.styles";
 import { useNavigate } from "react-router-dom";
 import { messages } from "./title.data";
-import { addMessage } from "../../../../../store/reducers/messages";
+import {
+  addMessage,
+  removeScrollMessage,
+} from "../../../../../store/reducers/messages";
 import { Paths } from "../../../../../routes/root";
 import { RootState } from "../../../../../store";
 import socket from "../../../../../services/socket";
@@ -39,6 +42,8 @@ const Title = () => {
       socket.on("connect", () => dispatch(setConnection(true)));
     }
 
+    dispatch(removeScrollMessage());
+
     const msg = {
       isAi: false,
       text: message,
@@ -52,6 +57,13 @@ const Title = () => {
       id: "loading",
     };
     dispatch(addMessage(loadingMsg));
+
+    const scrollMsg = {
+      id: "scroll",
+      isAi: true,
+      text: "",
+    };
+    dispatch(addMessage(scrollMsg));
 
     if (!soulIsSet) {
       const soulInfo = { soul: soul, isSet: true };
