@@ -108,12 +108,6 @@ const UpdatePayment = (props: Props) => {
             <UpdateBtnText>update payment</UpdateBtnText>
           </UpdateBtnInnerWrapper>
         </UpdateBtnOuterWrapper>
-        <CancelSubBtn
-          show={profileState.isSubscribed ? true : false}
-          onClick={(e) => handleCancelSub(e)}
-        >
-          cancel subscription
-        </CancelSubBtn>
         <CardInfoWrapper show={update}>
           <PaymentInputs
             number={number}
@@ -125,6 +119,12 @@ const UpdatePayment = (props: Props) => {
           />
           <SaveBtn onClick={(e) => handleSubmit(e)}>Save</SaveBtn>
         </CardInfoWrapper>
+        <CancelSubBtn
+          show={profileState.isSubscribed ? true : false}
+          onClick={(e) => handleCancelSub(e)}
+        >
+          cancel subscription
+        </CancelSubBtn>
         <SubscribeBtn
           show={profileState.isSubscribed ? false : true}
           onClick={(e) => handleSub(e)}

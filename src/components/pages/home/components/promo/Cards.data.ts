@@ -45,7 +45,7 @@ export const individualsData = [
     imgUrl: "/ind/photos/j_christ.png",
     substrateUrl: "/ind/sub/6.png",
     id: 5,
-    uuid: "1e4a40b6-ca71-4c65-8c5d-fe4b81a6",
+    uuid: "1e4a40b6-ca71-4c65-8c5d-fe4b81a6710b",
   },
   {
     fullName: "leonardo da vinci",

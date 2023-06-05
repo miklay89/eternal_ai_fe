@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChatInputWrapper,
   ChatWindow,
@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import {
   addMessage,
+  addMessagesFromHistory,
   removeLoadingMessage,
   removePrevUserMessage,
   removeScrollMessage,
@@ -35,8 +36,9 @@ import { setConnection } from "../../../store/reducers/socket";
 import { Modals } from "../modals/types";
 import Loading from "../loading/Loading";
 import ScrollMessage from "./components/scrollMessage/ScrollMessage";
-
-// TODO add history
+import ChatInstance from "../../../api/chat/chat";
+import { individualsData } from "../home/components/promo/Cards.data";
+import { setSoul } from "../../../store/reducers/soul";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,7 @@ const Chat = () => {
   const modalState = useSelector((state: RootState) => state.modal.open);
   const messages = useSelector((state: RootState) => state.message);
   const soul = useSelector((state: RootState) => state.soul.soul);
+  const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
   const chatMessageRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,6 +56,81 @@ const Chat = () => {
       dispatch(removePrevUserMessage());
     });
     socket.on("disconnect", () => dispatch(setConnection(false)));
+
+    if (!soulIsSet) {
+      ChatInstance.getChatInfo().then((info) => {
+        if (info) {
+          const [newSoul] = individualsData.filter(
+            (i) => i.uuid === info.currentSoulId
+          );
+          const soulInfo = { soul: newSoul ? newSoul : soul, isSet: true };
+          socket.emit("setSoul", { soulId: newSoul.uuid });
+          dispatch(setSoul(soulInfo));
+
+          //history
+          ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
+            res.forEach((m) => {
+              if (m.role === "user") {
+                const userMsg = {
+                  id: m.id,
+                  isAi: false,
+                  text: m.content,
+                };
+                dispatch(addMessage(userMsg));
+              }
+              if (m.role === "assistant") {
+                const aiMsg = {
+                  id: m.id,
+                  isAi: true,
+                  text: m.content,
+                };
+                dispatch(addMessage(aiMsg));
+              }
+            });
+
+            const scrollMsg = {
+              id: "scroll",
+              isAi: true,
+              text: "",
+            };
+            dispatch(addMessage(scrollMsg));
+          });
+        } else {
+          const soulInfo = { soul: soul, isSet: true };
+          socket.emit("setSoul", { soulId: soul.uuid });
+          dispatch(setSoul(soulInfo));
+
+          //history
+          ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
+            res.forEach((m) => {
+              if (m.role === "user") {
+                const userMsg = {
+                  id: m.id,
+                  isAi: false,
+                  text: m.content,
+                };
+                dispatch(addMessage(userMsg));
+              }
+              if (m.role === "assistant") {
+                const aiMsg = {
+                  id: m.id,
+                  isAi: true,
+                  text: m.content,
+                };
+                dispatch(addMessage(aiMsg));
+              }
+            });
+
+            const scrollMsg = {
+              id: "scroll",
+              isAi: true,
+              text: "",
+            };
+            dispatch(addMessage(scrollMsg));
+          });
+        }
+      });
+    }
 
     return () => {
       socket.off("error");
@@ -104,13 +182,35 @@ const Chat = () => {
     };
   }, [modalState]);
 
-  const scrollToBottom = () => {
-    chatMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = () => {
+    chatMessageRef.current?.scrollIntoView();
   };
 
   useEffect(() => {
-    scrollToBottom();
+    scrollTo();
   }, [messages]);
+
+  const handleScroll = async (e: React.UIEvent<HTMLDivElement>) => {
+    dispatch(removeScrollMessage());
+    if (e.currentTarget.scrollTop === 0) {
+      const firstMsgId = messages[0].id;
+      if (firstMsgId === "scroll") {
+        dispatch(removeScrollMessage());
+        return;
+      }
+      ChatInstance.getMessages(soul.uuid, firstMsgId).then((res) => {
+        const prepared = res.map((m) => {
+          if (m.role === "user") {
+            return { id: m.id, isAi: false, text: m.content };
+          } else {
+            return { id: m.id, isAi: true, text: m.content };
+          }
+        });
+        dispatch(addMessagesFromHistory(prepared));
+      });
+      dispatch(removeScrollMessage());
+    }
+  };
 
   const messagesForRender = messages.map((msg, idx) => {
     if (msg.isAi && msg.id !== "loading" && msg.id !== "scroll") {
@@ -165,7 +265,9 @@ const Chat = () => {
             id={soul.id}
           />
         </PortraitWrapper>
-        <ChatWindow>{messagesForRender}</ChatWindow>
+        <ChatWindow onScroll={(e) => handleScroll(e)}>
+          {messagesForRender}
+        </ChatWindow>
         <ChatInputWrapper>
           <ChatInput />
         </ChatInputWrapper>

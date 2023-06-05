@@ -4,3 +4,14 @@ export type ChatInfo = {
     currentSoulId: string | null;
   } | null;
 };
+
+export type ChatHistory = {
+  messages: {
+    id: string;
+    soulId: string;
+    content: string;
+    userId: string;
+    role: "user" | "assistant";
+    timestamp: string;
+  }[];
+};

@@ -16,6 +16,15 @@ export const messagesSlice = createSlice({
       if (uniqIds.includes(action.payload.id)) return;
       state.push(action.payload);
     },
+    addMessagesFromHistory: (state, action: PayloadAction<messageState[]>) => {
+      const scrollMsg = {
+        id: "scroll",
+        isAi: true,
+        text: "",
+      };
+      state = [...action.payload, scrollMsg, ...state];
+      return state;
+    },
     removePrevUserMessage: (state) => {
       return [...state.filter((a) => a.id !== "template")];
     },
@@ -32,6 +41,7 @@ export const messagesSlice = createSlice({
 });
 
 export const { addMessage } = messagesSlice.actions;
+export const { addMessagesFromHistory } = messagesSlice.actions;
 export const { removePrevUserMessage } = messagesSlice.actions;
 export const { removeLoadingMessage } = messagesSlice.actions;
 export const { removeScrollMessage } = messagesSlice.actions;

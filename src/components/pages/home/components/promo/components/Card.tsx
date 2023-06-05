@@ -17,6 +17,7 @@ import {
 import socket from "../../../../../../services/socket";
 import { RootState } from "../../../../../../store";
 import { setConnection } from "../../../../../../store/reducers/socket";
+import ChatInstance from "../../../../../../api/chat/chat";
 
 type Props = {
   fullName: string;
@@ -58,6 +59,33 @@ const Card = (props: Props) => {
 
     if (soul.uuid === props.uuid) {
       navigate(Paths.CHAT);
+      ChatInstance.getInitHistory(soul.uuid).then((res) => {
+        res.forEach((m) => {
+          if (m.role === "user") {
+            const userMsg = {
+              id: m.id,
+              isAi: false,
+              text: m.content,
+            };
+            dispatch(addMessage(userMsg));
+          }
+          if (m.role === "assistant") {
+            const aiMsg = {
+              id: m.id,
+              isAi: true,
+              text: m.content,
+            };
+            dispatch(addMessage(aiMsg));
+          }
+        });
+
+        const scrollMsg = {
+          id: "scroll",
+          isAi: true,
+          text: "",
+        };
+        dispatch(addMessage(scrollMsg));
+      });
       return;
     }
 
@@ -66,18 +94,35 @@ const Card = (props: Props) => {
     dispatch(setSoul(soulInfo));
     dispatch(eraseChat());
 
-    // say hi msg
-    const aiMsg = {
-      id: new Date().toJSON(),
-      isAi: true,
-      text: `Hello, I'm ${props.fullName
-        .split(" ")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ")} and I have answers for you, just ask...`,
-    };
+    ChatInstance.getInitHistory(soulInfo.soul.uuid)
+      .then((res) => {
+        res.forEach((m) => {
+          if (m.role === "user") {
+            const userMsg = {
+              id: m.id,
+              isAi: false,
+              text: m.content,
+            };
+            dispatch(addMessage(userMsg));
+          }
+          if (m.role === "assistant") {
+            const aiMsg = {
+              id: m.id,
+              isAi: true,
+              text: m.content,
+            };
+            dispatch(addMessage(aiMsg));
+          }
+        });
 
-    dispatch(addMessage(aiMsg));
-    navigate(Paths.CHAT);
+        const scrollMsg = {
+          id: "scroll",
+          isAi: true,
+          text: "",
+        };
+        dispatch(addMessage(scrollMsg));
+      })
+      .finally(() => navigate(Paths.CHAT));
   };
 
   return (

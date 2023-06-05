@@ -17,8 +17,9 @@ import LocalStorage from "../../../services/localStorage";
 import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
 import { setLoading } from "../../../store/reducers/loading";
-import Chat from "../../../api/chat/chat";
+import ChatInstance from "../../../api/chat/chat";
 import { individualsData } from "../home/components/promo/Cards.data";
+import { addMessage } from "../../../store/reducers/messages";
 
 const Loading = () => {
   const dispatch = useDispatch();
@@ -58,18 +59,76 @@ const Loading = () => {
     }
 
     if (!soulIsSet) {
-      Chat.getChatInfo().then((chat) => {
-        if (chat) {
+      ChatInstance.getChatInfo().then((info) => {
+        if (info) {
           const [newSoul] = individualsData.filter(
-            (i) => i.uuid === chat.currentSoulId
+            (i) => i.uuid === info.currentSoulId
           );
           const soulInfo = { soul: newSoul ? newSoul : soul, isSet: true };
           socket.emit("setSoul", { soulId: newSoul.uuid });
           dispatch(setSoul(soulInfo));
+
+          //history
+          ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
+            res.forEach((m) => {
+              if (m.role === "user") {
+                const userMsg = {
+                  id: m.id,
+                  isAi: false,
+                  text: m.content,
+                };
+                dispatch(addMessage(userMsg));
+              }
+              if (m.role === "assistant") {
+                const aiMsg = {
+                  id: m.id,
+                  isAi: true,
+                  text: m.content,
+                };
+                dispatch(addMessage(aiMsg));
+              }
+            });
+
+            const scrollMsg = {
+              id: "scroll",
+              isAi: true,
+              text: "",
+            };
+            dispatch(addMessage(scrollMsg));
+          });
         } else {
           const soulInfo = { soul: soul, isSet: true };
           socket.emit("setSoul", { soulId: soul.uuid });
           dispatch(setSoul(soulInfo));
+
+          //history
+          ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
+            res.forEach((m) => {
+              if (m.role === "user") {
+                const userMsg = {
+                  id: m.id,
+                  isAi: false,
+                  text: m.content,
+                };
+                dispatch(addMessage(userMsg));
+              }
+              if (m.role === "assistant") {
+                const aiMsg = {
+                  id: m.id,
+                  isAi: true,
+                  text: m.content,
+                };
+                dispatch(addMessage(aiMsg));
+              }
+            });
+
+            const scrollMsg = {
+              id: "scroll",
+              isAi: true,
+              text: "",
+            };
+            dispatch(addMessage(scrollMsg));
+          });
         }
       });
     }
