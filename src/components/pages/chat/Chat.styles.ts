@@ -5,7 +5,7 @@ export const Section = styled.section`
   max-width: 100%;
   position: relative;
   height: 100%;
-  background-color: #111115;
+  background-color: #0a0907;
   color: #ffffff;
 `;
 
@@ -37,8 +37,8 @@ export const ChatWindow = styled.div`
   padding-right: 26px;
   left: 887px;
   top: 137px;
-  width: 745px;
-  height: 676px;
+  max-width: 745px;
+  max-height: 970px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
