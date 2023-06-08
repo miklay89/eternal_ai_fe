@@ -1,4 +1,3 @@
-import Bagel from "../header/bagel/Bagel";
 import {
   Copy,
   FollowText,
@@ -8,13 +7,13 @@ import {
   Social,
   SocialImg,
 } from "./Footer.styles";
-import { MainLogo } from "../header/Header.styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
 import scrollToTop from "../../hooks/scrollToTop";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../store/reducers/modals";
 import { Modals } from "../../pages/modals/types";
+import FooterLogo from "./components/footerLogo/FooterLogo";
 
 type Props = {
   marginTop: number;
@@ -37,8 +36,7 @@ const Footer = (props: Props) => {
   return (
     <FooterWrapper marginTop={props.marginTop}>
       <FooterLogoWrapper onClick={(e) => handleClickFooterLogo(e)}>
-        <Bagel />
-        <MainLogo src="/eternal.svg" />
+        <FooterLogo />
       </FooterLogoWrapper>
       <Copy>© 2023 Eternal. All rights reserved.</Copy>
       <FollowWrapper>

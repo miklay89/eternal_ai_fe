@@ -4,11 +4,9 @@ import { setAuth } from "../../../store/reducers/auth";
 import {
   HeaderWrapper,
   MenuIconWrapper,
-  MainLogoWrapper,
   LoginBtn,
   GetStartedBtn,
   MenuIcon,
-  MainLogo,
   ShareBtnOuter,
   ShareBtnInner,
   ShareIcon,
@@ -19,39 +17,25 @@ import {
   Left,
   Right,
 } from "./Header.styles";
-import Bagel from "./bagel/Bagel";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
-import scrollToTop from "../../hooks/scrollToTop";
 import LocalStorage from "../../../services/localStorage";
 import { Modals } from "../../pages/modals/types";
 import { openModal } from "../../../store/reducers/modals";
 import socket from "../../../services/socket";
 import { setConnection } from "../../../store/reducers/socket";
 import { setInitialState } from "../../../store/reducers/profile";
+import MainLogo from "./components/mainLogo/MainLogo";
 
 type Props = {
   show: boolean;
 };
 
 const Header = (props: Props) => {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
   const modalState = useSelector((state: RootState) => state.modal.open);
-
-  const handleClickLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === Paths.HOME) {
-      dispatch(openModal(Modals.NONE));
-      scrollToTop();
-    } else {
-      navigate(Paths.HOME);
-      dispatch(openModal(Modals.NONE));
-      scrollToTop();
-    }
-  };
 
   const handleClickBtn = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -87,10 +71,7 @@ const Header = (props: Props) => {
         </MenuCloseBtnWrapper>
       </Left>
       <Center>
-        <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <Bagel />
-          <MainLogo src="/eternal.svg" />
-        </MainLogoWrapper>
+        <MainLogo />
       </Center>
       <Right>
         <LoginBtn onClick={(e) => handleClickBtn(e)}>

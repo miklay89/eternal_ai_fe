@@ -19,7 +19,11 @@ import { setProfile } from "../../../store/reducers/profile";
 import { setLoading } from "../../../store/reducers/loading";
 import ChatInstance from "../../../api/chat/chat";
 import { individualsData } from "../home/components/promo/Cards.data";
-import { addMessage } from "../../../store/reducers/messages";
+import {
+  addAIMessage,
+  addUserMessage,
+  addScrollMessage,
+} from "../../../store/reducers/messages";
 
 const Loading = () => {
   const dispatch = useDispatch();
@@ -72,29 +76,14 @@ const Loading = () => {
           ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
             res.forEach((m) => {
               if (m.role === "user") {
-                const userMsg = {
-                  id: m.id,
-                  isAi: false,
-                  text: m.content,
-                };
-                dispatch(addMessage(userMsg));
+                dispatch(addUserMessage({ id: m.id, text: m.content }));
               }
               if (m.role === "assistant") {
-                const aiMsg = {
-                  id: m.id,
-                  isAi: true,
-                  text: m.content,
-                };
-                dispatch(addMessage(aiMsg));
+                dispatch(addAIMessage({ id: m.id, text: m.content }));
               }
             });
 
-            const scrollMsg = {
-              id: "scroll",
-              isAi: true,
-              text: "",
-            };
-            dispatch(addMessage(scrollMsg));
+            dispatch(addScrollMessage());
           });
         } else {
           const soulInfo = { soul: soul, isSet: true };
@@ -105,29 +94,14 @@ const Loading = () => {
           ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
             res.forEach((m) => {
               if (m.role === "user") {
-                const userMsg = {
-                  id: m.id,
-                  isAi: false,
-                  text: m.content,
-                };
-                dispatch(addMessage(userMsg));
+                dispatch(addUserMessage({ id: m.id, text: m.content }));
               }
               if (m.role === "assistant") {
-                const aiMsg = {
-                  id: m.id,
-                  isAi: true,
-                  text: m.content,
-                };
-                dispatch(addMessage(aiMsg));
+                dispatch(addAIMessage({ id: m.id, text: m.content }));
               }
             });
 
-            const scrollMsg = {
-              id: "scroll",
-              isAi: true,
-              text: "",
-            };
-            dispatch(addMessage(scrollMsg));
+            dispatch(addScrollMessage());
           });
         }
       });

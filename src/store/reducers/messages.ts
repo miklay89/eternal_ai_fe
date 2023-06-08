@@ -11,10 +11,51 @@ export const messagesSlice = createSlice({
   name: "message",
   initialState,
   reducers: {
-    addMessage: (state, action: PayloadAction<messageState>) => {
+    addUserMessage: (
+      state,
+      action: PayloadAction<{ id: string; text: string }>
+    ) => {
       const uniqIds = [...new Set(state.map((m) => m.id))];
       if (uniqIds.includes(action.payload.id)) return;
-      state.push(action.payload);
+      const userMsg = {
+        id: action.payload.id,
+        isAi: false,
+        text: action.payload.text,
+      };
+      state.push(userMsg);
+    },
+    addAIMessage: (
+      state,
+      action: PayloadAction<{ id: string; text: string }>
+    ) => {
+      const uniqIds = [...new Set(state.map((m) => m.id))];
+      if (uniqIds.includes(action.payload.id)) return;
+      const aiMsg = {
+        id: action.payload.id,
+        isAi: true,
+        text: action.payload.text,
+      };
+      state.push(aiMsg);
+    },
+    addLoadingMessage: (state) => {
+      const uniqIds = [...new Set(state.map((m) => m.id))];
+      const loadingMsg = {
+        id: "loading",
+        isAi: true,
+        text: "",
+      };
+      if (uniqIds.includes(loadingMsg.id)) return;
+      state.push(loadingMsg);
+    },
+    addScrollMessage: (state) => {
+      const uniqIds = [...new Set(state.map((m) => m.id))];
+      const scrollMsg = {
+        id: "scroll",
+        isAi: true,
+        text: "",
+      };
+      if (uniqIds.includes(scrollMsg.id)) return;
+      state.push(scrollMsg);
     },
     addMessagesFromHistory: (state, action: PayloadAction<messageState[]>) => {
       const scrollMsg = {
@@ -40,10 +81,14 @@ export const messagesSlice = createSlice({
   },
 });
 
-export const { addMessage } = messagesSlice.actions;
+export const { addUserMessage } = messagesSlice.actions;
+export const { addAIMessage } = messagesSlice.actions;
+export const { addLoadingMessage } = messagesSlice.actions;
+export const { addScrollMessage } = messagesSlice.actions;
 export const { addMessagesFromHistory } = messagesSlice.actions;
 export const { removePrevUserMessage } = messagesSlice.actions;
 export const { removeLoadingMessage } = messagesSlice.actions;
 export const { removeScrollMessage } = messagesSlice.actions;
 export const { eraseChat } = messagesSlice.actions;
+
 export default messagesSlice.reducer;

@@ -1,3 +1,4 @@
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   Blur,
   Conversation,
@@ -16,17 +17,51 @@ type Props = {
 };
 
 const EternalsBG = (props: Props) => {
+  const elRef = useRef<HTMLDivElement | null>(null);
+  const [top, setTop] = useState<number>(
+    window.innerWidth < 1001 ? -127 : props.top
+  );
+
+  const updateMargin = () => {
+    if (elRef.current) {
+      switch (true) {
+        case window.innerWidth > 300 && window.innerWidth < 401:
+          return setTop(-127);
+        case window.innerWidth > 400 && window.innerWidth < 501:
+          return setTop(-25);
+        case window.innerWidth > 500 && window.innerWidth < 601:
+          return setTop(30);
+        case window.innerWidth > 600 && window.innerWidth < 701:
+          return setTop(70);
+        case window.innerWidth > 700 && window.innerWidth < 801:
+          return setTop(130);
+        case window.innerWidth > 800 && window.innerWidth < 901:
+          return setTop(230);
+        case window.innerWidth > 900 && window.innerWidth < 1000:
+          return setTop(290);
+        default:
+          setTop(props.top);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("DOMContentLoaded", updateMargin);
+    window.addEventListener("resize", updateMargin);
+    return () => window.removeEventListener("resize", updateMargin);
+  }, []);
+
   return (
-    <Wrapper top={props.top}>
-      <Conversation src="/home/conversation.png" left={76} bottom={200} />
-      <Blur src="/home/blur.png" left={-25} bottom={10} />
-      <PortraitMusk src="/home/e_musk.png" left={0} bottom={8} />
-      <PortraitTeresa src="/home/m_teresa.png" left={1201} bottom={8} />
-      <PortraitJobs src="/home/s_jobs.png" left={251} bottom={8} />
-      <PortraitEinstein src="/home/a_einstein.png" left={923} bottom={8} />
-      <Ellipse src="/home/ellipse_3643.png" left={-29} bottom={8} />
-      <PortraitKing src="/home/l_king.png" left={508} bottom={8} />
-      <Ellipse src="/home/ellipse_3644.png" left={-29} bottom={8} />
+    <Wrapper top={top} ref={elRef}>
+      <Conversation src="/home/conversation.png" />
+      <Blur src="/home/blur.png" />
+      <PortraitMusk src="/home/e_musk.png" />
+      <PortraitTeresa src="/home/m_teresa.png" />
+      <PortraitJobs src="/home/s_jobs.png" />
+      <PortraitEinstein src="/home/a_einstein.png" />
+      <Ellipse src="/home/ellipse_3643.png" />
+      <PortraitKing src="/home/l_king.png" />
+      <Ellipse src="/home/ellipse_3644.png" />
       <Shadow />
     </Wrapper>
   );

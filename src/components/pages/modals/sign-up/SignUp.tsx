@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
+import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   AlreadyHaveWrapper,
   AlreadyLink,
@@ -20,13 +20,13 @@ import {
 } from "./SignUp.styles";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
 import Auth from "../../../../api/auth/auth";
-import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
 import { Paths } from "../../../../routes/root";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
+import MainLogo from "../../../common/header/components/mainLogo/MainLogo";
 
 type Props = {
   isOpen: boolean;
@@ -78,8 +78,7 @@ const SignUp = (props: Props) => {
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
         <LogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <Bagel />
-          <MainLogo src="/eternal.svg" />
+          <MainLogo />
         </LogoWrapper>
         <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
           <MenuCloseIcon src="/header/close_btn.svg" />

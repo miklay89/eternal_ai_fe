@@ -53,7 +53,7 @@ const HomePage = () => {
           }
         />
         <Title />
-        <EternalsBG top={1270} />
+        <EternalsBG top={213} />
         <Promo />
         <Footer marginTop={150.84} />
       </Container>

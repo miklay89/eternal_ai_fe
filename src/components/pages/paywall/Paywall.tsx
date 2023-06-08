@@ -18,9 +18,8 @@ import scrollToTop from "../../hooks/scrollToTop";
 import PayInfo from "./components/payInfo/PayInfo";
 import Payment from "./components/payment/Payment";
 import Success from "./components/success/Success";
-import Bagel from "../../common/header/bagel/Bagel";
-import { MainLogo } from "../../common/header/Header.styles";
 import { Payments } from "./types";
+import MainLogo from "../../common/header/components/mainLogo/MainLogo";
 
 const Paywall = () => {
   const navigate = useNavigate();
@@ -43,8 +42,7 @@ const Paywall = () => {
       <GradientCorner />
       <Container>
         <LogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <Bagel />
-          <MainLogo src="/eternal.svg" />
+          <MainLogo />
         </LogoWrapper>
         <CloseBtnWrapper onClick={(e) => handleCloseBtnClick(e)}>
           <CloseIcon src="/header/close_btn.svg" />

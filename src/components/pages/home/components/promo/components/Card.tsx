@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   CardImage,
   CardWrapper,
+  ImageWrapper,
   PersonFullName,
   PersonInfo,
   PersonTitle,
@@ -11,7 +12,9 @@ import { setSoul } from "../../../../../../store/reducers/soul";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "../../../../../../routes/root";
 import {
-  addMessage,
+  addAIMessage,
+  addScrollMessage,
+  addUserMessage,
   eraseChat,
 } from "../../../../../../store/reducers/messages";
 import socket from "../../../../../../services/socket";
@@ -62,29 +65,14 @@ const Card = (props: Props) => {
       ChatInstance.getInitHistory(soul.uuid).then((res) => {
         res.forEach((m) => {
           if (m.role === "user") {
-            const userMsg = {
-              id: m.id,
-              isAi: false,
-              text: m.content,
-            };
-            dispatch(addMessage(userMsg));
+            dispatch(addUserMessage({ id: m.id, text: m.content }));
           }
           if (m.role === "assistant") {
-            const aiMsg = {
-              id: m.id,
-              isAi: true,
-              text: m.content,
-            };
-            dispatch(addMessage(aiMsg));
+            dispatch(addAIMessage({ id: m.id, text: m.content }));
           }
         });
 
-        const scrollMsg = {
-          id: "scroll",
-          isAi: true,
-          text: "",
-        };
-        dispatch(addMessage(scrollMsg));
+        dispatch(addScrollMessage());
       });
       return;
     }
@@ -98,29 +86,14 @@ const Card = (props: Props) => {
       .then((res) => {
         res.forEach((m) => {
           if (m.role === "user") {
-            const userMsg = {
-              id: m.id,
-              isAi: false,
-              text: m.content,
-            };
-            dispatch(addMessage(userMsg));
+            dispatch(addUserMessage({ id: m.id, text: m.content }));
           }
           if (m.role === "assistant") {
-            const aiMsg = {
-              id: m.id,
-              isAi: true,
-              text: m.content,
-            };
-            dispatch(addMessage(aiMsg));
+            dispatch(addAIMessage({ id: m.id, text: m.content }));
           }
         });
 
-        const scrollMsg = {
-          id: "scroll",
-          isAi: true,
-          text: "",
-        };
-        dispatch(addMessage(scrollMsg));
+        dispatch(addScrollMessage());
       })
       .finally(() => navigate(Paths.CHAT));
   };
@@ -132,7 +105,9 @@ const Card = (props: Props) => {
       onMouseLeave={() => setShowPersonInfo(false)}
       onClick={(e) => handleClick(e)}
     >
-      <CardImage src={props.imgUrl} />
+      <ImageWrapper>
+        <CardImage src={props.imgUrl} />
+      </ImageWrapper>
       <PersonInfo show={showPersonInfo}>
         <PersonFullName>{props.fullName}</PersonFullName>
         <PersonTitle>{props.title}</PersonTitle>

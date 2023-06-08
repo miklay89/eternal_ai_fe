@@ -15,11 +15,22 @@ export const FooterWrapper = styled.div<{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    height: auto;
+    gap: 32px;
+    margin-top: 58px;
+  }
 `;
 
 export const FooterLogoWrapper = styled.div`
   display: inline-flex;
   align-items: center;
+  @media (max-width: 800px) {
+    order: 1;
+  }
 `;
 
 export const Copy = styled.div`
@@ -32,11 +43,17 @@ export const Copy = styled.div`
   letter-spacing: -0.006em;
   color: #ffffff;
   opacity: 0.7;
+  @media (max-width: 800px) {
+    order: 3;
+  }
 `;
 
 export const FollowWrapper = styled.div`
   display: inline-flex;
   align-items: center;
+  @media (max-width: 800px) {
+    order: 2;
+  }
 `;
 
 export const FollowText = styled.div`

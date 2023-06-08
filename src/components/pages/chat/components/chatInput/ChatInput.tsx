@@ -5,10 +5,11 @@ import {
   OuterWrapper,
   SubmitBtn,
 } from "./ChatInput.styles";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../../store";
+import { useDispatch } from "react-redux";
 import {
-  addMessage,
+  addLoadingMessage,
+  addScrollMessage,
+  addUserMessage,
   removeScrollMessage,
 } from "../../../../../store/reducers/messages";
 import socket from "../../../../../services/socket";
@@ -23,29 +24,14 @@ const ChatInput = () => {
 
     dispatch(removeScrollMessage());
 
-    const msg = {
-      isAi: false,
-      text: value,
-      id: "template",
-    };
-    dispatch(addMessage(msg));
-    socket.emit("sendMessage", { content: msg.text });
+    dispatch(addUserMessage({ id: "template", text: value }));
+    socket.emit("sendMessage", { content: value });
 
     setValue("");
 
-    const loadingMsg = {
-      isAi: true,
-      text: "",
-      id: "loading",
-    };
-    dispatch(addMessage(loadingMsg));
+    dispatch(addLoadingMessage());
 
-    const scrollMsg = {
-      id: "scroll",
-      isAi: true,
-      text: "",
-    };
-    dispatch(addMessage(scrollMsg));
+    dispatch(addScrollMessage());
   };
 
   const handleSubmitKeyboard = (e: React.KeyboardEvent) => {
@@ -54,30 +40,14 @@ const ChatInput = () => {
 
       dispatch(removeScrollMessage());
 
-      const msg = {
-        isAi: false,
-        text: value,
-        id: "template",
-      };
-      dispatch(addMessage(msg));
-
-      socket.emit("sendMessage", { content: msg.text });
+      dispatch(addUserMessage({ id: "template", text: value }));
+      socket.emit("sendMessage", { content: value });
 
       setValue("");
 
-      const loadingMsg = {
-        isAi: true,
-        text: "",
-        id: "loading",
-      };
-      dispatch(addMessage(loadingMsg));
+      dispatch(addLoadingMessage());
 
-      const scrollMsg = {
-        id: "scroll",
-        isAi: true,
-        text: "",
-      };
-      dispatch(addMessage(scrollMsg));
+      dispatch(addScrollMessage());
     } else {
       return;
     }

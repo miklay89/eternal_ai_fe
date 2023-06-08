@@ -16,6 +16,9 @@ export const Container = styled.div`
   padding: 28px;
   max-width: 1640px;
   overflow: hidden;
+  @media (max-width: 1001px) {
+    padding: 32px 16px 16px;
+  }
 `;
 
 export const GradientCorner = styled.div`

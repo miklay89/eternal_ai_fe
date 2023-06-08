@@ -18,15 +18,15 @@ import {
   Title,
   LogoWrapper,
 } from "./SignIn.styles";
-import { MainLogo, MenuCloseIcon } from "../../../common/header/Header.styles";
+import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import Auth from "../../../../api/auth/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
-import Bagel from "../../../common/header/bagel/Bagel";
 import scrollToTop from "../../../hooks/scrollToTop";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
+import MainLogo from "../../../common/header/components/mainLogo/MainLogo";
 
 type Props = {
   isOpen: boolean;
@@ -83,13 +83,12 @@ const SignIn = (props: Props) => {
       scrollToTop();
     }
   };
-// TODO enter login
+  // TODO enter login
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <ModalNavWrapper>
         <LogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <Bagel />
-          <MainLogo src="/eternal.svg" />
+          <MainLogo />
         </LogoWrapper>
         <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
           <MenuCloseIcon src="/header/close_btn.svg" />

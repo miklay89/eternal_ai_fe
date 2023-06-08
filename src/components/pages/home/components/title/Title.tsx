@@ -10,7 +10,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { messages } from "./title.data";
 import {
-  addMessage,
+  addLoadingMessage,
+  addScrollMessage,
+  addUserMessage,
   removeScrollMessage,
 } from "../../../../../store/reducers/messages";
 import { Paths } from "../../../../../routes/root";
@@ -44,26 +46,11 @@ const Title = () => {
 
     dispatch(removeScrollMessage());
 
-    const msg = {
-      isAi: false,
-      text: message,
-      id: "template",
-    };
-    dispatch(addMessage(msg));
+    dispatch(addUserMessage({ id: "template", text: message }));
 
-    const loadingMsg = {
-      isAi: true,
-      text: "",
-      id: "loading",
-    };
-    dispatch(addMessage(loadingMsg));
+    dispatch(addLoadingMessage());
 
-    const scrollMsg = {
-      id: "scroll",
-      isAi: true,
-      text: "",
-    };
-    dispatch(addMessage(scrollMsg));
+    dispatch(addScrollMessage());
 
     if (!soulIsSet) {
       const soulInfo = { soul: soul, isSet: true };
@@ -71,7 +58,7 @@ const Title = () => {
       dispatch(setSoul(soulInfo));
     }
 
-    socket.emit("sendMessage", { content: msg.text });
+    socket.emit("sendMessage", { content: message });
     navigate(Paths.CHAT);
   };
 

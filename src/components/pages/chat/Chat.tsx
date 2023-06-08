@@ -23,8 +23,10 @@ import UserMessage from "./components/userMessage/UserMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import {
-  addMessage,
+  addAIMessage,
   addMessagesFromHistory,
+  addScrollMessage,
+  addUserMessage,
   removeLoadingMessage,
   removePrevUserMessage,
   removeScrollMessage,
@@ -71,29 +73,14 @@ const Chat = () => {
           ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
             res.forEach((m) => {
               if (m.role === "user") {
-                const userMsg = {
-                  id: m.id,
-                  isAi: false,
-                  text: m.content,
-                };
-                dispatch(addMessage(userMsg));
+                dispatch(addUserMessage({ id: m.id, text: m.content }));
               }
               if (m.role === "assistant") {
-                const aiMsg = {
-                  id: m.id,
-                  isAi: true,
-                  text: m.content,
-                };
-                dispatch(addMessage(aiMsg));
+                dispatch(addAIMessage({ id: m.id, text: m.content }));
               }
             });
 
-            const scrollMsg = {
-              id: "scroll",
-              isAi: true,
-              text: "",
-            };
-            dispatch(addMessage(scrollMsg));
+            dispatch(addScrollMessage());
           });
         } else {
           const soulInfo = { soul: soul, isSet: true };
@@ -104,29 +91,14 @@ const Chat = () => {
           ChatInstance.getInitHistory(soulInfo.soul.uuid).then((res) => {
             res.forEach((m) => {
               if (m.role === "user") {
-                const userMsg = {
-                  id: m.id,
-                  isAi: false,
-                  text: m.content,
-                };
-                dispatch(addMessage(userMsg));
+                dispatch(addUserMessage({ id: m.id, text: m.content }));
               }
               if (m.role === "assistant") {
-                const aiMsg = {
-                  id: m.id,
-                  isAi: true,
-                  text: m.content,
-                };
-                dispatch(addMessage(aiMsg));
+                dispatch(addAIMessage({ id: m.id, text: m.content }));
               }
             });
 
-            const scrollMsg = {
-              id: "scroll",
-              isAi: true,
-              text: "",
-            };
-            dispatch(addMessage(scrollMsg));
+            dispatch(addScrollMessage());
           });
         }
       });
@@ -146,27 +118,12 @@ const Chat = () => {
     dispatch(removeLoadingMessage());
 
     const [usrRes] = res.messages.filter((m) => m.role === "user");
-    const userMsg = {
-      id: usrRes.id,
-      isAi: false,
-      text: usrRes.content,
-    };
-    dispatch(addMessage(userMsg));
+    dispatch(addUserMessage({ id: usrRes.id, text: usrRes.content }));
 
     const [aiRes] = res.messages.filter((m) => m.role === "assistant");
-    const aiMsg = {
-      id: aiRes.id,
-      isAi: true,
-      text: aiRes.content,
-    };
-    dispatch(addMessage(aiMsg));
+    dispatch(addAIMessage({ id: aiRes.id, text: aiRes.content }));
 
-    const scrollMsg = {
-      id: "scroll",
-      isAi: true,
-      text: "",
-    };
-    dispatch(addMessage(scrollMsg));
+    dispatch(addScrollMessage());
   };
 
   useEffect(() => {

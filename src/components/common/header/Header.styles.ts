@@ -19,6 +19,12 @@ export const Left = styled.div`
   align-items: center;
   width: 320px;
   height: 56px;
+  @media (max-width: 1001px) {
+    width: 160px;
+    height: 30px;
+    order: 2;
+    justify-content: end;
+  }
 `;
 
 export const Center = styled.div`
@@ -26,6 +32,11 @@ export const Center = styled.div`
   align-items: center;
   width: 320px;
   height: 56px;
+  @media (max-width: 1001px) {
+    width: 160px;
+    height: 30px;
+    order: 1;
+  }
 `;
 
 export const Right = styled.div`
@@ -33,6 +44,10 @@ export const Right = styled.div`
   align-items: center;
   width: 320px;
   height: 56px;
+  @media (max-width: 1001px) {
+    height: 30px;
+    display: none;
+  }
 `;
 
 export const MenuIconWrapper = styled.div<{
@@ -44,12 +59,10 @@ export const MenuIconWrapper = styled.div<{
   width: 56px;
   height: 56px;
   cursor: pointer;
-`;
-
-export const MainLogoWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
+  @media (max-width: 1001px) {
+    width: auto;
+    height: auto;
+  }
 `;
 
 export const HeaderButtonsWrapper = styled.div`
@@ -109,6 +122,7 @@ export const MenuIcon = styled.img`
   display: block;
   margin: auto 0;
   margin-left: 4px;
+  filter: brightness(0) invert(1);
   &:hover {
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
@@ -116,6 +130,10 @@ export const MenuIcon = styled.img`
   &:focus {
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
+  }
+  @media (max-width: 1001px) {
+    filter: url("#custom");
+    margin-left: 0px;
   }
 `;
 
@@ -141,18 +159,6 @@ export const MenuCloseBtnWrapper = styled.div<{
 export const MenuCloseIcon = styled.img`
   display: block;
   margin: auto auto;
-`;
-
-export const MainLogo = styled.img`
-  cursor: pointer;
-  &:hover {
-    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
-      brightness(100%) contrast(95%);
-  }
-  &:focus {
-    filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
-      brightness(100%) contrast(95%);
-  }
 `;
 
 export const ShareBtnOuter = styled.div<{

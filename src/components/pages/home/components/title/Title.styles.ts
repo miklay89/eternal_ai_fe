@@ -5,6 +5,9 @@ export const TitleWrapper = styled.div`
   margin: 0 auto;
   margin-top: 136px;
   z-index: 5;
+  @media (max-width: 1001px) {
+    margin-top: 67px;
+  }
 `;
 
 export const MainTitle = styled.div`
@@ -21,10 +24,16 @@ export const MainTitle = styled.div`
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.3em;
+    height: auto;
+    margin-left: 0px;
+  }
 `;
 
 export const Subtitle = styled.div`
-  
   margin: 0 auto;
   margin-top: 8px;
   width: fit-content;
@@ -37,6 +46,10 @@ export const Subtitle = styled.div`
   color: #ffffff;
   opacity: 0.7;
   text-align: center;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    line-height: 150%;
+  }
 `;
 
 export const MessagesWrapper = styled.div`
@@ -47,6 +60,11 @@ export const MessagesWrapper = styled.div`
   padding: 0px;
   width: 534px;
   margin-top: 32px;
+  @media (max-width: 1001px) {
+    width: auto;
+    gap: 12px;
+    margin-top: 24px;
+  }
 `;
 
 export const TitleMessage = styled.div`
@@ -68,6 +86,10 @@ export const TitleMessage = styled.div`
       rgba(88, 51, 239, 1) 114.41%
     );
   }
+  @media (max-width: 1001px) {
+    height: 64px;
+    width: 343px;
+  }
 `;
 
 export const MessageText = styled.div`
@@ -85,4 +107,9 @@ export const MessageText = styled.div`
   color: #ffffff;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    line-height: 150%;
+    padding: 21.5px 21.5px 24px 24px;
+  }
 `;
