@@ -20,7 +20,7 @@ export const Container = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  padding-bottom: 32px;
+  padding-bottom: 70px;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -62,7 +62,7 @@ export const Link = styled.div<{
   &:focus {
     color: #f82d98;
   }
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     font-size: 24px;
     height: auto;
   }
@@ -91,7 +91,7 @@ export const Social = styled.div`
   flex: none;
   flex-grow: 0;
   cursor: pointer;
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     margin-top: 26px;
     gap: 13px;
   }
@@ -106,7 +106,7 @@ export const SocialFacebook = styled.img`
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
   }
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     scale: 0.68;
   }
 `;
@@ -120,7 +120,7 @@ export const SocialInstagram = styled.img`
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
   }
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     scale: 0.68;
     transform: translate(-3px);
   }
@@ -135,7 +135,7 @@ export const SocialTwitter = styled.img`
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
   }
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     scale: 0.68;
     transform: translate(-6px);
   }
@@ -150,7 +150,7 @@ export const SocialDiscord = styled.img`
     filter: invert(29%) sepia(85%) saturate(3285%) hue-rotate(310deg)
       brightness(100%) contrast(95%);
   }
-  @media (max-width: 1001px) {
+  @media (max-width: 500px) {
     scale: 0.9;
     transform: translate(-4px);
   }
