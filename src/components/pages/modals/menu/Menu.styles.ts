@@ -30,10 +30,7 @@ export const Navbar = styled.nav`
   width: 343px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -73%);
-  @media (max-width: 1001px) {
-    transform: translate(-50%, -56%);
-  }
+  transform: translate(-50%, -50%);
 `;
 
 export const Link = styled.div<{
