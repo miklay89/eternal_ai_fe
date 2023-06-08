@@ -31,7 +31,7 @@ export const CardWrapper = styled.div<{
   border-radius: 16px;
   @media (max-width: 1001px) {
     width: 163.5px;
-    height: 281.72px;
+    height: auto;
     border-radius: 0px;
   }
 `;

@@ -1,16 +1,30 @@
 import {
+  AdditionalButtonsWrapper,
+  Container,
   Divider,
+  GetStartedBtn,
   Link,
+  LoginBtn,
   MenuWrapper,
   Navbar,
   Social,
-  SocialImg,
+  SocialDiscord,
+  SocialFacebook,
+  SocialInstagram,
+  SocialTwitter,
 } from "./Menu.styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
+import { RootState } from "../../../../store";
+import { setAuth } from "../../../../store/reducers/auth";
+import socket from "../../../../services/socket";
+import { setConnection } from "../../../../store/reducers/socket";
+import LocalStorage from "../../../../services/localStorage";
+import { setInitialState } from "../../../../store/reducers/profile";
+import { useEffect, useState } from "react";
 
 type Props = {
   isOpen: boolean;
@@ -20,6 +34,8 @@ const Menu = (props: Props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
 
   const handleAccountClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -36,21 +52,67 @@ const Menu = (props: Props) => {
     navigate(Paths.PAYWALL);
   };
 
+  const handleClickBtn = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!authState) {
+      dispatch(openModal(Modals.SIGN_IN));
+    } else {
+      dispatch(setAuth(false));
+      socket.disconnect();
+      dispatch(setConnection(false));
+      LocalStorage.deleteToken();
+      dispatch(setInitialState());
+      navigate(Paths.HOME);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("DOMContentLoaded", () =>
+      setWidth(window.innerWidth)
+    );
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    return () => window.removeEventListener("resize", () => {});
+  }, []);
+
   return (
     <MenuWrapper isOpen={props.isOpen}>
-      <Navbar>
-        <Link onClick={() => dispatch(openModal(Modals.ABOUT))}>About us</Link>
-        <Link onClick={(e) => handleClickPricing(e)}>Pricing</Link>
-        <Link>How it works</Link>
-        <Link onClick={(e) => handleAccountClick(e)}>My account</Link>
-        <Divider />
-        <Social>
-          <SocialImg src="/menu/facebook.svg" />
-          <SocialImg src="/menu/instagram.svg" />
-          <SocialImg src="/menu/twitter.svg" />
-          <SocialImg src="/menu/discord.svg" />
-        </Social>
-      </Navbar>
+      <Container>
+        <Navbar>
+          <Link show={true} onClick={() => dispatch(openModal(Modals.ABOUT))}>
+            About us
+          </Link>
+          <Link show={true} onClick={(e) => handleClickPricing(e)}>
+            Pricing
+          </Link>
+          <Link show={true}>How it works</Link>
+          <Link show={authState} onClick={(e) => handleAccountClick(e)}>
+            My account
+          </Link>
+          <Divider />
+          <Social>
+            <SocialFacebook src="/menu/facebook.svg" />
+            <SocialInstagram src="/menu/instagram.svg" />
+            <SocialTwitter src="/menu/twitter.svg" />
+            <SocialDiscord src="/menu/discord.svg" />
+          </Social>
+        </Navbar>
+        <AdditionalButtonsWrapper
+          show={window.innerWidth < 1001 ? true : false}
+        >
+          <GetStartedBtn
+            show={authState ? false : true}
+            onClick={() => dispatch(openModal(Modals.SIGN_UP))}
+          >
+            get started
+          </GetStartedBtn>
+          <LoginBtn
+            authState={authState ? true : false}
+            onClick={(e) => handleClickBtn(e)}
+          >
+            {authState ? "sign out" : "login"}
+          </LoginBtn>
+        </AdditionalButtonsWrapper>
+      </Container>
     </MenuWrapper>
   );
 };
