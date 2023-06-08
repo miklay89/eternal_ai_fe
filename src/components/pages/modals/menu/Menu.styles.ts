@@ -20,6 +20,10 @@ export const Container = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 `;
 
 export const Navbar = styled.nav`
@@ -185,9 +189,8 @@ export const AdditionalButtonsWrapper = styled.div<{
   padding-right: 16px;
   width: 100%;
   position: relative;
-  top: 90.8%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
 `;
 
 export const GetStartedBtn = styled.button<{
