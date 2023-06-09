@@ -117,10 +117,10 @@ export const Shadow = styled.div`
   z-index: 1;
   position: absolute;
   height: 393px;
-  width: 100%;
+  width: 200%;
   background: linear-gradient(180deg, rgba(17, 17, 21, 0) 54.58%, #111115 100%);
   bottom: 0;
-  left: 0;
+  left: -100px;
   @media (max-width: 1001px) {
     height: 136.44px;
   }
