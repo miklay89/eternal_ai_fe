@@ -16,7 +16,10 @@ import {
   OuterWrapper,
   SignInBtn,
   Title,
-  LogoWrapper,
+  Container,
+  Left,
+  Center,
+  Right,
 } from "./SignIn.styles";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import Auth from "../../../../api/auth/auth";
@@ -86,42 +89,49 @@ const SignIn = (props: Props) => {
   // TODO enter login
   return (
     <ModalWrapper isOpen={props.isOpen}>
-      <ModalNavWrapper>
-        <LogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <MainLogo />
-        </LogoWrapper>
-        <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
-          <MenuCloseIcon src="/header/close_btn.svg" />
-        </ModalCloseBtnWrapper>
-      </ModalNavWrapper>
-      <OuterWrapper>
-        <InnerWrapper>
-          <Title>Login</Title>
-          <InputTitle>Email</InputTitle>
-          <Input
-            placeholder="justin@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Input>
-          <InputTitle>Password</InputTitle>
-          <Input
-            placeholder="•••••••••••••••••••"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Input>
-          <ForgotPassword>Forgot password?</ForgotPassword>
-          <SignInBtn onClick={(e) => handleClick(e)}>sign in</SignInBtn>
-          <Divider />
-          <HaveNotWrapper>
-            <NotText>Don’t have an account?</NotText>
-            &nbsp;
-            <NotLink onClick={() => dispatch(openModal(Modals.SIGN_UP))}>
-              Sign up
-            </NotLink>
-          </HaveNotWrapper>
-        </InnerWrapper>
-      </OuterWrapper>
+      <Container>
+        <ModalNavWrapper>
+          <Left></Left>
+          <Center>
+            <MainLogo />
+          </Center>
+          <Right>
+            <ModalCloseBtnWrapper
+              onClick={() => dispatch(openModal(Modals.NONE))}
+            >
+              <MenuCloseIcon src="/header/close_btn.svg" />
+            </ModalCloseBtnWrapper>
+          </Right>
+        </ModalNavWrapper>
+        <OuterWrapper>
+          <InnerWrapper>
+            <Title>Login</Title>
+            <InputTitle>Email</InputTitle>
+            <Input
+              placeholder="justin@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
+            <InputTitle>Password</InputTitle>
+            <Input
+              placeholder="•••••••••••••••••••"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Input>
+            <ForgotPassword>Forgot password?</ForgotPassword>
+            <SignInBtn onClick={(e) => handleClick(e)}>sign in</SignInBtn>
+            <Divider />
+            <HaveNotWrapper>
+              <NotText>Don’t have an account?</NotText>
+              &nbsp;
+              <NotLink onClick={() => dispatch(openModal(Modals.SIGN_UP))}>
+                Sign up
+              </NotLink>
+            </HaveNotWrapper>
+          </InnerWrapper>
+        </OuterWrapper>
+      </Container>
     </ModalWrapper>
   );
 };

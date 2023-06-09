@@ -5,15 +5,18 @@ import {
   AlreadyLink,
   AlreadyText,
   ButtonsWrapper,
+  Center,
+  Container,
   Divider,
   InnerWrapper,
   Input,
   InputTitle,
-  LogoWrapper,
+  Left,
   ModalCloseBtnWrapper,
   ModalNavWrapper,
   ModalWrapper,
   OuterWrapper,
+  Right,
   SignUpBtn,
   SubTitle,
   Title,
@@ -76,44 +79,51 @@ const SignUp = (props: Props) => {
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
-      <ModalNavWrapper>
-        <LogoWrapper onClick={(e) => handleClickLogo(e)}>
-          <MainLogo />
-        </LogoWrapper>
-        <ModalCloseBtnWrapper onClick={() => dispatch(openModal(Modals.NONE))}>
-          <MenuCloseIcon src="/header/close_btn.svg" />
-        </ModalCloseBtnWrapper>
-      </ModalNavWrapper>
-      <OuterWrapper>
-        <InnerWrapper>
-          <Title>Get started</Title>
-          <SubTitle>To continue please create an account</SubTitle>
-          <InputTitle>Email</InputTitle>
-          <Input
-            placeholder="justin@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Input>
-          <InputTitle>Password</InputTitle>
-          <Input
-            placeholder="•••••••••••••••••••"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Input>
-          <ButtonsWrapper>
-            <SignUpBtn onClick={(e) => handleClick(e)}>sign up</SignUpBtn>
-          </ButtonsWrapper>
-          <Divider />
-          <AlreadyHaveWrapper>
-            <AlreadyText>Already have an account?</AlreadyText>
-            &nbsp;
-            <AlreadyLink onClick={() => dispatch(openModal(Modals.SIGN_IN))}>
-              Sign in
-            </AlreadyLink>
-          </AlreadyHaveWrapper>
-        </InnerWrapper>
-      </OuterWrapper>
+      <Container>
+        <ModalNavWrapper>
+          <Left></Left>
+          <Center>
+            <MainLogo />
+          </Center>
+          <Right>
+            <ModalCloseBtnWrapper
+              onClick={() => dispatch(openModal(Modals.NONE))}
+            >
+              <MenuCloseIcon src="/header/close_btn.svg" />
+            </ModalCloseBtnWrapper>
+          </Right>
+        </ModalNavWrapper>
+        <OuterWrapper>
+          <InnerWrapper>
+            <Title>Get started</Title>
+            <SubTitle>To continue please create an account</SubTitle>
+            <InputTitle>Email</InputTitle>
+            <Input
+              placeholder="justin@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
+            <InputTitle>Password</InputTitle>
+            <Input
+              placeholder="•••••••••••••••••••"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Input>
+            <ButtonsWrapper>
+              <SignUpBtn onClick={(e) => handleClick(e)}>sign up</SignUpBtn>
+            </ButtonsWrapper>
+            <Divider />
+            <AlreadyHaveWrapper>
+              <AlreadyText>Already have an account?</AlreadyText>
+              &nbsp;
+              <AlreadyLink onClick={() => dispatch(openModal(Modals.SIGN_IN))}>
+                Sign in
+              </AlreadyLink>
+            </AlreadyHaveWrapper>
+          </InnerWrapper>
+        </OuterWrapper>
+      </Container>
     </ModalWrapper>
   );
 };

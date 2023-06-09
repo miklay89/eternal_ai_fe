@@ -154,6 +154,10 @@ export const MenuCloseBtnWrapper = styled.div<{
   &:hover {
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
+  @media (max-width: 1001px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const MenuCloseIcon = styled.img`

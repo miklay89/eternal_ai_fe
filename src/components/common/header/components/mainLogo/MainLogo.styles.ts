@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const MainLogoWrapper = styled.div`
   display: flex;
+  position: relative;
+  z-index: 15;
   align-items: center;
   margin: 0 auto;
   @media (max-width: 1001px) {
