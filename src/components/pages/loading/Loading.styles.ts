@@ -27,6 +27,9 @@ export const BagelWrapper = styled.div<{
   height: ${(props) => props.height + "px"};
   margin: 0 auto;
   margin-top: 350px;
+  @media (max-width: 1001px) {
+    margin-top: 250px;
+  }
 `;
 
 export const BagelEllipse = styled.div<EllipseProps>`
@@ -53,8 +56,8 @@ export const LoadingWrapper = styled.div<{
 }>`
   display: ${(props) => (props.show ? "block" : "none")};
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   left: 0;
   top: 0;
   background: #1e1e1e;
@@ -62,9 +65,15 @@ export const LoadingWrapper = styled.div<{
 `;
 
 export const LoadingContainer = styled.div`
-  margin: 0 auto;
-  position: relative;
   max-width: 1640px;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Eternal = styled.img`
@@ -74,4 +83,7 @@ export const Eternal = styled.img`
   width: 100%;
   height: 30px;
   object-fit: contain;
+  @media (max-width: 1001px) {
+    width: 95%;
+  }
 `;
