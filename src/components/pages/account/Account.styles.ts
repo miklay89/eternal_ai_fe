@@ -164,7 +164,13 @@ export const SaveBtn = styled.button`
   @media (max-width: 1001px) {
     margin: 0 auto;
     margin-top: 24px;
+    width: 100%;
     font-size: 12px;
-    width: 295px;
+  }
+  @media (min-width: 500px) {
+    margin: 0 auto;
+    margin-top: 24px;
+    width: 250px;
+    font-size: 12px;
   }
 `;
