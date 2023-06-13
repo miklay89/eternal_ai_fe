@@ -34,7 +34,7 @@ const PaymentInputs = (props: Props) => {
               width: 100%;
             }
             @media (min-width: 500px) {
-              width: 470px;
+              width: 420px;
             }
           `,
           errored: css``,
