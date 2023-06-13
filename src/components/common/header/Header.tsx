@@ -25,7 +25,7 @@ import { openModal } from "../../../store/reducers/modals";
 import socket from "../../../services/socket";
 import { setConnection } from "../../../store/reducers/socket";
 import { setInitialState } from "../../../store/reducers/profile";
-import MainLogo from "./components/mainLogo/MainLogo";
+import MainLogo from "../mainLogo/MainLogo";
 
 type Props = {
   show: boolean;

@@ -30,6 +30,12 @@ const PaymentInputs = (props: Props) => {
             width: 529px;
             background: transparent;
             outline: none;
+            @media (max-width: 1001px) {
+              width: 100%;
+            }
+            @media (min-width: 500px) {
+              width: 470px;
+            }
           `,
           errored: css``,
         },
@@ -48,6 +54,12 @@ const PaymentInputs = (props: Props) => {
             border-radius: 16px;
             &:hover {
               border: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            @media (max-width: 1001px) {
+              padding-left: 12px;
+              padding-right: 12px;
+              padding-top: 17.5px;
+              padding-bottom: 17.5px;
             }
           `,
           errored: css`
@@ -77,19 +89,34 @@ const PaymentInputs = (props: Props) => {
             letter-spacing: -0.01em;
             color: #ffffff;
             opacity: 0.7;
+            @media (max-width: 1001px) {
+              width: 100%;
+              height: 21px;
+              font-size: 14px;
+              margin-left: -4px;
+            }
           `,
           errored: css`
             color: red;
           `,
           cardNumber: css`
             width: 15rem;
+            @media (max-width: 1001px) {
+              width: 8rem;
+            }
           `,
           expiryDate: css`
             margin-left: auto;
             width: 4.3rem;
+            @media (max-width: 1001px) {
+              width: 3.4rem;
+            }
           `,
           cvc: css`
             width: 2.3rem;
+            @media (max-width: 1001px) {
+              width: 1.7rem;
+            }
           `,
         },
         errorText: {

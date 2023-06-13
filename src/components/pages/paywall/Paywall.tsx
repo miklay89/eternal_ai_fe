@@ -19,7 +19,7 @@ import PayInfo from "./components/payInfo/PayInfo";
 import Payment from "./components/payment/Payment";
 import Success from "./components/success/Success";
 import { Payments } from "./types";
-import MainLogo from "../../common/header/components/mainLogo/MainLogo";
+import MainLogo from "../../common/mainLogo/MainLogo";
 
 const Paywall = () => {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ const Paywall = () => {
             onChangeView={showPayment}
           />
         </PaymentWrapper>
-        <EternalsBG top={1440} />
+        <EternalsBG top={231} />
       </Container>
     </Section>
   );

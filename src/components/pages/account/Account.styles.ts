@@ -16,6 +16,10 @@ export const Container = styled.div`
   padding: 28px;
   max-width: 1640px;
   overflow: visible;
+  @media (max-width: 1001px) {
+    padding: 16px;
+    padding-top: 28px;
+  }
 `;
 
 export const Ellipse = styled.img<{
@@ -43,8 +47,11 @@ export const OuterWrapper = styled.div`
     rgba(88, 51, 239, 0.4) 114.41%
   );
   position: relative;
-  width: 760px;
+  max-width: 760px;
   z-index: 5;
+  @media (max-width: 1001px) {
+    margin-top: 31px;
+  }
 `;
 
 export const InnerWrapper = styled.div`
@@ -55,6 +62,9 @@ export const InnerWrapper = styled.div`
   border-radius: 32px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 24px;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -71,6 +81,10 @@ export const Title = styled.div`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 24px;
+    height: 36px;
+  }
 `;
 
 export const InputTitle = styled.div`
@@ -83,6 +97,11 @@ export const InputTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    margin-top: 24px;
+    font-size: 14px;
+    height: 21px;
+  }
 `;
 
 export const Input = styled.input`
@@ -112,6 +131,10 @@ export const Input = styled.input`
   &:focus {
     border-color: rgba(248, 45, 152, 1);
   }
+  @media (max-width: 1001px) {
+    height: 53px;
+    font-size: 14px;
+  }
 `;
 
 export const SaveBtn = styled.button`
@@ -137,5 +160,11 @@ export const SaveBtn = styled.button`
       rgba(248, 45, 152, 0.8) -2.34%,
       rgba(88, 51, 239, 0.8) 114.41%
     );
+  }
+  @media (max-width: 1001px) {
+    margin: 0 auto;
+    margin-top: 24px;
+    font-size: 12px;
+    width: 295px;
   }
 `;

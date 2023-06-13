@@ -21,7 +21,7 @@ import {
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
-import MainLogo from "../../../common/header/components/mainLogo/MainLogo";
+import MainLogo from "../../../common/mainLogo/MainLogo";
 
 type Props = {
   isOpen: boolean;

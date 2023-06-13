@@ -7,8 +7,11 @@ export const OuterWrapper = styled.div`
   border-radius: 32px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   position: relative;
-  width: 760px;
+  max-width: 760px;
   z-index: 5;
+  @media (max-width: 1001px) {
+    margin-top: 24px;
+  }
 `;
 
 export const InnerWrapper = styled.div`
@@ -19,6 +22,9 @@ export const InnerWrapper = styled.div`
   border-radius: 32px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 24px;
+  }
 `;
 
 export const ProOuterWrapper = styled.div`
@@ -30,6 +36,10 @@ export const ProOuterWrapper = styled.div`
   width: 66px;
   height: 44px;
   z-index: 5;
+  @media (max-width: 1001px) {
+    width: 60px;
+    height: 42px;
+  }
 `;
 
 export const ProInnerWrapper = styled.div`
@@ -39,6 +49,9 @@ export const ProInnerWrapper = styled.div`
   padding: 8px 16px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 15px 16px;
+  }
 `;
 
 export const ProText = styled.div`
@@ -51,6 +64,9 @@ export const ProText = styled.div`
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 11px;
+  }
 `;
 
 export const Price = styled.div`
@@ -64,6 +80,10 @@ export const Price = styled.div`
   text-align: center;
   letter-spacing: -0.01em;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    margin-top: 8px;
+    font-size: 20px;
+  }
 `;
 
 export const NextPayment = styled.div`
@@ -78,6 +98,10 @@ export const NextPayment = styled.div`
   letter-spacing: -0.01em;
   color: #ffffff;
   opacity: 0.7;
+  @media (max-width: 1001px) {
+    margin-top: 8px;
+    font-size: 14px;
+  }
 `;
 
 export const UpdateBtnOuterWrapper = styled.div<{
@@ -94,6 +118,9 @@ export const UpdateBtnOuterWrapper = styled.div<{
   cursor: pointer;
   &:hover {
     background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  }
+  @media (max-width: 1001px) {
+    margin-top: 14px;
   }
 `;
 
@@ -116,6 +143,9 @@ export const UpdateBtnText = styled.div`
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 12px;
+  }
 `;
 
 export const CancelSubBtn = styled.div<{
@@ -137,6 +167,10 @@ export const CancelSubBtn = styled.div<{
   &:hover {
     color: #f82d98;
   }
+  @media (max-width: 1001px) {
+    margin-top: 24px;
+    font-size: 12px;
+  }
 `;
 
 export const CardInfoWrapper = styled.div<{
@@ -147,6 +181,10 @@ export const CardInfoWrapper = styled.div<{
   align-items: center;
   margin-top: 32px;
   gap: 16px;
+  @media (max-width: 1001px) {
+    margin-top: 14px;
+    flex-direction: column;
+  }
 `;
 
 export const SaveBtn = styled.button`
@@ -170,6 +208,14 @@ export const SaveBtn = styled.button`
       rgba(248, 45, 152, 0.8) -2.34%,
       rgba(88, 51, 239, 0.8) 114.41%
     );
+  }
+  @media (max-width: 1001px) {
+    width: 100%;
+    font-size: 12px;
+  }
+  @media (min-width: 500px) {
+    width: 250px;
+    font-size: 12px;
   }
 `;
 

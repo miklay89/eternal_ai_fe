@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../../../store/reducers/profile";
 import { RootState } from "../../../../store";
 import { useNavigate } from "react-router-dom";
-import { Paths } from "../../../../routes/root";
 
 type Props = {
   nextPayment: string;
@@ -35,7 +34,6 @@ type Props = {
 
 const UpdatePayment = (props: Props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const profileState = useSelector((state: RootState) => state.profile.user);
   const [update, setIsUpdate] = useState<boolean>(false);
   const [number, setNumber] = useState<string>("");

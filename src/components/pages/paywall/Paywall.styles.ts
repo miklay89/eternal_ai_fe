@@ -16,7 +16,7 @@ export const Container = styled.div`
   max-width: 1640px;
   overflow: hidden;
   position: relative;
-  height: 1382px;
+  height: auto;
 `;
 
 export const GradientCorner = styled.div`
