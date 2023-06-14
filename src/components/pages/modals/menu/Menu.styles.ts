@@ -290,6 +290,36 @@ export const GetStartedBtn = styled.button<{
   display: ${(props) => (props.show ? "block" : "none")};
   width: 185px;
   height: 48px;
+  background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  border-radius: 120px;
+  border: none;
+  font-family: "Arquitecta";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 110%;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(
+      281.4deg,
+      rgba(248, 45, 152, 0.8) -2.34%,
+      rgba(88, 51, 239, 0.8) 114.41%
+    );
+  }
+  @media (max-width: 500px) {
+    font-size: 11px;
+  }
+`;
+
+export const GetStartedAdditionalBtn = styled.button<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "block" : "none")};
+  width: 185px;
+  height: 48px;
   margin: 0 auto;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   border-radius: 120px;

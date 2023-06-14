@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { Container, GradientCorner, HomeSection } from "./Home.styles";
 import EternalsBG from "../../common/eternalsBG/EternalsBG";
 import Footer from "../../common/footer/Footer";
@@ -6,11 +5,6 @@ import Header from "../../common/header/Header";
 import Menu from "../modals/menu/Menu";
 import Promo from "./components/promo/Promo";
 import Title from "./components/title/Title";
-import {
-  clearAllBodyScrollLocks,
-  disableBodyScroll,
-  enableBodyScroll,
-} from "body-scroll-lock";
 import SignUp from "../modals/sign-up/SignUp";
 import About from "../modals/about/About";
 import SignIn from "../modals/sign-in/SignIn";

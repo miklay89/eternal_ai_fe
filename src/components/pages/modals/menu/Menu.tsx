@@ -3,6 +3,7 @@ import {
   Center,
   Container,
   Divider,
+  GetStartedAdditionalBtn,
   GetStartedBtn,
   Left,
   Link,
@@ -141,12 +142,12 @@ const Menu = (props: Props) => {
         <AdditionalButtonsWrapper
           show={window.innerWidth < 1001 ? true : false}
         >
-          <GetStartedBtn
+          <GetStartedAdditionalBtn
             show={authState ? false : true}
             onClick={() => dispatch(openModal(Modals.SIGN_UP))}
           >
             get started
-          </GetStartedBtn>
+          </GetStartedAdditionalBtn>
           <LoginBtnAdditional
             authState={authState ? true : false}
             onClick={(e) => handleClickBtn(e)}

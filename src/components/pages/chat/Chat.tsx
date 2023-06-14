@@ -6,11 +6,6 @@ import {
   PortraitWrapper,
   Section,
 } from "./Chat.styles";
-import {
-  clearAllBodyScrollLocks,
-  disableBodyScroll,
-  enableBodyScroll,
-} from "body-scroll-lock";
 import Menu from "../modals/menu/Menu";
 import SignUp from "../modals/sign-up/SignUp";
 import SignIn from "../modals/sign-in/SignIn";
@@ -125,19 +120,6 @@ const Chat = () => {
 
     dispatch(addScrollMessage());
   };
-
-  useEffect(() => {
-    if (ref.current) {
-      if (modalState === Modals.NONE) {
-        enableBodyScroll(ref.current);
-      } else {
-        disableBodyScroll(ref.current);
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks();
-    };
-  }, [modalState]);
 
   const scrollTo = () => {
     chatMessageRef.current?.scrollIntoView();
