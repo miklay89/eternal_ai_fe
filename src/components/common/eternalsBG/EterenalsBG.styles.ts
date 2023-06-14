@@ -7,6 +7,28 @@ export const Wrapper = styled.div`
   height: 400px;
   left: 50%;
   transform: translate(-50%, 0%);
+  @media (max-width: 1001px) {
+    margin-top: 250px;
+  }
+  @media (max-width: 900px) {
+    margin-top: 150px;
+  }
+  @media (max-width: 800px) {
+    margin-top: 100px;
+  }
+  @media (max-width: 700px) {
+    margin-top: 50px;
+  }
+  @media (max-width: 600px) {
+    margin-top: -20px;
+  }
+  @media (max-width: 500px) {
+    margin-top: -70px;
+  }
+  @media (max-width: 400px) {
+    margin-top: -127px;
+  }
+
 `;
 
 export const Conversation = styled.img`
