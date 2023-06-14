@@ -10,7 +10,7 @@ import {
   Wrapper,
 } from "./Success.styles";
 import { useNavigate } from "react-router-dom";
-import { Paths } from "../../../../../routes/root";
+import { Paths } from "../../../../../../routes/root";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 

@@ -12,15 +12,9 @@ import {
   Wrapper,
 } from "./EterenalsBG.styles";
 
-type Props = {
-  top: number;
-};
-
-const EternalsBG = (props: Props) => {
+const EternalsBG = () => {
   const elRef = useRef<HTMLDivElement | null>(null);
-  const [top, setTop] = useState<number>(
-    window.innerWidth < 1001 ? -127 : props.top
-  );
+  const [top, setTop] = useState<number>(window.innerWidth < 1001 ? -127 : 213);
 
   const updateMargin = () => {
     if (elRef.current) {
@@ -40,7 +34,7 @@ const EternalsBG = (props: Props) => {
         case window.innerWidth > 900 && window.innerWidth < 1000:
           return setTop(290);
         default:
-          setTop(props.top);
+          setTop(213);
       }
     }
   };
@@ -52,7 +46,7 @@ const EternalsBG = (props: Props) => {
   }, []);
 
   return (
-    <Wrapper top={top} ref={elRef}>
+    <Wrapper ref={elRef}>
       <Conversation src="/home/conversation.png" />
       <Blur src="/home/blur.png" />
       <PortraitMusk src="/home/e_musk.png" />

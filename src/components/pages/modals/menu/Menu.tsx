@@ -61,8 +61,8 @@ const Menu = (props: Props) => {
 
   const handleClickPricing = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(openModal(Modals.NONE));
-    navigate(Paths.PAYWALL);
+    navigate(Paths.HOME);
+    dispatch(openModal(Modals.PAYWALL));
   };
 
   const handleClickBtn = (e: React.MouseEvent) => {

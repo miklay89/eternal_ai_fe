@@ -1,4 +1,9 @@
-import { Container, GradientCorner, HomeSection } from "./Home.styles";
+import {
+  Container,
+  GradientCorner,
+  HomeSection,
+  PaywallBlock,
+} from "./Home.styles";
 import EternalsBG from "../../common/eternalsBG/EternalsBG";
 import Footer from "../../common/footer/Footer";
 import Header from "../../common/header/Header";
@@ -12,6 +17,7 @@ import { Modals } from "../modals/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import Loading from "../loading/Loading";
+import Paywall from "../modals/paywall/Paywall";
 
 const HomePage = () => {
   const modalState = useSelector((state: RootState) => state.modal.open);
@@ -24,6 +30,7 @@ const HomePage = () => {
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
       <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
       <About isOpen={modalState === Modals.ABOUT ? true : false} />
+      <Paywall isOpen={modalState === Modals.PAYWALL ? true : false} />
       <Container>
         <div style={{ maxWidth: "1640px", maxHeight: "56px" }}>
           <Header
@@ -34,9 +41,9 @@ const HomePage = () => {
             }
           />
         </div>
-
+        <PaywallBlock show={modalState === Modals.PAYWALL ? true : false} />
         <Title />
-        <EternalsBG top={213} />
+        <EternalsBG />
         <Promo />
         <Footer marginTop={150.84} />
       </Container>

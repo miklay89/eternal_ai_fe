@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
   margin: 0 auto;
   margin-top: 136px;

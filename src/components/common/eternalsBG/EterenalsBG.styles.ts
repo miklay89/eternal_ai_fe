@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{
-  top: number;
-}>`
+export const Wrapper = styled.div`
   position: relative;
-  margin-top: ${(props) => props.top + "px"};
+  margin-top: 213px;
   width: 100%;
   height: 400px;
   left: 50%;

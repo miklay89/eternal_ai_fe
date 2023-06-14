@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import {
   InnerWrapper,
   OuterWrapper,
+  PaymentInputWrapper,
   ProInnerWrapper,
   ProOuterWrapper,
   ProText,
@@ -9,16 +10,16 @@ import {
   Title,
   Wrapper,
 } from "./Payment.styles";
-import PaymentInputs from "../../../../common/paymentInput/PaymentInput";
+import PaymentInputs from "../../../../../common/paymentInput/PaymentInput";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../../store";
+import { RootState } from "../../../../../../store";
 import {
   validateCVC,
   validateCardNumber,
   validateMonth,
   validateYear,
-} from "../../../../common/paymentInput/cardInputsValidators";
-import Profile from "../../../../../api/profile/profile";
+} from "../../../../../common/paymentInput/cardInputsValidators";
+import Profile from "../../../../../../api/profile/profile";
 import { Payments } from "../../types";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
@@ -81,16 +82,18 @@ const Payment = (props: Props) => {
             </ProInnerWrapper>
           </ProOuterWrapper>
           <Title>$10 / month</Title>
-          <PaymentInputs
-            number={number}
-            date={date}
-            cvc={cvc}
-            setNumber={setNumber}
-            setDate={setDate}
-            setCvc={setCvc}
-          />
+          <PaymentInputWrapper>
+            <PaymentInputs
+              number={number}
+              date={date}
+              cvc={cvc}
+              setNumber={setNumber}
+              setDate={setDate}
+              setCvc={setCvc}
+            />
+          </PaymentInputWrapper>
           <SubmitPaymentBtn onClick={(e) => handleSubmit(e)}>
-            submit payment
+            subscribe
           </SubmitPaymentBtn>
         </InnerWrapper>
       </OuterWrapper>

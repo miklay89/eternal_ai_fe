@@ -20,16 +20,17 @@ import { RootState } from "../../../../../store";
 import socket from "../../../../../services/socket";
 import { setConnection } from "../../../../../store/reducers/socket";
 import { setSoul } from "../../../../../store/reducers/soul";
+import { Modals } from "../../../modals/types";
 
 const Title = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const socketIsConnected = useSelector(
     (state: RootState) => state.socket.connection
   );
   const soul = useSelector((state: RootState) => state.soul.soul);
   const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
-
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
 
   const handleClickMessage = (e: React.MouseEvent, message: string) => {
@@ -71,7 +72,7 @@ const Title = () => {
   });
 
   return (
-    <TitleWrapper>
+    <TitleWrapper show={modalState !== Modals.PAYWALL ? true : false}>
       <MainTitle>
         ask important people
         <br /> important questions

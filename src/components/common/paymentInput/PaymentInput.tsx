@@ -31,10 +31,10 @@ const PaymentInputs = (props: Props) => {
             background: transparent;
             outline: none;
             @media (max-width: 1001px) {
-              width: 100%;
-            }
-            @media (min-width: 500px) {
               width: 420px;
+            }
+            @media (max-width: 500px) {
+              width: 100%;
             }
           `,
           errored: css``,

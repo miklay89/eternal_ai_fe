@@ -34,3 +34,10 @@ export const GradientCorner = styled.div`
     rgba(29, 29, 36, 0) 12%
   );
 `;
+
+export const PaywallBlock = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "block" : "none")};
+  height: 790px;
+`;

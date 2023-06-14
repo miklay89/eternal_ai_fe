@@ -24,6 +24,7 @@ import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
 import Auth from "../../../api/auth/auth";
 import Loading from "../loading/Loading";
+import Paywall from "../modals/paywall/paywall";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -110,6 +111,7 @@ const Account = () => {
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
       <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
       <About isOpen={modalState === Modals.ABOUT ? true : false} />
+      <Paywall isOpen={modalState === Modals.PAYWALL ? true : false} />
       <Container>
         <Header
           show={

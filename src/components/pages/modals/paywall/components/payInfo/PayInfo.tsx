@@ -4,6 +4,7 @@ import {
   NoteText,
   NoteTick,
   NoteWrapper,
+  NotesWrapper,
   ProInnerWrapper,
   ProOuterWrapper,
   ProText,
@@ -51,19 +52,23 @@ const PayInfo = (props: Props) => {
             </ProInnerWrapper>
           </ProOuterWrapper>
           <Title>$10 / month</Title>
-          <NoteWrapper>
-            <NoteTick src="/check.svg" />
-            <NoteText>Unlimited questions</NoteText>
-          </NoteWrapper>
-          <NoteWrapper>
-            <NoteTick src="/check.svg" />
-            <NoteText>SMS texting</NoteText>
-          </NoteWrapper>
-          <NoteWrapper>
-            <NoteTick src="/check.svg" />
-            <NoteText>Access to all characters</NoteText>
-          </NoteWrapper>
-          <SubscribeBtn onClick={() => props.onChangeView(Payments.PAYMENT)}>subscribe</SubscribeBtn>
+          <NotesWrapper>
+            <NoteWrapper>
+              <NoteTick src="/check.svg" />
+              <NoteText>Unlimited questions</NoteText>
+            </NoteWrapper>
+            <NoteWrapper>
+              <NoteTick src="/check.svg" />
+              <NoteText>SMS texting</NoteText>
+            </NoteWrapper>
+            <NoteWrapper>
+              <NoteTick src="/check.svg" />
+              <NoteText>Access to all characters</NoteText>
+            </NoteWrapper>
+          </NotesWrapper>
+          <SubscribeBtn onClick={() => props.onChangeView(Payments.PAYMENT)}>
+            subscribe
+          </SubscribeBtn>
         </SubscribeInnerWrapper>
       </SubscribeOuterWrapper>
     </Wrapper>

@@ -36,6 +36,7 @@ import ScrollMessage from "./components/scrollMessage/ScrollMessage";
 import ChatInstance from "../../../api/chat/chat";
 import { individualsData } from "../home/components/promo/Cards.data";
 import { setSoul } from "../../../store/reducers/soul";
+import Paywall from "../modals/paywall/paywall";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -186,7 +187,7 @@ const Chat = () => {
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />
       <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
       <About isOpen={modalState === Modals.ABOUT ? true : false} />
-
+      <Paywall isOpen={modalState === Modals.PAYWALL ? true : false} />
       <Container>
         <Header
           show={

@@ -5,6 +5,10 @@ export const Wrapper = styled.div<{
 }>`
   display: ${(props) => (props.show ? "flex" : "none")};
   gap: 32px;
+  @media (max-width: 1001px) {
+    flex-direction: column;
+    gap: 16px;
+  }
 `;
 
 export const Share = styled.div`
@@ -19,6 +23,10 @@ export const Share = styled.div`
   );
   backdrop-filter: blur(12px);
   border-radius: 32px;
+  @media (max-width: 1001px) {
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
 `;
 
 export const FreeLogo = styled.div`
@@ -37,6 +45,10 @@ export const FreeLogo = styled.div`
   text-align: center;
   letter-spacing: -0.01em;
   color: #0e0e10;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    transform: translateY(-2px);
+  }
 `;
 
 export const Title = styled.div`
@@ -49,6 +61,10 @@ export const Title = styled.div`
   text-align: center;
   letter-spacing: -0.01em;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 18px;
+    margin-top: 15px;
+  }
 `;
 
 export const Subtitle = styled.div`
@@ -61,6 +77,9 @@ export const Subtitle = styled.div`
   text-align: center;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.7);
+  @media (max-width: 1001px) {
+    font-size: 14px;
+  }
 `;
 
 export const Span = styled.span`
@@ -72,6 +91,9 @@ export const Span = styled.span`
   text-align: center;
   letter-spacing: -0.01em;
   color: rgba(248, 45, 152, 1);
+  @media (max-width: 1001px) {
+    font-size: 14px;
+  }
 `;
 
 export const ShareBtnOuterWrapper = styled.div`
@@ -86,6 +108,11 @@ export const ShareBtnOuterWrapper = styled.div`
   cursor: pointer;
   &:hover {
     background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  }
+  @media (max-width: 1001px) {
+    margin-top: 15px;
+    width: 295px;
+    height: 46px;
   }
 `;
 
@@ -126,6 +153,10 @@ export const SubscribeInnerWrapper = styled.div`
   border-radius: 32px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 24px;
+    width: 341px;
+  }
 `;
 
 export const ProOuterWrapper = styled.div`
@@ -137,6 +168,11 @@ export const ProOuterWrapper = styled.div`
   width: 66px;
   height: 40px;
   z-index: 5;
+  @media (max-width: 1001px) {
+    width: 58px;
+    height: 42px;
+    transform: translateY(-2px);
+  }
 `;
 
 export const ProInnerWrapper = styled.div`
@@ -146,6 +182,9 @@ export const ProInnerWrapper = styled.div`
   padding: 8px 16px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 15px 16px;
+  }
 `;
 
 export const ProText = styled.div`
@@ -158,14 +197,26 @@ export const ProText = styled.div`
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 11px;
+  }
+`;
+
+export const NotesWrapper = styled.div`
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 `;
 
 export const NoteWrapper = styled.div`
-  margin-top: 18px;
   display: flex;
   flex-direction: row;
   justify-content: start;
   gap: 20px;
+  @media (max-width: 1001px) {
+    margin-left: 56px;
+  }
 `;
 
 export const NoteTick = styled.img`
@@ -184,6 +235,9 @@ export const NoteText = styled.div`
   letter-spacing: -0.01em;
   color: #ffffff;
   flex: none;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+  }
 `;
 
 export const SubscribeBtn = styled.button`
@@ -208,5 +262,13 @@ export const SubscribeBtn = styled.button`
       rgba(248, 45, 152, 0.8) -2.34%,
       rgba(88, 51, 239, 0.8) 114.41%
     );
+  }
+  @media (max-width: 1001px) {
+    margin-top: 18px;
+    height: 46px;
+    font-size: 13px;
+  }
+  @media (max-width: 500px) {
+    width: 295px;
   }
 `;

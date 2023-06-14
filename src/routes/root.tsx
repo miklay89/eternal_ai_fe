@@ -22,10 +22,6 @@ const router = createBrowserRouter([
     element: <PrivateRoute fc={Account} />,
   },
   {
-    path: Paths.PAYWALL,
-    element: <Paywall />,
-  },
-  {
     path: Paths.CHAT,
     element: <PrivateRoute fc={Chat} />,
   },

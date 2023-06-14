@@ -27,7 +27,6 @@ import Auth from "../../../../api/auth/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../../routes/root";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
-import scrollToTop from "../../../hooks/scrollToTop";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
 import MainLogo from "../../../common/mainLogo/MainLogo";
@@ -77,16 +76,6 @@ const SignIn = (props: Props) => {
     }
   };
 
-  const handleClickLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === Paths.HOME) {
-      dispatch(openModal(Modals.NONE));
-      scrollToTop();
-    } else {
-      navigate(Paths.HOME);
-      scrollToTop();
-    }
-  };
   // TODO enter login
   return (
     <ModalWrapper isOpen={props.isOpen}>
