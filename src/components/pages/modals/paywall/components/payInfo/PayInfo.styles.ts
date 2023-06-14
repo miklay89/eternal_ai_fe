@@ -26,6 +26,7 @@ export const Share = styled.div`
   @media (max-width: 1001px) {
     padding: 24px;
     border: 1px solid rgba(255, 255, 255, 0.4);
+    max-width: 343px;
   }
 `;
 
@@ -111,7 +112,7 @@ export const ShareBtnOuterWrapper = styled.div`
   }
   @media (max-width: 1001px) {
     margin-top: 15px;
-    width: 295px;
+    width: 293px;
     height: 46px;
   }
 `;
