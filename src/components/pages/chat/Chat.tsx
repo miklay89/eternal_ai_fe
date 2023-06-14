@@ -36,7 +36,7 @@ import ScrollMessage from "./components/scrollMessage/ScrollMessage";
 import ChatInstance from "../../../api/chat/chat";
 import { individualsData } from "../home/components/promo/Cards.data";
 import { setSoul } from "../../../store/reducers/soul";
-import Paywall from "../modals/paywall/paywall";
+import Paywall from "../modals/paywall/Paywall";
 
 const Chat = () => {
   const dispatch = useDispatch();

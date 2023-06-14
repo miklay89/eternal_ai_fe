@@ -24,7 +24,7 @@ import Profile from "../../../api/profile/profile";
 import { setProfile } from "../../../store/reducers/profile";
 import Auth from "../../../api/auth/auth";
 import Loading from "../loading/Loading";
-import Paywall from "../modals/paywall/paywall";
+import Paywall from "../modals/paywall/Paywall";
 
 const Account = () => {
   const dispatch = useDispatch();
