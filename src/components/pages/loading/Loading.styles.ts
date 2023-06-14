@@ -65,7 +65,7 @@ export const LoadingWrapper = styled.div<{
 `;
 
 export const LoadingContainer = styled.div`
-  max-width: 1640px;
+  max-width: 100%;
   position: fixed;
   top: 35%;
   left: 50%;

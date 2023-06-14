@@ -13,11 +13,6 @@ import {
   Title,
 } from "./Account.styles";
 import UpdatePayment from "./components/UpdatePayment";
-import {
-  clearAllBodyScrollLocks,
-  disableBodyScroll,
-  enableBodyScroll,
-} from "body-scroll-lock";
 import Menu from "../modals/menu/Menu";
 import SignUp from "../modals/sign-up/SignUp";
 import SignIn from "../modals/sign-in/SignIn";
@@ -31,7 +26,6 @@ import Auth from "../../../api/auth/auth";
 import Loading from "../loading/Loading";
 
 const Account = () => {
-  const ref = useRef(null);
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.modal.open);
   const profileState = useSelector((state: RootState) => state.profile.user);
@@ -109,21 +103,8 @@ const Account = () => {
     }
   }, [profileState]);
 
-  useEffect(() => {
-    if (ref.current) {
-      if (modalState === Modals.NONE) {
-        enableBodyScroll(ref.current);
-      } else {
-        disableBodyScroll(ref.current);
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks();
-    };
-  }, [modalState]);
-
   return (
-    <AccountSection ref={ref}>
+    <AccountSection>
       <Loading />
       <Menu isOpen={modalState === Modals.MENU ? true : false} />
       <SignUp isOpen={modalState === Modals.SIGN_UP ? true : false} />

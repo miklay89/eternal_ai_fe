@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
+  Center,
   Check,
   CheckBox,
   CheckBoxText,
@@ -9,13 +10,13 @@ import {
   ContinueBtn,
   Description,
   InnerWrapper,
-  Center,
   Left,
-  Right,
   ModalCloseBtnWrapper,
   ModalNavWrapper,
   ModalWrapper,
   OuterWrapper,
+  Overlay,
+  Right,
   Title,
 } from "./About.styles";
 import { useDispatch } from "react-redux";
@@ -42,6 +43,7 @@ const About = (props: Props) => {
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
+      <Overlay />
       <Container>
         <ModalNavWrapper>
           <Left></Left>

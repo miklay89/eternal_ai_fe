@@ -52,10 +52,7 @@ const Header = (props: Props) => {
   };
 
   return (
-    <HeaderWrapper
-      show={props.show}
-      isOpenMenu={modalState === Modals.MENU ? true : false}
-    >
+    <HeaderWrapper show={props.show}>
       <Left>
         <MenuIconWrapper
           show={modalState === Modals.MENU ? false : true}

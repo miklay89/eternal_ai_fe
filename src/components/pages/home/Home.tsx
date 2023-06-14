@@ -21,23 +21,9 @@ import Loading from "../loading/Loading";
 
 const HomePage = () => {
   const modalState = useSelector((state: RootState) => state.modal.open);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      if (modalState === Modals.NONE) {
-        enableBodyScroll(ref.current);
-      } else {
-        disableBodyScroll(ref.current);
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks();
-    };
-  }, [modalState]);
 
   return (
-    <HomeSection ref={ref}>
+    <HomeSection>
       <Loading />
       <GradientCorner />
       <Menu isOpen={modalState === Modals.MENU ? true : false} />
@@ -45,13 +31,16 @@ const HomePage = () => {
       <SignIn isOpen={modalState === Modals.SIGN_IN ? true : false} />
       <About isOpen={modalState === Modals.ABOUT ? true : false} />
       <Container>
-        <Header
-          show={
-            modalState === Modals.NONE || modalState === Modals.MENU
-              ? true
-              : false
-          }
-        />
+        <div style={{ maxWidth: "1640px", maxHeight: "56px" }}>
+          <Header
+            show={
+              modalState === Modals.NONE || modalState === Modals.MENU
+                ? true
+                : false
+            }
+          />
+        </div>
+
         <Title />
         <EternalsBG top={213} />
         <Promo />

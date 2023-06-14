@@ -31,17 +31,11 @@ const Paywall = () => {
     scrollToTop();
   };
 
-  const handleClickLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate(Paths.HOME);
-    scrollToTop();
-  };
-
   return (
     <Section>
       <GradientCorner />
       <Container>
-        <LogoWrapper onClick={(e) => handleClickLogo(e)}>
+        <LogoWrapper>
           <MainLogo />
         </LogoWrapper>
         <CloseBtnWrapper onClick={(e) => handleCloseBtnClick(e)}>

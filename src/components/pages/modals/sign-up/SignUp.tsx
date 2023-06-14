@@ -16,6 +16,7 @@ import {
   ModalNavWrapper,
   ModalWrapper,
   OuterWrapper,
+  Overlay,
   Right,
   SignUpBtn,
   SubTitle,
@@ -79,6 +80,7 @@ const SignUp = (props: Props) => {
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
+      <Overlay />
       <Container>
         <ModalNavWrapper>
           <Left></Left>

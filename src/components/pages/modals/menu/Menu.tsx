@@ -1,12 +1,22 @@
 import {
   AdditionalButtonsWrapper,
+  Center,
   Container,
   Divider,
   GetStartedBtn,
+  Left,
   Link,
   LoginBtn,
-  MenuWrapper,
+  LoginBtnAdditional,
+  MenuCloseBtnWrapper,
+  ModalNavWrapper,
+  ModalWrapper,
   Navbar,
+  Overlay,
+  Right,
+  ShareBtnInner,
+  ShareIcon,
+  ShareText,
   Social,
   SocialDiscord,
   SocialFacebook,
@@ -25,6 +35,8 @@ import { setConnection } from "../../../../store/reducers/socket";
 import LocalStorage from "../../../../services/localStorage";
 import { setInitialState } from "../../../../store/reducers/profile";
 import { useEffect, useState } from "react";
+import MainLogo from "../../../common/mainLogo/MainLogo";
+import { MenuCloseIcon, ShareBtnOuter } from "../../../common/header/Header.styles";
 
 type Props = {
   isOpen: boolean;
@@ -75,8 +87,38 @@ const Menu = (props: Props) => {
   }, []);
 
   return (
-    <MenuWrapper isOpen={props.isOpen}>
+    <ModalWrapper isOpen={props.isOpen}>
+      <Overlay />
       <Container>
+        <ModalNavWrapper>
+          <Left>
+            <MenuCloseBtnWrapper
+              onClick={() => dispatch(openModal(Modals.NONE))}
+            >
+              <MenuCloseIcon src="/header/close_btn.svg" />
+            </MenuCloseBtnWrapper>
+          </Left>
+          <Center>
+            <MainLogo />
+          </Center>
+          <Right>
+            <LoginBtn onClick={(e) => handleClickBtn(e)}>
+              {authState ? "sign out" : "login"}
+            </LoginBtn>
+            <GetStartedBtn
+              show={authState ? false : true}
+              onClick={() => dispatch(openModal(Modals.SIGN_UP))}
+            >
+              get started
+            </GetStartedBtn>
+            <ShareBtnOuter show={authState ? true : false}>
+              <ShareBtnInner>
+                <ShareIcon src="/share_icon.svg" />
+                <ShareText>SHARE</ShareText>
+              </ShareBtnInner>
+            </ShareBtnOuter>
+          </Right>
+        </ModalNavWrapper>
         <Navbar>
           <Link show={true} onClick={() => dispatch(openModal(Modals.ABOUT))}>
             About us
@@ -105,15 +147,15 @@ const Menu = (props: Props) => {
           >
             get started
           </GetStartedBtn>
-          <LoginBtn
+          <LoginBtnAdditional
             authState={authState ? true : false}
             onClick={(e) => handleClickBtn(e)}
           >
             {authState ? "sign out" : "login"}
-          </LoginBtn>
+          </LoginBtnAdditional>
         </AdditionalButtonsWrapper>
       </Container>
-    </MenuWrapper>
+    </ModalWrapper>
   );
 };
 

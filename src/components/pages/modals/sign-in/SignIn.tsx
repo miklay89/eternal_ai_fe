@@ -20,6 +20,7 @@ import {
   Left,
   Center,
   Right,
+  Overlay,
 } from "./SignIn.styles";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import Auth from "../../../../api/auth/auth";
@@ -89,6 +90,7 @@ const SignIn = (props: Props) => {
   // TODO enter login
   return (
     <ModalWrapper isOpen={props.isOpen}>
+      <Overlay />
       <Container>
         <ModalNavWrapper>
           <Left></Left>

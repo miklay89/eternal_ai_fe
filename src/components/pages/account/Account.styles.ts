@@ -18,7 +18,7 @@ export const Container = styled.div`
   overflow: visible;
   @media (max-width: 1001px) {
     padding: 16px;
-    padding-top: 28px;
+    padding-top: 32px;
   }
 `;
 

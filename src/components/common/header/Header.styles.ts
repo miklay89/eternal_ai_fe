@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div<{
   show: boolean;
-  isOpenMenu: boolean;
 }>`
   height: auto;
   margin: 0 auto;
   position: relative;
+  
   display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  z-index: ${(props) => (props.isOpenMenu ? 20 : 5)};
+  z-index: 5;
 `;
 
 export const Left = styled.div`

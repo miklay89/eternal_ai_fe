@@ -9,34 +9,44 @@ export const ModalWrapper = styled.div<{
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(77px);
   z-index: 10;
 `;
 
-export const Container = styled.div`
+export const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(77px);
+  background: rgba(0, 0, 0, 0.4);
+`;
+
+export const Container = styled.div`
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  max-width: 1640px;
+  width: 100%;
   padding: 28px;
   height: 100vh;
-  flex-direction: column;
+  padding-bottom: 70px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   @media (max-width: 1001px) {
-    padding: 23px 16px 16px;
+    padding-top: 23px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
   }
 `;
 
 export const ModalNavWrapper = styled.div`
-  margin: 0 auto;
-  position: relative;
-  max-width: 1640px;
-  padding-left: 28px;
-  padding-right: 28px;
   display: flex;
   justify-content: space-between;
   @media (max-width: 1001px) {
-    padding: 0;
   }
 `;
 
@@ -83,21 +93,6 @@ export const ModalCloseIcon = styled.img`
   margin: auto auto;
 `;
 
-export const OuterWrapper = styled.div`
-  padding: 1px;
-  border-radius: 32px;
-  background: linear-gradient(
-    281.4deg,
-    rgba(248, 45, 152, 0.3) -2.34%,
-    rgba(88, 51, 239, 0.3) 114.41%
-  );
-  position: absolute;
-  max-width: 721px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
 export const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,6 +132,21 @@ export const Description = styled.div`
   @media (max-width: 1001px) {
     font-size: 14px;
   }
+`;
+
+export const OuterWrapper = styled.div`
+  padding: 1px;
+  border-radius: 32px;
+  background: linear-gradient(
+    281.4deg,
+    rgba(248, 45, 152, 0.3) -2.34%,
+    rgba(88, 51, 239, 0.3) 114.41%
+  );
+  position: absolute;
+  max-width: 721px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export const CheckBoxWrapper = styled.div`
