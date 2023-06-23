@@ -130,9 +130,8 @@ export const ChatWindow = styled.div`
     max-width: 570px;
   }
 
-  @media screen and (orientation: portrait) {
+  @media screen and (max-width: 1001px) and (orientation: portrait) {
     transform: translateX(7px);
-    height: calc(53svh - 200px);
     width: 100%;
     position: relative;
     margin: 0 auto;
@@ -141,23 +140,21 @@ export const ChatWindow = styled.div`
     z-index: 0;
     gap: 8px;
     padding-right: 4px;
+    max-height: 40vh;
   }
 
-  @media screen and (max-height: 736px) and (orientation: portrait) {
-    height: calc(48svh - 200px);
+  @media screen and (max-width: 1001px) and (orientation: portrait) {
+    max-height: 17vh;
   }
 
-  @media screen and (max-height: 667px) and (orientation: portrait) {
-    height: calc(48svh - 200px);
-  }
 `;
 
 export const Shadow = styled.div`
   z-index: 2;
   position: absolute;
-  bottom: -70px;
+  bottom: -60px;
   left: -100%;
-  height: 70px;
+  height: 30px;
   width: 400%;
   background: linear-gradient(180deg, #0a0806 0%, rgba(10, 8, 6, 0) 100%);
   display: none;

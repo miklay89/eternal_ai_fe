@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
   height: 900px;
   z-index: 0;
   @media (max-height: 1400px) and (orientation: landscape) {
-    width: 50svh;
-    height: 50svh;
+    width: 50vh;
+    height: 50vh;
   }
 
   @media (max-height: 414px) and (orientation: landscape) {
@@ -16,24 +16,37 @@ export const Wrapper = styled.div`
   }
 
   @media (max-height: 374px) and (orientation: landscape) {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
   }
 
-  @media (orientation: portrait) {
+  @media screen and (max-width: 1000px) and (orientation: portrait) {
     z-index: 2;
-    width: 40vh;
-    height: 40vh;
+    width: 60vw;
+    height: 60vw;
+  }
+
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    z-index: 2;
+    width: 68vw;
+    height: 68vw;
+  }
+
+  @media screen and (max-width: 600px) and (orientation: portrait) {
+    z-index: 2;
+    width: 80vw;
+    height: 80vw;
+  }
+
+  @media screen and (max-width: 500px) and (orientation: portrait) {
+    z-index: 2;
+    width: 92vw;
+    height: 92vw;
   }
 
   @media screen and (max-width: 375px) and (orientation: portrait) {
     width: 350px;
     height: 350px;
-  }
-
-  @media screen and (max-width: 374px) and (orientation: portrait) {
-    width: 250px;
-    height: 250px;
   }
 `;
 
