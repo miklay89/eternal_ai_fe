@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import {
+  ChatBoxWrapper,
   ChatInputWrapper,
   ChatWindow,
   Container,
+  ContentWrapper,
   PortraitWrapper,
   Section,
+  Shadow,
 } from "./Chat.styles";
 import Menu from "../modals/menu/Menu";
 import SignUp from "../modals/sign-up/SignUp";
@@ -196,21 +199,26 @@ const Chat = () => {
               : false
           }
         />
-        <PortraitWrapper>
-          <Portrait
-            fullName={soul.fullName}
-            imgUrl={soul.imgUrl}
-            uuid={soul.uuid}
-            title={soul.title}
-            id={soul.id}
-          />
-        </PortraitWrapper>
-        <ChatWindow onScroll={(e) => handleScroll(e)}>
-          {messagesForRender}
-        </ChatWindow>
-        <ChatInputWrapper>
-          <ChatInput />
-        </ChatInputWrapper>
+        <ContentWrapper>
+          <PortraitWrapper>
+            <Portrait
+              fullName={soul.fullName}
+              imgUrl={soul.imgUrl}
+              uuid={soul.uuid}
+              title={soul.title}
+              id={soul.id}
+            />
+            <Shadow />
+          </PortraitWrapper>
+          <ChatBoxWrapper>
+            <ChatWindow onScroll={(e) => handleScroll(e)}>
+              {messagesForRender}
+            </ChatWindow>
+            <ChatInputWrapper>
+              <ChatInput />
+            </ChatInputWrapper>
+          </ChatBoxWrapper>
+        </ContentWrapper>
       </Container>
     </Section>
   );

@@ -86,7 +86,7 @@ const Menu = (props: Props) => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
     return () => window.removeEventListener("resize", () => {});
   }, []);
-
+//TODO add share btn in chat
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />

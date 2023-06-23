@@ -16,8 +16,9 @@ import {
   Center,
   Left,
   Right,
+  AdditionalShareBtn,
 } from "./Header.styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
 import LocalStorage from "../../../services/localStorage";
 import { Modals } from "../../pages/modals/types";
@@ -32,6 +33,7 @@ type Props = {
 };
 
 const Header = (props: Props) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
@@ -54,6 +56,13 @@ const Header = (props: Props) => {
   return (
     <HeaderWrapper show={props.show}>
       <Left>
+        <AdditionalShareBtn
+          show={location.pathname === Paths.CHAT ? true : false}
+        >
+          <ShareBtnInner>
+            <ShareText>SHARE</ShareText>
+          </ShareBtnInner>
+        </AdditionalShareBtn>
         <MenuIconWrapper
           show={modalState === Modals.MENU ? false : true}
           onClick={() => dispatch(openModal(Modals.MENU))}

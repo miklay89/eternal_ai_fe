@@ -50,6 +50,10 @@ export const MessageBlob = styled.div`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #e4e4e4;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    padding: 24px;
+  }
 `;
 
 const BounceAnimation = keyframes`
@@ -71,4 +75,8 @@ export const Dot = styled.div<{
   margin: 0 5px;
   animation: ${BounceAnimation} 0.5s linear infinite;
   animation-delay: ${(props) => props.delay};
+  @media (max-width: 1001px) {
+    width: 5px;
+    height: 5px;
+  }
 `;

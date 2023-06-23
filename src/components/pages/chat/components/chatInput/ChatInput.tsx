@@ -64,7 +64,11 @@ const ChatInput = () => {
           value={value}
           onKeyDown={(e) => handleSubmitKeyboard(e)}
         />
-        <SubmitBtn onClick={(e) => handleSubmit(e)}>submit</SubmitBtn>
+        <SubmitBtn
+          onClick={(e) => handleSubmit(e)}
+        >
+          submit
+        </SubmitBtn>
       </InnerWrapper>
     </OuterWrapper>
   );

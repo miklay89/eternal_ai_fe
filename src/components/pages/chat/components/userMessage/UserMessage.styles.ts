@@ -19,4 +19,8 @@ export const Wrapper = styled.div`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #0a0806;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    padding: 24px;
+  }
 `;

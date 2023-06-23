@@ -2,8 +2,39 @@ import styled, { keyframes } from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 939px;
-  height: 939px;
+  width: 900px;
+  height: 900px;
+  z-index: 0;
+  @media (max-width: 1640px) and (orientation: landscape) {
+    width: 50svh;
+    height: 50svh;
+  }
+
+  @media (max-width: 801px) and (orientation: landscape) {
+    width: 300px;
+    height: 300px;
+  }
+
+  @media (max-width: 667px) and (orientation: landscape) {
+    width: 250px;
+    height: 250px;
+  }
+
+  @media (orientation: portrait) {
+    z-index: 2;
+    width: 40vh;
+    height: 40vh;
+  }
+
+  @media (max-height: 736px) and (orientation: portrait) {
+    width: 350px;
+    height: 350px;
+  }
+
+  @media screen and (max-height: 375px) and (orientation: portrait) {
+    width: 250px;
+    height: 250px;
+  }
 `;
 
 type EllipseProps = {
@@ -29,6 +60,7 @@ export const BagelWrapper = styled.div<{
   height: number;
 }>`
   position: relative;
+  margin: 0 auto;
   width: ${(props) => props.width + "px"};
   height: ${(props) => props.height + "px"};
 `;
@@ -63,6 +95,12 @@ export const PortraitImg = styled.img`
   position: absolute;
   bottom: 0;
   z-index: 2;
+  @media (max-width: 1601px) {
+    height: 93%;
+  }
+  @media (max-width: 1001px) {
+    height: 93%;
+  }
 `;
 
 export const Shadow = styled.div`
@@ -73,12 +111,20 @@ export const Shadow = styled.div`
   background: linear-gradient(180deg, rgba(17, 17, 21, 0) 54.58%, #111115 100%);
   bottom: 0;
   left: 0;
+  @media (max-width: 1001px) {
+    height: 100px;
+  }
 `;
 
 export const InfoWrapper = styled.div`
   position: absolute;
   left: 50%;
   transform: translate(-50%, 19px);
+  width: 100%;
+  @media (max-width: 1201px) and (orientation: portrait) {
+    z-index: 3;
+    transform: translate(-50%, -32px);
+  }
 `;
 
 export const Name = styled.div`
@@ -91,6 +137,9 @@ export const Name = styled.div`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+  }
 `;
 
 export const Title = styled.div`
@@ -105,4 +154,8 @@ export const Title = styled.div`
   text-transform: uppercase;
   color: #ffffff;
   opacity: 0.7;
+  @media (max-width: 1001px) {
+    margin-top: 2px;
+    font-size: 11px;
+  }
 `;

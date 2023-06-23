@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   BagelEllipse,
   BagelWrapper,
@@ -18,70 +19,88 @@ type Props = {
 };
 
 const Portrait = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      if (ref.current) {
+        setWidth(ref.current.offsetWidth);
+      }
+    };
+
+    handleWindowResize();
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
-    <Wrapper>
-      <BagelWrapper width={939} height={939}>
+    <Wrapper ref={ref}>
+      <BagelWrapper width={width} height={width}>
         <BagelEllipse
-          width={610}
-          height={685}
+          width={Number(0.75 * width)}
+          height={Number(0.82 * width)}
+          borderWidth={Number(0.07 * width)}
           from={-90}
-          borderWidth={60}
-          borderColor="#F82D98"
-          blur={27}
+          borderColor="#933eff"
+          blur={Number(0.03 * width)}
         />
         <BagelEllipse
-          width={610}
-          height={780}
+          width={Number(0.75 * width)}
+          height={Number(0.94 * width)}
           from={-90}
-          borderWidth={100}
+          borderWidth={Number(0.12 * width)}
           borderColor="#5833EF"
-          blur={49}
+          blur={Number(0.06 * width)}
         />
         <BagelEllipse
-          width={610}
-          height={740}
+          width={Number(0.75 * width)}
+          height={Number(0.89 * width)}
           from={-57.23}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#FFFEF0"
-          blur={27}
+          blur={Number(0.03 * width)}
         />
         <BagelEllipse
-          width={610}
-          height={740}
+          width={Number(0.75 * width)}
+          height={Number(0.89 * width)}
           from={-45}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#FFFFFF"
           blur={0}
         />
         <BagelEllipse
-          width={610}
-          height={720}
+          width={Number(0.75 * width)}
+          height={Number(0.87 * width)}
           from={0}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#F82D98"
-          blur={27}
+          blur={Number(0.03 * width)}
         />
         <BagelEllipse
-          width={610}
-          height={720}
+          width={Number(0.75 * width)}
+          height={Number(0.87 * width)}
           from={0}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#F82D98"
           blur={0}
         />
         <BagelEllipse
-          width={610}
-          height={720}
+          width={Number(0.75 * width)}
+          height={Number(0.87 * width)}
           from={45}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#AFF220"
-          blur={27}
+          blur={Number(0.03 * width)}
         />
         <BagelEllipse
-          width={630}
-          height={710}
+          width={Number(0.76 * width)}
+          height={Number(0.87 * width)}
           from={45}
-          borderWidth={45}
+          borderWidth={Number(0.07 * width)}
           borderColor="#AFF220"
           blur={0}
         />

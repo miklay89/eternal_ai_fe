@@ -20,10 +20,14 @@ export const InnerWrapper = styled.div`
   border-radius: 120px;
   width: 100%;
   height: 100%;
+  @media (max-width: 1001px) {
+    padding: 8px 8px 8px 30px;
+  }
 `;
 
 export const SubmitBtn = styled.button`
-  width: 157px;
+  display: block;
+  width: 200px;
   height: 62px;
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   border-radius: 120px;
@@ -44,10 +48,17 @@ export const SubmitBtn = styled.button`
       rgba(88, 51, 239, 0.8) 114.41%
     );
   }
+  @media (max-width: 1001px) {
+    width: 120px;
+    height: 100%;
+  }
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 export const Input = styled.input`
-  width: 500px;
+  width: 100%;
   outline: none;
   border: none;
   background: transparent;
@@ -59,4 +70,8 @@ export const Input = styled.input`
   line-height: 150%;
   letter-spacing: -0.01em;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    font-size: 14px;
+    width: 100%;
+  }
 `;

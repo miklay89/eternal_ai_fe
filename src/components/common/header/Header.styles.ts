@@ -6,12 +6,15 @@ export const HeaderWrapper = styled.div<{
   height: auto;
   margin: 0 auto;
   position: relative;
-  
+  width: 100%;
   display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   z-index: 5;
+  @media (max-width: 1001px) {
+    margin: 0;
+  }
 `;
 
 export const Left = styled.div`
@@ -23,6 +26,7 @@ export const Left = styled.div`
     width: 160px;
     height: 30px;
     order: 2;
+    gap: 16px;
     justify-content: end;
   }
 `;
@@ -178,6 +182,22 @@ export const ShareBtnOuter = styled.div<{
   cursor: pointer;
 `;
 
+export const AdditionalShareBtn = styled.div<{
+  show: boolean;
+}>`
+  display: ${(props) => (props.show ? "flex" : "none")};
+  padding: 1px;
+  border-radius: 66px;
+  background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
+  position: relative;
+  width: 75px;
+  height: 32px;
+  cursor: pointer;
+  @media (min-width: 1002px) {
+    display: none;
+  }
+`;
+
 export const ShareBtnInner = styled.div`
   display: flex;
   justify-content: center;
@@ -204,4 +224,10 @@ export const ShareText = styled.div`
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #ffffff;
+  @media (max-width: 1001px) {
+    width: 43px;
+    height: 12px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
 `;
