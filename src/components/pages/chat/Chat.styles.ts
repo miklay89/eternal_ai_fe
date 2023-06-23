@@ -97,6 +97,7 @@ export const ChatWindow = styled.div`
   position: relative;
   padding-right: 26px;
   width: 744px;
+  max-height: 900px;
   height: calc(100svh - 250px);
   overflow-y: scroll;
   display: flex;
