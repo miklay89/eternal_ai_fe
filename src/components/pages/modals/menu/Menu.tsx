@@ -37,7 +37,10 @@ import LocalStorage from "../../../../services/localStorage";
 import { setInitialState } from "../../../../store/reducers/profile";
 import { useEffect, useState } from "react";
 import MainLogo from "../../../common/mainLogo/MainLogo";
-import { MenuCloseIcon, ShareBtnOuter } from "../../../common/header/Header.styles";
+import {
+  MenuCloseIcon,
+  ShareBtnOuter,
+} from "../../../common/header/Header.styles";
 
 type Props = {
   isOpen: boolean;
@@ -48,7 +51,6 @@ const Menu = (props: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
-  const [width, setWidth] = useState<number>(window.innerWidth);
 
   const handleAccountClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -79,14 +81,6 @@ const Menu = (props: Props) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("DOMContentLoaded", () =>
-      setWidth(window.innerWidth)
-    );
-    window.addEventListener("resize", () => setWidth(window.innerWidth));
-    return () => window.removeEventListener("resize", () => {});
-  }, []);
-//TODO add share btn in chat
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />

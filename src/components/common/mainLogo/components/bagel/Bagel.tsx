@@ -2,25 +2,26 @@ import { useEffect, useRef, useState } from "react";
 import { BagelEllipse, BagelWrapper } from "./Bagel.style";
 
 const Bagel = () => {
-  const elRef = useRef<HTMLDivElement | null>(null);
-  const [width, setWidth] = useState<number>(
-    window.innerWidth > 1001 ? 45 : 30
-  );
-
-  const updateWidth = () => {
-    if (elRef.current) {
-      setWidth(elRef.current.clientWidth);
-    }
-  };
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState<number>(0);
 
   useEffect(() => {
-    window.addEventListener("DOMContentLoaded", updateWidth);
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
+    const calcWidth = () => {
+      if (ref.current) {
+        setWidth(ref.current.offsetWidth);
+      }
+    };
+
+    calcWidth();
+
+    window.addEventListener("resize", calcWidth);
+    return () => {
+      window.removeEventListener("resize", calcWidth);
+    };
   }, []);
 
   return (
-    <BagelWrapper ref={elRef}>
+    <BagelWrapper ref={ref}>
       <BagelEllipse
         width={Number(0.75 * width)}
         height={Number(0.82 * width)}

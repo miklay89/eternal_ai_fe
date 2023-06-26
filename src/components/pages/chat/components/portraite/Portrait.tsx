@@ -23,17 +23,17 @@ const Portrait = (props: Props) => {
   const [width, setWidth] = useState<number>(0);
 
   useEffect(() => {
-    const handleWindowResize = () => {
+    const calcWidth = () => {
       if (ref.current) {
         setWidth(ref.current.offsetWidth);
       }
     };
 
-    handleWindowResize();
+    calcWidth();
 
-    window.addEventListener("resize", handleWindowResize);
+    window.addEventListener("resize", calcWidth);
     return () => {
-      window.removeEventListener("resize", handleWindowResize);
+      window.removeEventListener("resize", calcWidth);
     };
   }, []);
 

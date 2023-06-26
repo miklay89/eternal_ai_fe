@@ -36,7 +36,7 @@ export const Container = styled.div`
   flex-flow: column;
   justify-content: space-between;
   @media (max-width: 1001px) {
-    padding-top: 23px;
+    padding-top: 7px;
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 16px;
