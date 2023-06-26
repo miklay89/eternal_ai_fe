@@ -28,6 +28,10 @@ export const Container = styled.div`
     padding-bottom: 52px;
     gap: 8px;
   }
+  @media (orientation: portrait) {
+    max-height: 100vh;
+    height: 100%;
+  }
 `;
 
 export const PortraitWrapper = styled.div`
@@ -97,7 +101,6 @@ export const ChatWindow = styled.div`
   position: relative;
   padding-right: 26px;
   width: 744px;
-  max-height: 900px;
   height: calc(100svh - 250px);
   overflow-y: scroll;
   display: flex;
@@ -140,13 +143,8 @@ export const ChatWindow = styled.div`
     z-index: 0;
     gap: 8px;
     padding-right: 4px;
-    max-height: 40vh;
+    max-height: calc(40vh - 180px);;
   }
-
-  @media screen and (max-width: 1001px) and (orientation: portrait) {
-    max-height: 17vh;
-  }
-
 `;
 
 export const Shadow = styled.div`
