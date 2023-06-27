@@ -21,6 +21,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow: hidden;
   @media (max-width: 1001px) {
     max-height: none;
     padding-left: 16px;
@@ -84,7 +85,7 @@ export const ContentWrapper = styled.div`
   height: 100%;
   @media screen and (max-width: 2400px) and (orientation: portrait) {
     flex-direction: column;
-    gap: 85px;
+    gap: 45px;
   }
   @media screen and (max-width: 900px) and (orientation: portrait) {
     flex-direction: column;
@@ -100,7 +101,6 @@ export const ChatBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-content: space-between;
   height: 100%;
   @media (max-width: 1501px) {
     transform: none;
@@ -151,6 +151,7 @@ export const ChatWindow = styled.div<{
 
   @media screen and (max-width: 1800px) and (orientation: portrait) {
     transform: translateX(7px);
+    flex: 1;
     width: 100%;
     position: relative;
     margin: 0 auto;
@@ -160,7 +161,6 @@ export const ChatWindow = styled.div<{
     gap: 8px;
     padding-right: 4px;
     max-height: ${(props) => props.height + "px"};
-    /* max-height: calc(40vh - 180px); */
   }
 
   @media (aspect-ratio: 1/1) {

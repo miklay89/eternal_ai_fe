@@ -207,21 +207,21 @@ const Chat = () => {
           // console.log("here");
           window.innerHeight > 1000
             ? setHeight(
-                window.innerHeight - portraitRef.current.clientHeight - 340
+                window.innerHeight - portraitRef.current.clientHeight - 250
               )
             : setHeight(
-                window.innerHeight - portraitRef.current.clientHeight - 200
+                window.innerHeight - portraitRef.current.clientHeight - 250
               );
 
           // landscape
         } else {
-          const newHeight = window.innerHeight - 280;
+          const newHeight = window.innerHeight - 300;
           setHeight(newHeight > 900 ? 900 : newHeight);
         }
         // ratio 1/1
         if (window.innerHeight === window.innerWidth) {
           setHeight(
-            window.innerHeight - portraitRef.current.clientHeight - 280
+            window.innerHeight - portraitRef.current.clientHeight - 300
           );
         }
       }
