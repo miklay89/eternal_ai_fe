@@ -14,13 +14,28 @@ import SignUp from "../modals/sign-up/SignUp";
 import About from "../modals/about/About";
 import SignIn from "../modals/sign-in/SignIn";
 import { Modals } from "../modals/types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import Loading from "../loading/Loading";
 import Paywall from "../modals/paywall/Paywall";
+import { useEffect } from "react";
+import { openModal } from "../../../store/reducers/modals";
 
 const HomePage = () => {
   const modalState = useSelector((state: RootState) => state.modal.open);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const closeModal = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+    window.addEventListener("keyup", closeModal);
+    return () => {
+      window.removeEventListener("keyup", closeModal);
+    };
+  }, []);
 
   return (
     <HomeSection>

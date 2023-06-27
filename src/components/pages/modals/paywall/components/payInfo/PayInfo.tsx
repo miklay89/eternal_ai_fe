@@ -21,6 +21,7 @@ import {
   Wrapper,
 } from "./PayInfo.styles";
 import { Payments } from "../../types";
+import { copyTextToClipboard } from "../../../../../hooks/copyToClipboard";
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -38,7 +39,15 @@ const PayInfo = (props: Props) => {
         <Subtitle>
           Get <Span>3 free</Span> questions when you share on social media
         </Subtitle>
-        <ShareBtnOuterWrapper tabIndex={0}>
+        <ShareBtnOuterWrapper
+          tabIndex={0}
+          onClick={async () => await copyTextToClipboard(window.location.href)}
+          onKeyDown={async (e) =>
+            e.key === "Enter"
+              ? await copyTextToClipboard(window.location.href)
+              : ""
+          }
+        >
           <ShareBtnInnerWrapper>
             <ShareBtnText>SHARE</ShareBtnText>
           </ShareBtnInnerWrapper>

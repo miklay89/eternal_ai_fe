@@ -25,6 +25,7 @@ import { setProfile } from "../../../store/reducers/profile";
 import Auth from "../../../api/auth/auth";
 import Loading from "../loading/Loading";
 import Paywall from "../modals/paywall/Paywall";
+import { openModal } from "../../../store/reducers/modals";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -103,6 +104,18 @@ const Account = () => {
       }
     }
   }, [profileState]);
+
+  useEffect(() => {
+    const closeModal = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+    window.addEventListener("keyup", closeModal);
+    return () => {
+      window.removeEventListener("keyup", closeModal);
+    };
+  }, []);
 
   return (
     <AccountSection>

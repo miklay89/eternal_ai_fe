@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../../../../store/reducers/auth";
 import {
@@ -36,6 +36,7 @@ type Props = {
 };
 
 const SignIn = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,6 +75,21 @@ const SignIn = (props: Props) => {
     }
   };
 
+  // outside click
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+
+    document.addEventListener("mouseup", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mouseup", outsideClickHandler);
+    };
+  });
+
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />
@@ -95,7 +111,7 @@ const SignIn = (props: Props) => {
             </ModalCloseBtnWrapper>
           </Right>
         </ModalNavWrapper>
-        <OuterWrapper>
+        <OuterWrapper ref={props.isOpen ? ref : null}>
           <InnerWrapper>
             <Title>Login</Title>
             <InputTitle>Email</InputTitle>

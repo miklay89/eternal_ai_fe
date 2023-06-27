@@ -40,12 +40,16 @@ import {
   MenuCloseIcon,
   ShareBtnOuter,
 } from "../../../common/header/Header.styles";
+import { copyTextToClipboard } from "../../../hooks/copyToClipboard";
+import { useEffect, useRef } from "react";
 
 type Props = {
   isOpen: boolean;
 };
 
 const Menu = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const disabledRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -77,6 +81,28 @@ const Menu = (props: Props) => {
       navigate(Paths.HOME);
     }
   };
+
+  // outside click
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (
+        disabledRef.current &&
+        disabledRef.current.contains(e.target as Node)
+      ) {
+        return;
+      }
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        dispatch(openModal(Modals.NONE));
+      }
+      return;
+    };
+
+    document.addEventListener("mouseup", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mouseup", outsideClickHandler);
+    };
+  });
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
@@ -116,9 +142,17 @@ const Menu = (props: Props) => {
               get started
             </GetStartedBtn>
             <ShareBtnOuter
+              ref={props.isOpen ? ref : null}
               show={authState ? true : false}
               tabIndex={0}
-              onKeyDown={(e) => (e.key === "Enter" ? alert("share") : "")}
+              onClick={async () =>
+                await copyTextToClipboard(window.location.href)
+              }
+              onKeyDown={async (e) =>
+                e.key === "Enter"
+                  ? await copyTextToClipboard(window.location.href)
+                  : ""
+              }
             >
               <ShareBtnInner>
                 <ShareIcon src="/share_icon.svg" />
@@ -146,7 +180,11 @@ const Menu = (props: Props) => {
           >
             Pricing
           </Link>
-          <Link show={true} tabIndex={0}>
+          <Link
+            show={true}
+            tabIndex={0}
+            ref={props.isOpen ? disabledRef : null}
+          >
             How it works
           </Link>
           <Link

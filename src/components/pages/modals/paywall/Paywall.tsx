@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   Center,
@@ -29,8 +29,24 @@ type Props = {
 };
 
 const Paywall = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const [payment, showPayment] = useState<string>(Payments.INFO);
+
+  // outside click
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+
+    document.addEventListener("mouseup", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mouseup", outsideClickHandler);
+    };
+  });
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
@@ -60,7 +76,7 @@ const Paywall = (props: Props) => {
               Share or subscribe to continue asking unlimited questions
             </SubTitle>
           </TitleWrapper>
-          <PaymentWrapper>
+          <PaymentWrapper ref={props.isOpen ? ref : null}>
             <PayInfo
               show={payment === Payments.INFO ? true : false}
               onChangeView={showPayment}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   Center,
@@ -31,6 +31,7 @@ type Props = {
 
 const About = (props: Props) => {
   const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>(null);
   const modalState = useSelector((state: RootState) => state.modal.open);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -41,6 +42,21 @@ const About = (props: Props) => {
     }
     dispatch(openModal(Modals.NONE));
   };
+
+  // outside click
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+
+    document.addEventListener("mouseup", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mouseup", outsideClickHandler);
+    };
+  });
 
   return (
     <ModalWrapper isOpen={props.isOpen}>
@@ -63,7 +79,7 @@ const About = (props: Props) => {
             </ModalCloseBtnWrapper>
           </Right>
         </ModalNavWrapper>
-        <OuterWrapper>
+        <OuterWrapper ref={props.isOpen ? ref : null}>
           <InnerWrapper>
             <Title>About the platform</Title>
             <Description>

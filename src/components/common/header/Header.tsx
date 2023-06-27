@@ -27,6 +27,7 @@ import socket from "../../../services/socket";
 import { setConnection } from "../../../store/reducers/socket";
 import { setInitialState } from "../../../store/reducers/profile";
 import MainLogo from "../mainLogo/MainLogo";
+import { copyTextToClipboard } from "../../hooks/copyToClipboard";
 
 type Props = {
   show: boolean;
@@ -58,6 +59,12 @@ const Header = (props: Props) => {
         <AdditionalShareBtn
           show={location.pathname === Paths.CHAT ? true : false}
           tabIndex={modalState === Modals.NONE ? 0 : -1}
+          onClick={async () => await copyTextToClipboard(window.location.href)}
+          onKeyDown={async (e) =>
+            e.key === "Enter"
+              ? await copyTextToClipboard(window.location.href)
+              : ""
+          }
         >
           <ShareBtnInner>
             <ShareText>SHARE</ShareText>
@@ -108,6 +115,12 @@ const Header = (props: Props) => {
         <ShareBtnOuter
           tabIndex={modalState === Modals.NONE ? 0 : -1}
           show={authState ? true : false}
+          onClick={async () => await copyTextToClipboard(window.location.href)}
+          onKeyDown={async (e) =>
+            e.key === "Enter"
+              ? await copyTextToClipboard(window.location.href)
+              : ""
+          }
         >
           <ShareBtnInner>
             <ShareIcon src="/share_icon.svg" />

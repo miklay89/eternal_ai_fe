@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MenuCloseIcon } from "../../../common/header/Header.styles";
 import {
   AlreadyHaveWrapper,
@@ -34,6 +34,7 @@ type Props = {
 };
 
 const SignUp = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -60,6 +61,21 @@ const SignUp = (props: Props) => {
     dispatch(openModal(Modals.SIGN_IN));
   };
 
+  // outside click
+  useEffect(() => {
+    const outsideClickHandler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+
+    document.addEventListener("mouseup", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("mouseup", outsideClickHandler);
+    };
+  });
+
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />
@@ -81,7 +97,7 @@ const SignUp = (props: Props) => {
             </ModalCloseBtnWrapper>
           </Right>
         </ModalNavWrapper>
-        <OuterWrapper>
+        <OuterWrapper ref={props.isOpen ? ref : null}>
           <InnerWrapper>
             <Title>Get started</Title>
             <SubTitle>To continue please create an account</SubTitle>

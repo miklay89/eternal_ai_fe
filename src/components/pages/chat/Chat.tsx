@@ -40,6 +40,7 @@ import ChatInstance from "../../../api/chat/chat";
 import { individualsData } from "../home/components/promo/Cards.data";
 import { setSoul } from "../../../store/reducers/soul";
 import Paywall from "../modals/paywall/Paywall";
+import { openModal } from "../../../store/reducers/modals";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -185,6 +186,18 @@ const Chat = () => {
     }
     return <UserMessage key={idx} text={msg.text} />;
   });
+
+  useEffect(() => {
+    const closeModal = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dispatch(openModal(Modals.NONE));
+      }
+    };
+    window.addEventListener("keyup", closeModal);
+    return () => {
+      window.removeEventListener("keyup", closeModal);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     const updateHeight = () => {
