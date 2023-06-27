@@ -139,9 +139,11 @@ const Account = () => {
             <Title>Account Details</Title>
             <InputTitle>Name</InputTitle>
             <Input
+              tabIndex={modalState === Modals.NONE ? 0 : -1}
               placeholder="Justin Mac"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSave() : "")}
             />
             <InputTitle>Email</InputTitle>
             <Input
@@ -152,18 +154,27 @@ const Account = () => {
             />
             <InputTitle>Phone number</InputTitle>
             <Input
+              tabIndex={modalState === Modals.NONE ? 0 : -1}
               placeholder="+1329822222"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSave() : "")}
             />
             <InputTitle>Password</InputTitle>
             <Input
+              tabIndex={modalState === Modals.NONE ? 0 : -1}
               placeholder="•••••••••••••••••••"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSave() : "")}
             />
-            <SaveBtn onClick={handleSave}>Save</SaveBtn>
+            <SaveBtn
+              tabIndex={modalState === Modals.NONE ? 0 : -1}
+              onClick={handleSave}
+            >
+              Save
+            </SaveBtn>
           </InnerWrapper>
         </OuterWrapper>
         <UpdatePayment nextPayment={subEndDate} />

@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
     width: 50vh;
     height: 50vh;
   }
+  @media (max-height: 1200px) and (orientation: landscape) {
+    width: 40vh;
+    height: 40vh;
+  }
 
   @media (max-height: 414px) and (orientation: landscape) {
     width: 300px;
@@ -20,28 +24,16 @@ export const Wrapper = styled.div`
     height: 280px;
   }
 
-  @media screen and (max-width: 1000px) and (orientation: portrait) {
+  @media screen and (max-width: 1400px) and (orientation: portrait) {
     z-index: 2;
     width: 60vw;
     height: 60vw;
   }
 
-  @media screen and (max-width: 700px) and (orientation: portrait) {
+  @media screen and (max-width: 1000px) and (orientation: portrait) {
     z-index: 2;
-    width: 68vw;
-    height: 68vw;
-  }
-
-  @media screen and (max-width: 600px) and (orientation: portrait) {
-    z-index: 2;
-    width: 80vw;
-    height: 80vw;
-  }
-
-  @media screen and (max-width: 500px) and (orientation: portrait) {
-    z-index: 2;
-    width: 92vw;
-    height: 92vw;
+    width: 60vw;
+    height: 60vw;
   }
 
   @media screen and (max-width: 375px) and (orientation: portrait) {

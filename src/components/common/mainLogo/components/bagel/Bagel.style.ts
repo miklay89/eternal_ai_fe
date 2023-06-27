@@ -18,14 +18,17 @@ const rotateAnimation = (props: EllipseProps) => keyframes`
   }
 `;
 
-export const BagelWrapper = styled.div`
+export const BagelWrapper = styled.div<{
+  width: number;
+  height: number;
+}>`
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: ${(props) => props.width + "px"};
+  height: ${(props) => props.height + "px"};
   margin-right: 17.99px;
   @media (max-width: 1001px) {
-    width: 30px;
-    height: 30px;
+    width: ${(props) => props.width + "px"};
+    height: ${(props) => props.height + "px"};
     margin-right: 0px;
   }
 `;

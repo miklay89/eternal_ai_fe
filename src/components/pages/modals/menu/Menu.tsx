@@ -35,7 +35,6 @@ import socket from "../../../../services/socket";
 import { setConnection } from "../../../../store/reducers/socket";
 import LocalStorage from "../../../../services/localStorage";
 import { setInitialState } from "../../../../store/reducers/profile";
-import { useEffect, useState } from "react";
 import MainLogo from "../../../common/mainLogo/MainLogo";
 import {
   MenuCloseIcon,
@@ -51,9 +50,9 @@ const Menu = (props: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
+  const modalState = useSelector((state: RootState) => state.modal.open);
 
-  const handleAccountClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleAccountClick = () => {
     if (location.pathname === Paths.ACCOUNT) {
       dispatch(openModal(Modals.NONE));
     }
@@ -61,14 +60,12 @@ const Menu = (props: Props) => {
     navigate("/account");
   };
 
-  const handleClickPricing = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClickPricing = () => {
     navigate(Paths.HOME);
     dispatch(openModal(Modals.PAYWALL));
   };
 
-  const handleClickBtn = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClickBtn = () => {
     if (!authState) {
       dispatch(openModal(Modals.SIGN_IN));
     } else {
@@ -88,25 +85,41 @@ const Menu = (props: Props) => {
         <ModalNavWrapper>
           <Left>
             <MenuCloseBtnWrapper
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.NONE))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+              }
             >
               <MenuCloseIcon src="/header/close_btn.svg" />
             </MenuCloseBtnWrapper>
           </Left>
           <Center>
-            <MainLogo />
+            <MainLogo tabIndex={modalState === Modals.MENU ? 0 : -1} />
           </Center>
           <Right>
-            <LoginBtn onClick={(e) => handleClickBtn(e)}>
+            <LoginBtn
+              tabIndex={0}
+              onClick={(e) => handleClickBtn()}
+              onKeyDown={(e) => (e.key === "Enter" ? handleClickBtn() : "")}
+            >
               {authState ? "sign out" : "login"}
             </LoginBtn>
             <GetStartedBtn
               show={authState ? false : true}
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.SIGN_UP))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.SIGN_UP)) : ""
+              }
             >
               get started
             </GetStartedBtn>
-            <ShareBtnOuter show={authState ? true : false}>
+            <ShareBtnOuter
+              show={authState ? true : false}
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === "Enter" ? alert("share") : "")}
+            >
               <ShareBtnInner>
                 <ShareIcon src="/share_icon.svg" />
                 <ShareText>SHARE</ShareText>
@@ -115,36 +128,65 @@ const Menu = (props: Props) => {
           </Right>
         </ModalNavWrapper>
         <Navbar>
-          <Link show={true} onClick={() => dispatch(openModal(Modals.ABOUT))}>
+          <Link
+            show={true}
+            tabIndex={0}
+            onClick={() => dispatch(openModal(Modals.ABOUT))}
+            onKeyDown={(e) =>
+              e.key === "Enter" ? dispatch(openModal(Modals.ABOUT)) : ""
+            }
+          >
             About us
           </Link>
-          <Link show={true} onClick={(e) => handleClickPricing(e)}>
+          <Link
+            show={true}
+            tabIndex={0}
+            onClick={() => handleClickPricing()}
+            onKeyDown={(e) => (e.key === "Enter" ? handleClickPricing() : "")}
+          >
             Pricing
           </Link>
-          <Link show={true}>How it works</Link>
-          <Link show={authState} onClick={(e) => handleAccountClick(e)}>
+          <Link show={true} tabIndex={0}>
+            How it works
+          </Link>
+          <Link
+            show={authState}
+            tabIndex={0}
+            onClick={() => handleAccountClick()}
+            onKeyDown={(e) => (e.key === "Enter" ? handleAccountClick() : "")}
+          >
             My account
           </Link>
           <Divider />
           <Social>
-            <SocialFacebook src="/menu/facebook.svg" />
-            <SocialInstagram src="/menu/instagram.svg" />
-            <SocialTwitter src="/menu/twitter.svg" />
-            <SocialDiscord src="/menu/discord.svg" />
+            <a href="https://www.facebook.com/" tabIndex={0}>
+              <SocialFacebook src="/menu/facebook.svg" />
+            </a>
+            <a href="https://www.instagram.com/" tabIndex={0}>
+              <SocialInstagram src="/menu/instagram.svg" />
+            </a>
+            <a href="https://twitter.com/" tabIndex={0}>
+              <SocialTwitter src="/menu/twitter.svg" />
+            </a>
+            <a href="https://discord.com/" tabIndex={0}>
+              <SocialDiscord src="/menu/discord.svg" />
+            </a>
           </Social>
         </Navbar>
         <AdditionalButtonsWrapper
           show={window.innerWidth < 1001 ? true : false}
         >
           <GetStartedAdditionalBtn
+            tabIndex={0}
             show={authState ? false : true}
             onClick={() => dispatch(openModal(Modals.SIGN_UP))}
           >
             get started
           </GetStartedAdditionalBtn>
           <LoginBtnAdditional
+            tabIndex={0}
             authState={authState ? true : false}
-            onClick={(e) => handleClickBtn(e)}
+            onClick={() => handleClickBtn()}
           >
             {authState ? "sign out" : "login"}
           </LoginBtnAdditional>

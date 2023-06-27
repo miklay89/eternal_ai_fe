@@ -42,9 +42,7 @@ const SignIn = (props: Props) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   // sign-in
-  const handleClick = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (!validateEmail(email)) {
       alert("invalid email");
       return;
@@ -76,7 +74,6 @@ const SignIn = (props: Props) => {
     }
   };
 
-  // TODO enter login
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />
@@ -84,11 +81,15 @@ const SignIn = (props: Props) => {
         <ModalNavWrapper>
           <Left></Left>
           <Center>
-            <MainLogo />
+            <MainLogo tabIndex={0} />
           </Center>
           <Right>
             <ModalCloseBtnWrapper
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.NONE))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+              }
             >
               <MenuCloseIcon src="/header/close_btn.svg" />
             </ModalCloseBtnWrapper>
@@ -99,24 +100,40 @@ const SignIn = (props: Props) => {
             <Title>Login</Title>
             <InputTitle>Email</InputTitle>
             <Input
+              tabIndex={0}
               placeholder="justin@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
             ></Input>
             <InputTitle>Password</InputTitle>
             <Input
+              tabIndex={0}
               placeholder="•••••••••••••••••••"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
             ></Input>
             <ForgotPassword>Forgot password?</ForgotPassword>
-            <SignInBtn onClick={(e) => handleClick(e)}>sign in</SignInBtn>
+            <SignInBtn
+              tabIndex={0}
+              onClick={() => handleSubmit()}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
+            >
+              sign in
+            </SignInBtn>
             <Divider />
             <HaveNotWrapper>
               <NotText>Don’t have an account?</NotText>
               &nbsp;
-              <NotLink onClick={() => dispatch(openModal(Modals.SIGN_UP))}>
+              <NotLink
+                tabIndex={0}
+                onClick={() => dispatch(openModal(Modals.SIGN_UP))}
+                onKeyDown={(e) =>
+                  e.key === "Enter" ? dispatch(openModal(Modals.SIGN_UP)) : ""
+                }
+              >
                 Sign up
               </NotLink>
             </HaveNotWrapper>

@@ -24,9 +24,6 @@ import {
 } from "./SignUp.styles";
 import { validateEmail, validatePassword } from "../../../hooks/validators";
 import Auth from "../../../../api/auth/auth";
-import scrollToTop from "../../../hooks/scrollToTop";
-import { Paths } from "../../../../routes/root";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
@@ -37,15 +34,11 @@ type Props = {
 };
 
 const SignUp = (props: Props) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleClick = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (!validateEmail(email)) {
       alert("invalid email");
       return;
@@ -67,17 +60,6 @@ const SignUp = (props: Props) => {
     dispatch(openModal(Modals.SIGN_IN));
   };
 
-  const handleClickLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === Paths.HOME) {
-      dispatch(openModal(Modals.NONE));
-      scrollToTop();
-    } else {
-      navigate(Paths.HOME);
-      scrollToTop();
-    }
-  };
-
   return (
     <ModalWrapper isOpen={props.isOpen}>
       <Overlay />
@@ -85,11 +67,15 @@ const SignUp = (props: Props) => {
         <ModalNavWrapper>
           <Left></Left>
           <Center>
-            <MainLogo />
+            <MainLogo tabIndex={0} />
           </Center>
           <Right>
             <ModalCloseBtnWrapper
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.NONE))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+              }
             >
               <MenuCloseIcon src="/header/close_btn.svg" />
             </ModalCloseBtnWrapper>
@@ -101,25 +87,41 @@ const SignUp = (props: Props) => {
             <SubTitle>To continue please create an account</SubTitle>
             <InputTitle>Email</InputTitle>
             <Input
+              tabIndex={0}
               placeholder="justin@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
             ></Input>
             <InputTitle>Password</InputTitle>
             <Input
+              tabIndex={0}
               placeholder="•••••••••••••••••••"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
             ></Input>
             <ButtonsWrapper>
-              <SignUpBtn onClick={(e) => handleClick(e)}>sign up</SignUpBtn>
+              <SignUpBtn
+                tabIndex={0}
+                onClick={() => handleSubmit()}
+                onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
+              >
+                sign up
+              </SignUpBtn>
             </ButtonsWrapper>
             <Divider />
             <AlreadyHaveWrapper>
               <AlreadyText>Already have an account?</AlreadyText>
               &nbsp;
-              <AlreadyLink onClick={() => dispatch(openModal(Modals.SIGN_IN))}>
+              <AlreadyLink
+                tabIndex={0}
+                onClick={() => dispatch(openModal(Modals.SIGN_IN))}
+                onKeyDown={(e) =>
+                  e.key === "Enter" ? dispatch(openModal(Modals.SIGN_IN)) : ""
+                }
+              >
                 Sign in
               </AlreadyLink>
             </AlreadyHaveWrapper>

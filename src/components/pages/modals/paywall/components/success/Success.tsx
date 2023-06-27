@@ -21,8 +21,7 @@ type Props = {
 
 const Success = (props: Props) => {
   const navigate = useNavigate();
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = () => {
     navigate(Paths.CHAT);
   };
   return (
@@ -34,7 +33,11 @@ const Success = (props: Props) => {
           </Circle>
           <Title>You have successfully subscribed!</Title>
           <Subtitle>A receipt was sent to your email</Subtitle>
-          <StartChattingBtn onClick={(e) => handleClick(e)}>
+          <StartChattingBtn
+            tabIndex={0}
+            onClick={() => handleClick()}
+            onKeyDown={(e) => (e.key === "Enter" ? handleClick() : "")}
+          >
             start chatting
           </StartChattingBtn>
         </InnerWrapper>

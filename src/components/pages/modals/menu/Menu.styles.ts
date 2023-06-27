@@ -36,7 +36,7 @@ export const Container = styled.div`
   flex-flow: column;
   justify-content: space-between;
   @media (max-width: 1001px) {
-    padding-top: 7px;
+    padding-top: 23px;
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 16px;
@@ -254,6 +254,8 @@ export const LoginBtnAdditional = styled.div<{
   authState: boolean;
 }>`
   display: block;
+  width: 150px;
+  margin: 0 auto;
   margin-top: ${(props) => (props.authState ? "72px" : "24px")};
   font-family: "Arquitecta";
   text-align: center;

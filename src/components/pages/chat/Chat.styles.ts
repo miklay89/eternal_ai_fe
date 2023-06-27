@@ -21,10 +21,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  overflow: hidden;
   @media (max-width: 1001px) {
     max-height: none;
-    padding: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 32px;
     padding-bottom: 52px;
     gap: 8px;
   }
@@ -56,6 +57,10 @@ export const ChatInputWrapper = styled.div`
   max-width: 727px;
   height: 78px;
   z-index: 2;
+  @media (orientation: portrait) {
+    transform: none;
+    max-width: 100%;
+  }
   @media (max-width: 1601px) {
     max-width: 100%;
     width: 100%;
@@ -77,7 +82,11 @@ export const ContentWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  @media (orientation: portrait) {
+  @media screen and (max-width: 2400px) and (orientation: portrait) {
+    flex-direction: column;
+    gap: 85px;
+  }
+  @media screen and (max-width: 900px) and (orientation: portrait) {
     flex-direction: column;
     gap: 30px;
   }
@@ -92,17 +101,23 @@ export const ChatBoxWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
+  height: 100%;
   @media (max-width: 1501px) {
     transform: none;
   }
+  @media (orientation: portrait) {
+    transform: translateX(0px);
+  }
 `;
 
-export const ChatWindow = styled.div`
+export const ChatWindow = styled.div<{
+  height: number;
+}>`
   position: relative;
   padding-right: 26px;
   width: 744px;
   max-height: 900px;
-  height: calc(100svh - 250px);
+  height: ${(props) => props.height + "px"};
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -121,7 +136,7 @@ export const ChatWindow = styled.div`
     background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   }
 
-  @media screen and (max-width: 1601px) and (orientation: landscape) {
+  @media screen and (max-width: 1630px) and (orientation: landscape) {
     max-width: 700px;
     width: 100%;
   }
@@ -134,7 +149,7 @@ export const ChatWindow = styled.div`
     max-width: 570px;
   }
 
-  @media screen and (max-width: 1001px) and (orientation: portrait) {
+  @media screen and (max-width: 1800px) and (orientation: portrait) {
     transform: translateX(7px);
     width: 100%;
     position: relative;
@@ -144,14 +159,41 @@ export const ChatWindow = styled.div`
     z-index: 0;
     gap: 8px;
     padding-right: 4px;
-    max-height: calc(40vh - 180px);;
+    max-height: ${(props) => props.height + "px"};
+    /* max-height: calc(40vh - 180px); */
+  }
+
+  @media (aspect-ratio: 1/1) {
+    transform: translateX(7px);
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    gap: 8px;
+    padding-right: 4px;
+    max-height: ${(props) => props.height + "px"};
+  }
+
+  @media (aspect-ratio: 3/2) {
+    transform: translateX(7px);
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    gap: 8px;
+    padding-right: 4px;
+    max-height: ${(props) => props.height + "px"};
   }
 `;
 
 export const Shadow = styled.div`
   z-index: 2;
   position: absolute;
-  bottom: -60px;
+  bottom: -50px;
   left: -100%;
   height: 30px;
   width: 400%;

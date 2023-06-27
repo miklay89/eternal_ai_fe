@@ -5,7 +5,7 @@ import {
   OuterWrapper,
   SubmitBtn,
 } from "./ChatInput.styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addLoadingMessage,
   addScrollMessage,
@@ -13,8 +13,11 @@ import {
   removeScrollMessage,
 } from "../../../../../store/reducers/messages";
 import socket from "../../../../../services/socket";
+import { RootState } from "../../../../../store";
+import { Modals } from "../../../modals/types";
 
 const ChatInput = () => {
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>("");
   const handleSubmit = (e: React.MouseEvent) => {
@@ -57,6 +60,7 @@ const ChatInput = () => {
     <OuterWrapper>
       <InnerWrapper>
         <Input
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
           placeholder="Enter your message..."
           onChange={(e) => {
             setValue(e.target.value);
@@ -65,6 +69,7 @@ const ChatInput = () => {
           onKeyDown={(e) => handleSubmitKeyboard(e)}
         />
         <SubmitBtn
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
           onClick={(e) => handleSubmit(e)}
         >
           submit

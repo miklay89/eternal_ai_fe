@@ -39,8 +39,7 @@ const Header = (props: Props) => {
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
   const modalState = useSelector((state: RootState) => state.modal.open);
 
-  const handleClickBtn = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClickBtn = () => {
     if (!authState) {
       dispatch(openModal(Modals.SIGN_IN));
     } else {
@@ -58,6 +57,7 @@ const Header = (props: Props) => {
       <Left>
         <AdditionalShareBtn
           show={location.pathname === Paths.CHAT ? true : false}
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
         >
           <ShareBtnInner>
             <ShareText>SHARE</ShareText>
@@ -66,30 +66,49 @@ const Header = (props: Props) => {
         <MenuIconWrapper
           show={modalState === Modals.MENU ? false : true}
           onClick={() => dispatch(openModal(Modals.MENU))}
+          onKeyDown={(e) =>
+            e.key === "Enter" ? dispatch(openModal(Modals.MENU)) : ""
+          }
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
         >
           <MenuIcon src="/header/menu_icon.svg" />
         </MenuIconWrapper>
         <MenuCloseBtnWrapper
           show={modalState === Modals.MENU ? true : false}
           onClick={() => dispatch(openModal(Modals.NONE))}
+          onKeyDown={(e) =>
+            e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+          }
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
         >
           <MenuCloseIcon src="/header/close_btn.svg" />
         </MenuCloseBtnWrapper>
       </Left>
       <Center>
-        <MainLogo />
+        <MainLogo tabIndex={modalState === Modals.NONE ? 0 : -1} />
       </Center>
       <Right>
-        <LoginBtn onClick={(e) => handleClickBtn(e)}>
+        <LoginBtn
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          onClick={() => handleClickBtn()}
+          onKeyDown={(e) => (e.key === "Enter" ? handleClickBtn() : "")}
+        >
           {authState ? "sign out" : "login"}
         </LoginBtn>
         <GetStartedBtn
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
           show={authState ? false : true}
           onClick={() => dispatch(openModal(Modals.SIGN_UP))}
+          onKeyDown={(e) =>
+            e.key === "Enter" ? dispatch(openModal(Modals.SIGN_UP)) : ""
+          }
         >
           get started
         </GetStartedBtn>
-        <ShareBtnOuter show={authState ? true : false}>
+        <ShareBtnOuter
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          show={authState ? true : false}
+        >
           <ShareBtnInner>
             <ShareIcon src="/share_icon.svg" />
             <ShareText>SHARE</ShareText>

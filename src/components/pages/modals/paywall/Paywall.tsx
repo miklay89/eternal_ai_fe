@@ -39,11 +39,15 @@ const Paywall = (props: Props) => {
         <ModalNavWrapper>
           <Left></Left>
           <Center>
-            <MainLogo />
+            <MainLogo tabIndex={props.isOpen ? 0 : -1} />
           </Center>
           <Right>
             <ModalCloseBtnWrapper
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.NONE))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+              }
             >
               <MenuCloseIcon src="/header/close_btn.svg" />
             </ModalCloseBtnWrapper>

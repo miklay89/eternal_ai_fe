@@ -10,44 +10,43 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { Paths } from "../../../routes/root";
 import scrollToTop from "../../hooks/scrollToTop";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../store/reducers/modals";
 import { Modals } from "../../pages/modals/types";
 import FooterLogo from "./components/footerLogo/FooterLogo";
+import { RootState } from "../../../store";
 
 type Props = {
   marginTop: number;
 };
 
 const Footer = (props: Props) => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const handleClickFooterLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname === Paths.HOME) {
-      dispatch(openModal(Modals.NONE));
-      scrollToTop();
-    } else {
-      navigate(Paths.HOME);
-      scrollToTop();
-    }
-  };
+  const modalState = useSelector((state: RootState) => state.modal.open);
+
   return (
     <FooterWrapper marginTop={props.marginTop}>
-      <FooterLogoWrapper onClick={(e) => handleClickFooterLogo(e)}>
+      <FooterLogoWrapper>
         <FooterLogo />
       </FooterLogoWrapper>
       <Copy>© 2023 Eternal. All rights reserved.</Copy>
       <FollowWrapper>
         <FollowText>follow us</FollowText>
-        <Social>
+        <Social
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          href="https://twitter.com/"
+        >
           <SocialImg src="/footer/twitter.svg" />
         </Social>
-        <Social>
+        <Social
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          href="https://www.facebook.com/"
+        >
           <SocialImg src="/footer/facebook.svg" />
         </Social>
-        <Social>
+        <Social
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          href="https://www.youtube.com/"
+        >
           <SocialImg src="/footer/youtube.svg" />
         </Social>
       </FollowWrapper>

@@ -2,6 +2,9 @@ import { css } from "styled-components";
 import { PaymentInputsWrapper, usePaymentInputs } from "react-payment-inputs";
 import { images } from "./cardImages";
 import { FormEvent, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { Modals } from "../../pages/modals/types";
 
 type Props = {
   number: string;
@@ -13,6 +16,8 @@ type Props = {
 };
 
 const PaymentInputs = (props: Props) => {
+  const modalState = useSelector((state: RootState) => state.modal.open);
+
   const {
     wrapperProps,
     getCardImageProps,
@@ -136,18 +141,27 @@ const PaymentInputs = (props: Props) => {
     >
       <svg {...getCardImageProps({ images })} />
       <input
+        tabIndex={
+          modalState === Modals.PAYWALL || modalState === Modals.NONE ? 0 : -1
+        }
         {...getCardNumberProps({
           onChange: (e: FormEvent<HTMLInputElement>) =>
             props.setNumber(e.currentTarget.value),
         })}
       />
       <input
+        tabIndex={
+          modalState === Modals.PAYWALL || modalState === Modals.NONE ? 0 : -1
+        }
         {...getExpiryDateProps({
           onChange: (e: FormEvent<HTMLInputElement>) =>
             props.setDate(e.currentTarget.value),
         })}
       />
       <input
+        tabIndex={
+          modalState === Modals.PAYWALL || modalState === Modals.NONE ? 0 : -1
+        }
         {...getCVCProps({
           onChange: (e: FormEvent<HTMLInputElement>) =>
             props.setCvc(e.currentTarget.value),

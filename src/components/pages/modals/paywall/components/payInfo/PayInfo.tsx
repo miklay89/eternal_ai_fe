@@ -38,7 +38,7 @@ const PayInfo = (props: Props) => {
         <Subtitle>
           Get <Span>3 free</Span> questions when you share on social media
         </Subtitle>
-        <ShareBtnOuterWrapper>
+        <ShareBtnOuterWrapper tabIndex={0}>
           <ShareBtnInnerWrapper>
             <ShareBtnText>SHARE</ShareBtnText>
           </ShareBtnInnerWrapper>
@@ -66,7 +66,13 @@ const PayInfo = (props: Props) => {
               <NoteText>Access to all characters</NoteText>
             </NoteWrapper>
           </NotesWrapper>
-          <SubscribeBtn onClick={() => props.onChangeView(Payments.PAYMENT)}>
+          <SubscribeBtn
+            tabIndex={0}
+            onClick={() => props.onChangeView(Payments.PAYMENT)}
+            onKeyDown={(e) =>
+              e.key === "Enter" ? props.onChangeView(Payments.PAYMENT) : ""
+            }
+          >
             subscribe
           </SubscribeBtn>
         </SubscribeInnerWrapper>

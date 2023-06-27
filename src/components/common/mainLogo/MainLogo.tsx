@@ -7,13 +7,16 @@ import { openModal } from "../../../store/reducers/modals";
 import scrollToTop from "../../hooks/scrollToTop";
 import { Modals } from "../../pages/modals/types";
 
-const MainLogo = () => {
+type Props = {
+  tabIndex: number;
+};
+
+const MainLogo = (props: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleClickLogo = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClickLogo = () => {
     if (location.pathname === Paths.HOME) {
       dispatch(openModal(Modals.NONE));
       scrollToTop();
@@ -25,7 +28,11 @@ const MainLogo = () => {
   };
 
   return (
-    <MainLogoWrapper onClick={(e) => handleClickLogo(e)}>
+    <MainLogoWrapper
+      tabIndex={props.tabIndex}
+      onClick={() => handleClickLogo()}
+      onKeyDown={(e) => (e.key === "Enter" ? handleClickLogo() : "")}
+    >
       <Bagel />
       <MainLogoText src="/eternal.svg" />
     </MainLogoWrapper>

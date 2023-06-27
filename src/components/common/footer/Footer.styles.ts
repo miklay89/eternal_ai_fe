@@ -69,7 +69,7 @@ export const FollowText = styled.div`
   opacity: 0.7;
 `;
 
-export const Social = styled.div`
+export const Social = styled.a`
   margin-left: 8px;
   border-radius: 100%;
   display: flex;

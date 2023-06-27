@@ -21,6 +21,7 @@ import socket from "../../../../../../services/socket";
 import { RootState } from "../../../../../../store";
 import { setConnection } from "../../../../../../store/reducers/socket";
 import ChatInstance from "../../../../../../api/chat/chat";
+import { Modals } from "../../../../modals/types";
 
 type Props = {
   fullName: string;
@@ -34,6 +35,7 @@ type Props = {
 const Card = (props: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
   const socketIsConnected = useSelector(
     (state: RootState) => state.socket.connection
@@ -42,8 +44,7 @@ const Card = (props: Props) => {
   const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
   const [showPersonInfo, setShowPersonInfo] = useState<boolean>(false);
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = () => {
     if (!authState) {
       alert("sign in first");
       return;
@@ -103,7 +104,9 @@ const Card = (props: Props) => {
       background={props.substrateUrl}
       onMouseEnter={() => setShowPersonInfo(true)}
       onMouseLeave={() => setShowPersonInfo(false)}
-      onClick={(e) => handleClick(e)}
+      onClick={() => handleClick()}
+      tabIndex={modalState === Modals.NONE ? 0 : -1}
+      onKeyDown={(e) => (e.key === "Enter" ? handleClick() : "")}
     >
       <ImageWrapper>
         <CardImage src={props.imgUrl} />

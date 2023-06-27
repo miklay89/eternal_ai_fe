@@ -33,8 +33,7 @@ const Title = () => {
   const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
   const authState = useSelector((state: RootState) => state.isAuth.isAuth);
 
-  const handleClickMessage = (e: React.MouseEvent, message: string) => {
-    e.preventDefault();
+  const handleClickMessage = (message: string) => {
     if (!authState) {
       alert("sign in first");
       return;
@@ -65,7 +64,12 @@ const Title = () => {
 
   const messagesForRender = messages.map((m, i) => {
     return (
-      <TitleMessage key={i} onClick={(e) => handleClickMessage(e, m)}>
+      <TitleMessage
+        tabIndex={modalState === Modals.NONE ? 0 : -1}
+        key={i}
+        onClick={() => handleClickMessage(m)}
+        onKeyDown={(e) => (e.key === "Enter" ? handleClickMessage(m) : "")}
+      >
         <MessageText>{m}</MessageText>
       </TitleMessage>
     );

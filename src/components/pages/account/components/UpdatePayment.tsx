@@ -26,7 +26,7 @@ import Profile from "../../../../api/profile/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../../../store/reducers/profile";
 import { RootState } from "../../../../store";
-import { useNavigate } from "react-router-dom";
+import { Modals } from "../../modals/types";
 
 type Props = {
   nextPayment: string;
@@ -34,14 +34,14 @@ type Props = {
 
 const UpdatePayment = (props: Props) => {
   const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const profileState = useSelector((state: RootState) => state.profile.user);
   const [update, setIsUpdate] = useState<boolean>(false);
   const [number, setNumber] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
 
-  const handleSubmit = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const validCardNumber = validateCardNumber(number);
     if (typeof validCardNumber === "boolean") {
       return alert("card number incorrect");
@@ -74,16 +74,14 @@ const UpdatePayment = (props: Props) => {
     setIsUpdate(false);
   };
 
-  const handleCancelSub = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleCancelSub = async () => {
     const res = await Profile.deleteSubscription();
     if (typeof res === "string") return alert(res);
 
     Profile.getData().then((user) => dispatch(setProfile(user)));
   };
 
-  const handleSub = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleSub = () => {
     Profile.createSubscription().then((res) => {
       if (typeof res === "string") alert(res);
     });
@@ -101,7 +99,12 @@ const UpdatePayment = (props: Props) => {
         </ProOuterWrapper>
         <Price>$10 / month</Price>
         <NextPayment>{props.nextPayment}</NextPayment>
-        <UpdateBtnOuterWrapper onClick={() => setIsUpdate(true)} show={update}>
+        <UpdateBtnOuterWrapper
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          onClick={() => setIsUpdate(true)}
+          onKeyDown={(e) => (e.key === "Enter" ? setIsUpdate(true) : "")}
+          show={update}
+        >
           <UpdateBtnInnerWrapper>
             <UpdateBtnText>update payment</UpdateBtnText>
           </UpdateBtnInnerWrapper>
@@ -115,17 +118,27 @@ const UpdatePayment = (props: Props) => {
             setDate={setDate}
             setCvc={setCvc}
           />
-          <SaveBtn onClick={(e) => handleSubmit(e)}>Save</SaveBtn>
+          <SaveBtn
+            tabIndex={modalState === Modals.NONE ? 0 : -1}
+            onClick={() => handleSubmit()}
+            onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
+          >
+            Save
+          </SaveBtn>
         </CardInfoWrapper>
         <CancelSubBtn
           show={profileState.isSubscribed ? true : false}
-          onClick={(e) => handleCancelSub(e)}
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          onClick={() => handleCancelSub()}
+          onKeyDown={(e) => (e.key === "Enter" ? handleCancelSub() : "")}
         >
           cancel subscription
         </CancelSubBtn>
         <SubscribeBtn
           show={profileState.isSubscribed ? false : true}
-          onClick={(e) => handleSub(e)}
+          tabIndex={modalState === Modals.NONE ? 0 : -1}
+          onClick={() => handleSub()}
+          onKeyDown={(e) => (e.key === "Enter" ? handleSub() : "")}
         >
           Subscribe
         </SubscribeBtn>

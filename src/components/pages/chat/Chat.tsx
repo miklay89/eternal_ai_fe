@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   ChatBoxWrapper,
   ChatInputWrapper,
@@ -44,11 +44,14 @@ import Paywall from "../modals/paywall/Paywall";
 const Chat = () => {
   const dispatch = useDispatch();
   const ref = useRef(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const chatBoxRef = useRef<HTMLDivElement>(null);
   const modalState = useSelector((state: RootState) => state.modal.open);
   const messages = useSelector((state: RootState) => state.message);
   const soul = useSelector((state: RootState) => state.soul.soul);
   const soulIsSet = useSelector((state: RootState) => state.soul.isSet);
   const chatMessageRef = useRef<null | HTMLDivElement>(null);
+  const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
     socket.on("error", (res: ErrorRes) => {
@@ -183,6 +186,42 @@ const Chat = () => {
     return <UserMessage key={idx} text={msg.text} />;
   });
 
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (portraitRef.current) {
+        //portrait
+        if (window.innerHeight > window.innerWidth) {
+          // console.log("here");
+          window.innerHeight > 1000
+            ? setHeight(
+                window.innerHeight - portraitRef.current.clientHeight - 340
+              )
+            : setHeight(
+                window.innerHeight - portraitRef.current.clientHeight - 200
+              );
+
+          // landscape
+        } else {
+          const newHeight = window.innerHeight - 280;
+          setHeight(newHeight > 900 ? 900 : newHeight);
+        }
+        // ratio 1/1
+        if (window.innerHeight === window.innerWidth) {
+          setHeight(
+            window.innerHeight - portraitRef.current.clientHeight - 280
+          );
+        }
+      }
+    };
+
+    updateHeight();
+
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [window.innerHeight]);
+
   return (
     <Section ref={ref}>
       <Loading />
@@ -200,7 +239,7 @@ const Chat = () => {
           }
         />
         <ContentWrapper>
-          <PortraitWrapper>
+          <PortraitWrapper ref={portraitRef}>
             <Portrait
               fullName={soul.fullName}
               imgUrl={soul.imgUrl}
@@ -210,8 +249,8 @@ const Chat = () => {
             />
             <Shadow />
           </PortraitWrapper>
-          <ChatBoxWrapper>
-            <ChatWindow onScroll={(e) => handleScroll(e)}>
+          <ChatBoxWrapper ref={chatBoxRef}>
+            <ChatWindow height={height} onScroll={(e) => handleScroll(e)}>
               {messagesForRender}
             </ChatWindow>
             <ChatInputWrapper>

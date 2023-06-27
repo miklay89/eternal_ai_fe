@@ -19,10 +19,11 @@ import {
   Right,
   Title,
 } from "./About.styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../../store/reducers/modals";
 import { Modals } from "../types";
 import MainLogo from "../../../common/mainLogo/MainLogo";
+import { RootState } from "../../../../store";
 
 type Props = {
   isOpen: boolean;
@@ -30,10 +31,10 @@ type Props = {
 
 const About = (props: Props) => {
   const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.modal.open);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const handleClickContinue = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClickContinue = () => {
     if (!isChecked) {
       alert("checkbox required");
       return;
@@ -48,11 +49,15 @@ const About = (props: Props) => {
         <ModalNavWrapper>
           <Left></Left>
           <Center>
-            <MainLogo />
+            <MainLogo tabIndex={modalState === Modals.ABOUT ? 0 : -1} />
           </Center>
           <Right>
             <ModalCloseBtnWrapper
+              tabIndex={0}
               onClick={() => dispatch(openModal(Modals.NONE))}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? dispatch(openModal(Modals.NONE)) : ""
+              }
             >
               <MenuCloseIcon src="/header/close_btn.svg" />
             </ModalCloseBtnWrapper>
@@ -74,12 +79,24 @@ const About = (props: Props) => {
               You might even say they are our Heroes. In fact, you can say that.
             </Description>
             <CheckBoxWrapper>
-              <CheckBox onClick={() => setIsChecked((prev) => !prev)}>
+              <CheckBox
+                tabIndex={0}
+                onClick={() => setIsChecked((prev) => !prev)}
+                onKeyDown={(e) =>
+                  e.key === "Enter" ? setIsChecked((prev) => !prev) : ""
+                }
+              >
                 <Check isChecked={isChecked} src="/check.svg" />
               </CheckBox>
               <CheckBoxText>I have read the above statement</CheckBoxText>
             </CheckBoxWrapper>
-            <ContinueBtn onClick={(e) => handleClickContinue(e)}>
+            <ContinueBtn
+              tabIndex={0}
+              onClick={() => handleClickContinue()}
+              onKeyDown={(e) =>
+                e.key === "Enter" ? handleClickContinue() : ""
+              }
+            >
               continue
             </ContinueBtn>
           </InnerWrapper>

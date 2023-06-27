@@ -35,9 +35,9 @@ const Payment = (props: Props) => {
   const [date, setDate] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
 
-  const handleSubmit = async (e: React.MouseEvent) => {
+  const handleSubmit = async () => {
     if (!authState) return alert("sign-in first");
-    e.preventDefault();
+
     const validCardNumber = validateCardNumber(number);
     if (typeof validCardNumber === "boolean") {
       return alert("card number incorrect");
@@ -92,7 +92,11 @@ const Payment = (props: Props) => {
               setCvc={setCvc}
             />
           </PaymentInputWrapper>
-          <SubmitPaymentBtn onClick={(e) => handleSubmit(e)}>
+          <SubmitPaymentBtn
+            tabIndex={0}
+            onClick={(e) => handleSubmit()}
+            onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : "")}
+          >
             subscribe
           </SubmitPaymentBtn>
         </InnerWrapper>
