@@ -89,6 +89,7 @@ export const PersonInfo = styled.div<{
     position: relative;
     margin-top: 8px;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;

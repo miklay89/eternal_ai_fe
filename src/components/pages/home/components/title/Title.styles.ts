@@ -58,6 +58,7 @@ export const Subtitle = styled.div`
 export const MessagesWrapper = styled.div`
   margin: 0 auto;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   gap: 16px;
   padding: 0px;
@@ -97,6 +98,7 @@ export const TitleMessage = styled.div`
 
 export const MessageText = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   background: linear-gradient(90.83deg, #08081e 11.84%, #21050c 111.32%);
   padding: 8px 8px 8px 48px;

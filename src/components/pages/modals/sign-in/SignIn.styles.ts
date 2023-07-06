@@ -33,6 +33,7 @@ export const Container = styled.div`
   height: 100vh;
   padding-bottom: 70px;
   display: flex;
+  display: -webkit-flex;
   flex-flow: column;
   justify-content: space-between;
   @media (max-width: 1001px) {
@@ -45,6 +46,7 @@ export const Container = styled.div`
 
 export const ModalNavWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
   @media (max-width: 1001px) {
   }
@@ -62,6 +64,7 @@ export const Center = styled.div`
   width: 320px;
   height: auto;
   display: flex;
+  display: -webkit-flex;
 `;
 
 export const Right = styled.div`
@@ -73,6 +76,7 @@ export const ModalCloseBtnWrapper = styled.div`
   cursor: pointer;
   box-sizing: border-box;
   display: flex;
+  display: -webkit-flex;
   width: 56px;
   height: 56px;
   background: #000000;
@@ -110,6 +114,7 @@ export const OuterWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -159,6 +164,7 @@ export const Input = styled.input`
   outline: none;
   box-sizing: border-box;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   align-items: center;
   padding: 16px;
@@ -244,6 +250,7 @@ export const Divider = styled.div`
 
 export const HaveNotWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   margin: 0 auto;
   margin-top: 32px;
   @media (max-width: 1001px) {

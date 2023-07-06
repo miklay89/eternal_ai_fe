@@ -12,6 +12,7 @@ export const OuterWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

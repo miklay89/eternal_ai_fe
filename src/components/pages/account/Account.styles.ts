@@ -56,6 +56,7 @@ export const OuterWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -69,6 +70,7 @@ export const InnerWrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   gap: 24px;
 `;
@@ -109,6 +111,7 @@ export const Input = styled.input`
   outline: none;
   box-sizing: border-box;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   align-items: center;
   padding: 16px;

@@ -38,6 +38,7 @@ export const Container = styled.div`
   height: 100vh;
   padding-bottom: 70px;
   display: flex;
+  display: -webkit-flex;
   flex-flow: column;
   @media (max-width: 1001px) {
     padding-top: 23px;
@@ -49,6 +50,7 @@ export const Container = styled.div`
 
 export const ModalNavWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
   @media (max-width: 1001px) {
   }
@@ -66,6 +68,7 @@ export const Center = styled.div`
   width: 320px;
   height: auto;
   display: flex;
+  display: -webkit-flex;
 `;
 
 export const Right = styled.div`
@@ -77,6 +80,7 @@ export const ModalCloseBtnWrapper = styled.div`
   cursor: pointer;
   box-sizing: border-box;
   display: flex;
+  display: -webkit-flex;
   width: 56px;
   height: 56px;
   background: #000000;
@@ -99,6 +103,7 @@ export const ModalCloseIcon = styled.img`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -156,6 +161,7 @@ export const OuterWrapper = styled.div`
 export const CheckBoxWrapper = styled.div`
   margin-top: 32px;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   gap: 16px;
   flex-direction: row;
@@ -169,6 +175,7 @@ export const CheckBoxWrapper = styled.div`
 
 export const CheckBox = styled.div`
   display: flex;
+  display: -webkit-flex;
   width: 32px;
   height: 32px;
   border: 1px solid #ffffff;
@@ -240,6 +247,7 @@ export const PaywallContentWrapper = styled.div<{
   status: string;
 }>`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   margin-top: 175px;
   gap: 30px;
@@ -282,6 +290,7 @@ export const PaymentWrapper = styled.div`
   position: relative;
   margin: 0 auto;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
   flex-direction: row;
   gap: 32px;

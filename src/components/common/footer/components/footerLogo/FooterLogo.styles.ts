@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const FooterLogoWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   margin: 0 auto;
 `;

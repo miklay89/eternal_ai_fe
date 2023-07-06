@@ -14,6 +14,7 @@ export const Wrapper = styled.div<{
 export const Share = styled.div`
   padding: 100.5px 48px;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(
@@ -32,6 +33,7 @@ export const Share = styled.div`
 
 export const FreeLogo = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -119,6 +121,7 @@ export const ShareBtnOuterWrapper = styled.div`
 
 export const ShareBtnInnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   border-radius: 120px;
   padding: 16px 24px;
   width: 100%;
@@ -148,6 +151,7 @@ export const SubscribeOuterWrapper = styled.div`
 
 export const SubscribeInnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -178,6 +182,7 @@ export const ProOuterWrapper = styled.div`
 
 export const ProInnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   border-radius: 16px;
   padding: 8px 16px;
@@ -206,12 +211,14 @@ export const ProText = styled.div`
 export const NotesWrapper = styled.div`
   margin-top: 18px;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   gap: 18px;
 `;
 
 export const NoteWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: start;
   gap: 20px;

@@ -33,6 +33,7 @@ export const Container = styled.div`
   height: 100vh;
   padding-bottom: 70px;
   display: flex;
+  display: -webkit-flex;
   flex-flow: column;
   justify-content: space-between;
   @media (max-width: 1001px) {
@@ -45,6 +46,7 @@ export const Container = styled.div`
 
 export const ModalNavWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
   @media (max-width: 1001px) {
   }
@@ -62,6 +64,7 @@ export const Center = styled.div`
   width: 320px;
   height: auto;
   display: flex;
+  display: -webkit-flex;
   @media (max-width: 1001px) {
     order: 1;
   }
@@ -69,6 +72,7 @@ export const Center = styled.div`
 
 export const Right = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   justify-content: center;
   width: 320px;
@@ -82,6 +86,7 @@ export const MenuCloseBtnWrapper = styled.div`
   cursor: pointer;
   box-sizing: border-box;
   display: flex;
+  display: -webkit-flex;
   width: 56px;
   height: 56px;
   background: #000000;
@@ -102,6 +107,7 @@ export const MenuCloseBtnWrapper = styled.div`
 export const Navbar = styled.nav`
   position: absolute;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   align-items: center;
   width: 343px;
@@ -155,6 +161,7 @@ export const Divider = styled.div`
 export const Social = styled.div`
   margin-top: 32px;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
@@ -283,7 +290,7 @@ export const AdditionalButtonsWrapper = styled.div<{
   padding-right: 16px;
   width: 100%;
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 `;
 
 export const GetStartedBtn = styled.button<{
@@ -349,6 +356,7 @@ export const GetStartedAdditionalBtn = styled.button<{
 
 export const ShareBtnInner = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
   align-items: center;
   gap: 8px;

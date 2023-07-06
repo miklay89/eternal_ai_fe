@@ -16,6 +16,7 @@ export const OuterWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -34,6 +35,7 @@ export const Circle = styled.div`
   background: linear-gradient(281.4deg, #f82d98 -2.34%, #5833ef 114.41%);
   border-radius: 100%;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
   @media (max-width: 1001px) {
     width: 56px;

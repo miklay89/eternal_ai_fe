@@ -19,6 +19,7 @@ export const HeaderWrapper = styled.div<{
 
 export const Left = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   width: 320px;
   height: 56px;
@@ -33,6 +34,7 @@ export const Left = styled.div`
 
 export const Center = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   width: 320px;
   height: 56px;
@@ -45,6 +47,7 @@ export const Center = styled.div`
 
 export const Right = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   width: 320px;
   height: 56px;
@@ -71,6 +74,7 @@ export const MenuIconWrapper = styled.div<{
 
 export const HeaderButtonsWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: center;
 `;
 
@@ -200,6 +204,7 @@ export const AdditionalShareBtn = styled.div<{
 
 export const ShareBtnInner = styled.div`
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
   align-items: center;
   gap: 8px;

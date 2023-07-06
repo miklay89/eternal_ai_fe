@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: auto;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   gap: 16px;
 `;
@@ -33,6 +34,7 @@ export const MiniPortrait = styled.img`
 
 export const MessageBlob = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   align-items: center;
   padding: 42px 48px;
@@ -63,6 +65,7 @@ const BounceAnimation = keyframes`
 `;
 export const DotWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   align-items: flex-end;
 `;
 export const Dot = styled.div<{

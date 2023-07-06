@@ -18,6 +18,8 @@ export const Container = styled.div`
   height: auto;
   max-height: 1326px;
   display: flex;
+  display: -webkit-flex;
+  display: -webkit-flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -79,6 +81,7 @@ export const ChatInputWrapper = styled.div`
 export const ContentWrapper = styled.div`
   position: relative;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
@@ -99,6 +102,7 @@ export const ContentWrapper = styled.div`
 export const ChatBoxWrapper = styled.div`
   transform: translateX(-40px);
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   gap: 10px;
   height: 100%;
@@ -120,6 +124,7 @@ export const ChatWindow = styled.div<{
   height: ${(props) => props.height + "px"};
   overflow-y: scroll;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   gap: 24px;
   z-index: 5;

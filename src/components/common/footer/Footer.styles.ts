@@ -12,6 +12,7 @@ export const FooterWrapper = styled.div<{
   padding-left: 48px;
   padding-right: 48px;
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -73,6 +74,7 @@ export const Social = styled.a`
   margin-left: 8px;
   border-radius: 100%;
   display: flex;
+  display: -webkit-flex;
   justify-content: center;
   align-items: center;
   width: 32px;

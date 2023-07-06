@@ -210,7 +210,7 @@ const Chat = () => {
                 window.innerHeight - portraitRef.current.clientHeight - 250
               )
             : setHeight(
-                window.innerHeight - portraitRef.current.clientHeight - 250
+                window.innerHeight - portraitRef.current.clientHeight - 200
               );
 
           // landscape

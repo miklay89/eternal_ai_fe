@@ -16,6 +16,7 @@ export const OuterWrapper = styled.div`
 
 export const InnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   padding: 48px;
@@ -44,6 +45,7 @@ export const ProOuterWrapper = styled.div`
 
 export const ProInnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   background: linear-gradient(90.83deg, #040410 11.84%, #0f0306 111.32%);
   border-radius: 16px;
   padding: 8px 16px;
@@ -126,6 +128,7 @@ export const UpdateBtnOuterWrapper = styled.div<{
 
 export const UpdateBtnInnerWrapper = styled.div`
   display: flex;
+  display: -webkit-flex;
   border-radius: 120px;
   padding: 16px 24px;
   width: 100%;
